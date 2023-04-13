@@ -1,0 +1,24 @@
+﻿<Application x:Class="DrawBoard.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DrawBoard"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ui:ThemeResources />
+                <ui:XamlControlsResources />-->
+                <!--<ResourceDictionary Source="/ColorPickerLib;component/Themes/DarkBrushs.xaml" />-->
+                <!--<ResourceDictionary Source="/ColorPickerLib;component/Themes/LightBrushs.xaml" />-->
+                <!-- Other merged dictionaries here -->
+            </ResourceDictionary.MergedDictionaries>
+            
+            <!-- Other app resources here -->
+
+            <local:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
+            <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <local:NullCheckConverter x:Key="NullCheckConverter"/>
+            
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

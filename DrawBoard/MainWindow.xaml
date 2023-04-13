@@ -1,0 +1,884 @@
+﻿<Window x:Class="DrawBoard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DrawBoard"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:drawBehavior="clr-namespace:DrawBoard.Behaviors"
+        xmlns:colorpicker="clr-namespace:ColorPickerLib.Controls;assembly=ColorPickerLib"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        WindowStartupLocation="CenterScreen"
+        Height="{Binding WindowWidth, Mode=TwoWay}" 
+        Width="{Binding WindowHeight, Mode=TwoWay}"
+        MinWidth="200"
+        MinHeight="200"
+        mc:Ignorable="d"
+        Title="뽑기판(ver 1.5)">
+    
+    <behaviors:Interaction.Behaviors>
+        <drawBehavior:WindowCloseBehavior/>
+    </behaviors:Interaction.Behaviors>
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+
+        <Style TargetType="TextBlock">
+            <!--<Setter Property="Foreground" Value="#FFF0FFFF"/>-->
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <!--<Setter Property="Foreground" Value="#FFF0FFFF"/>-->
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5,0"/>
+        </Style>
+
+        <!--BasedOn="{StaticResource AccentButtonStyle}"-->
+        <Style x:Key="menuButtonStyle" TargetType="Button" >
+            <!--<Setter Property="Foreground" Value="#FFF0FFFF"/>-->
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <!--<Setter Property="Background" Value="Transparent"/>-->
+            <!--<Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>-->
+            <!--<Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#22ffffff"/>
+                </Trigger>
+            </Style.Triggers>-->
+        </Style>
+
+        <Style x:Key="defaultButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="10,0,10,0"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <MediaElement Source="{Binding WinMediaElementSource}"
+                      LoadedBehavior="Manual"
+                      Volume="{Binding WinVolume}">
+            <behaviors:Interaction.Behaviors>
+                <drawBehavior:MediaElementBehavior IsMediaElementPlay="{Binding IsWinMediaElementPlay}"/>
+            </behaviors:Interaction.Behaviors>
+        </MediaElement>
+
+        <TextBox Width="1" Height="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <behaviors:Interaction.Behaviors>
+                <drawBehavior:FocusOnOffBehavior />
+            </behaviors:Interaction.Behaviors>
+        </TextBox>
+        
+        <MediaElement Source="{Binding FailureMediaElementSource}"
+                      LoadedBehavior="Manual"
+                      Volume="{Binding FailureVolume}">
+            <behaviors:Interaction.Behaviors>
+                <drawBehavior:MediaElementBehavior IsMediaElementPlay="{Binding IsFailureMediaElementPlay}"/>
+            </behaviors:Interaction.Behaviors>
+        </MediaElement>
+
+        <!--메뉴-->
+        <StackPanel Grid.RowSpan="3"
+                    Margin="3">
+            <Button Style="{StaticResource menuButtonStyle}"
+                    Command="{Binding SettingChangeCommand}"
+                    CommandParameter="{x:Static local:SettingButtons.Number}">
+                <Button.Content>
+                    <StackPanel>
+                        <Image Source="/Images/home.png"
+                               Width="24"
+                               Height="24"/>
+                        <TextBlock Text="규칙"
+                                   Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Style="{StaticResource menuButtonStyle}"
+                    Command="{Binding SettingChangeCommand}"
+                    CommandParameter="{x:Static local:SettingButtons.Text}">
+                <Button.Content>
+                    <StackPanel>
+                        <Image Source="/Images/text.png"
+                               Width="24"
+                               Height="24"/>
+                        <TextBlock Text="글자"
+                                   Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Style="{StaticResource menuButtonStyle}"
+                    Command="{Binding SettingChangeCommand}"
+                    CommandParameter="{x:Static local:SettingButtons.Box}">
+                <Button.Content>
+                    <StackPanel>
+                        <Image Source="/Images/box.png"
+                               Width="24"
+                               Height="24"/>
+                        <TextBlock Text="박스"
+                                   Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Style="{StaticResource menuButtonStyle}"
+                    Command="{Binding SettingChangeCommand}"
+                    CommandParameter="{x:Static local:SettingButtons.Color}">
+                <Button.Content>
+                    <StackPanel>
+                        <Image Source="/Images/color.png"
+                               Width="24"
+                               Height="24"/>
+                        <TextBlock Text="색상"
+                                   Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Style="{StaticResource menuButtonStyle}"
+                    Command="{Binding SettingChangeCommand}"
+                    CommandParameter="{x:Static local:SettingButtons.Sound}">
+                <Button.Content>
+                    <StackPanel>
+                        <Image Source="/Images/sound.png"
+                               Width="24"
+                               Height="24"/>
+                        <TextBlock Text="소리"
+                                   Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Style="{StaticResource menuButtonStyle}"
+                    Command="{Binding SettingChangeCommand}"
+                    CommandParameter="{x:Static local:SettingButtons.Etc}">
+                <Button.Content>
+                    <StackPanel>
+                        <Image Source="/Images/etc.png"
+                               Width="24"
+                               Height="24"/>
+                        <TextBlock Text="기타"
+                                   Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+
+        <ScrollViewer Margin="0,0,0,1"
+                      Grid.Column="1"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto">
+            <Grid HorizontalAlignment="Stretch"
+                  VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <!--규칙-->
+                <Grid Visibility="{Binding NumberSetting}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel>
+                        <RadioButton x:Name="radioWinFailure"
+                                 Content="당첨사용"
+                                 IsChecked="True"
+                                 Margin="0,0,0,4"/>
+                        <RadioButton x:Name="radioRanking" 
+                                 Content="순위사용"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,0,0,4"
+                                    IsEnabled="{Binding IsChecked, ElementName=radioWinFailure}">
+                            <TextBlock Text="당첨전체개수"/>
+                            <TextBox Text="{Binding WinFailureAllCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}"
+                                     MaxLength="3"
+                                     >
+                                <behaviors:Interaction.Behaviors>
+                                    <drawBehavior:MatchNumberBehavior/>
+                                </behaviors:Interaction.Behaviors>
+                            </TextBox>
+
+                            <TextBlock Text="당첨개수"/>
+                            <TextBox Text="{Binding WinCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}"
+                                     MaxLength="3"
+                                     >
+                                <behaviors:Interaction.Behaviors>
+                                    <drawBehavior:MatchNumberBehavior/>
+                                </behaviors:Interaction.Behaviors>
+                            </TextBox>
+
+                            <Button Content="당첨만들기"
+                                    Margin="10,0,10,0"
+                                    Height="32"
+                                    Width="100"
+                                    Command="{Binding MakeWinFailureCommand}"
+                                    Style="{StaticResource defaultButtonStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,0,0,4"
+                                    IsEnabled="{Binding IsChecked, ElementName=radioRanking}">
+                            <TextBlock Text="순위전체개수"/>
+                            <TextBox Text="{Binding RankingAllCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}"
+                                     MaxLength="3"
+                                     >
+                                <behaviors:Interaction.Behaviors>
+                                    <drawBehavior:MatchNumberBehavior/>
+                                </behaviors:Interaction.Behaviors>
+                            </TextBox>
+
+                            <Button Content="순위만들기"
+                                    Margin="10,0,10,0"
+                                    Height="32"
+                                    Width="100"
+                                    Command="{Binding MakeRankingCommand}"
+                                    Style="{StaticResource defaultButtonStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal"
+                                    IsEnabled="{Binding IsChecked, ElementName=radioRanking}">
+                            <StackPanel.Resources>
+                                <Style TargetType="TextBox">
+                                    <Setter Property="MinWidth" Value="45"/>
+                                    <Setter Property="MaxLength" Value="2"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="Margin" Value="5,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+
+                            <TextBlock Text="1등"/>
+                            <TextBox Text="{Binding FirstCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}"
+                                     >
+                                <behaviors:Interaction.Behaviors>
+                                    <drawBehavior:MatchNumberBehavior/>
+                                </behaviors:Interaction.Behaviors>
+                            </TextBox>
+
+                            <TextBlock Text="2등"/>
+                            <TextBox Text="{Binding SecondCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}"
+                                     >
+                                <behaviors:Interaction.Behaviors>
+                                    <drawBehavior:MatchNumberBehavior/>
+                                </behaviors:Interaction.Behaviors>
+                            </TextBox>
+
+                            <TextBlock Text="3등"/>
+                            <TextBox Text="{Binding ThirdCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}"
+                                     >
+                                <behaviors:Interaction.Behaviors>
+                                    <drawBehavior:MatchNumberBehavior/>
+                                </behaviors:Interaction.Behaviors>
+                            </TextBox>
+
+                            <TextBlock Text="4등"/>
+                            <TextBox Text="{Binding FourthCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}"
+                                     >
+                                <behaviors:Interaction.Behaviors>
+                                    <drawBehavior:MatchNumberBehavior/>
+                                </behaviors:Interaction.Behaviors>
+                            </TextBox>
+
+                            <TextBlock Text="5등"/>
+                            <TextBox Text="{Binding FifthCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}"
+                                     >
+                                <behaviors:Interaction.Behaviors>
+                                    <drawBehavior:MatchNumberBehavior/>
+                                </behaviors:Interaction.Behaviors>
+                            </TextBox>
+
+                            <TextBlock Text="6등"/>
+                            <TextBox Text="{Binding SixthCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}"
+                                     >
+                                <behaviors:Interaction.Behaviors>
+                                    <drawBehavior:MatchNumberBehavior/>
+                                </behaviors:Interaction.Behaviors>
+                            </TextBox>
+
+                            <TextBlock Text="7등"/>
+                            <TextBox Text="{Binding SeventhCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}"
+                                     >
+                                <behaviors:Interaction.Behaviors>
+                                    <drawBehavior:MatchNumberBehavior/>
+                                </behaviors:Interaction.Behaviors>
+                            </TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <!--글자-->
+                <StackPanel Visibility="{Binding TextSetting}">
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,0,0,4"
+                                IsEnabled="{Binding IsChecked, ElementName=radioWinFailure}">
+                        <TextBlock Text="당첨명"/>
+                        <TextBox Text="{Binding WinText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 />
+
+                        <TextBlock Text="실패명"/>
+                        <TextBox Text="{Binding FailureText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 />
+
+                        <TextBlock Text="숫자크기"/>
+                        <TextBox Text="{Binding NumberTextSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullCheckConverter}}"
+                                 
+                                 MaxLength="2">
+                            <behaviors:Interaction.Behaviors>
+                                <drawBehavior:MatchNumberBehavior/>
+                            </behaviors:Interaction.Behaviors>
+                        </TextBox>
+
+                        <TextBlock Text="글자크기"/>
+                        <TextBox Text="{Binding WinFailureTextSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullCheckConverter}}"
+                                 
+                                 MaxLength="2">
+                            <behaviors:Interaction.Behaviors>
+                                <drawBehavior:MatchNumberBehavior/>
+                            </behaviors:Interaction.Behaviors>
+                        </TextBox>
+
+                        <TextBlock Text="당첨폰트"/>
+                        <ComboBox ItemsSource="{Binding FontList}"
+                                  SelectedItem="{Binding SelectedWinFailureFont, Mode=TwoWay}"
+                                  Margin="5,0">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontFamily="{Binding}" Text="{Binding}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,0,0,4"
+                                IsEnabled="{Binding IsChecked, ElementName=radioRanking}">
+
+                        <TextBlock Text="1등"/>
+                        <TextBox Text="{Binding FirstText, Mode=TwoWay}"
+                                 />
+
+                        <TextBlock Text="2등"/>
+                        <TextBox Text="{Binding SecondText, Mode=TwoWay}"
+                                 />
+
+                        <TextBlock Text="3등"/>
+                        <TextBox Text="{Binding ThirdText, Mode=TwoWay}"
+                                 >
+                        </TextBox>
+
+                        <TextBlock Text="4등"/>
+                        <TextBox Text="{Binding FourthText, Mode=TwoWay}"
+                                 >
+                        </TextBox>
+
+                        <TextBlock Text="5등"/>
+                        <TextBox Text="{Binding FifthText, Mode=TwoWay}"
+                                 >
+                        </TextBox>
+
+                        <TextBlock Text="6등"/>
+                        <TextBox Text="{Binding SixthText, Mode=TwoWay}"
+                                 >
+                        </TextBox>
+
+                        <TextBlock Text="7등"/>
+                        <TextBox Text="{Binding SeventhText, Mode=TwoWay}"
+                                 >
+                        </TextBox>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                IsEnabled="{Binding IsChecked, ElementName=radioRanking}">
+
+                        <TextBlock Text="순위실패명"/>
+                        <TextBox Text="{Binding RankingFailureText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 />
+
+                        <TextBlock Text="순위숫자크기"/>
+                        <TextBox Text="{Binding NumberTextSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 
+                                 MaxLength="2">
+                            <behaviors:Interaction.Behaviors>
+                                <drawBehavior:MatchNumberBehavior/>
+                            </behaviors:Interaction.Behaviors>
+                        </TextBox>
+
+                        <TextBlock Text="순위글자크기"/>
+                        <TextBox Text="{Binding WinFailureTextSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 
+                                 MaxLength="2">
+                            <behaviors:Interaction.Behaviors>
+                                <drawBehavior:MatchNumberBehavior/>
+                            </behaviors:Interaction.Behaviors>
+                        </TextBox>
+
+                        <TextBlock Text="순위폰트"/>
+                        <ComboBox ItemsSource="{Binding FontList}"
+                                  SelectedItem="{Binding SelectedRankingFont, Mode=TwoWay}"
+                                  Margin="5,0">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontFamily="{Binding}" Text="{Binding}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+
+
+                </StackPanel>
+
+                <!--박스-->
+                <StackPanel Visibility="{Binding BoxSetting}">
+
+                    <StackPanel Orientation="Horizontal"
+                            Margin="0,0,0,4"
+                            IsEnabled="{Binding IsChecked, ElementName=radioWinFailure}">
+                        <TextBlock Text="당첨박스너비"/>
+                        <TextBox Text="{Binding BoxWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 MaxLength="3"
+                                 >
+                            <behaviors:Interaction.Behaviors>
+                                <drawBehavior:MatchNumberBehavior/>
+                            </behaviors:Interaction.Behaviors>
+                        </TextBox>
+
+                        <TextBlock Text="당첨박스높이"/>
+                        <TextBox Text="{Binding BoxHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 MaxLength="3"
+                                 >
+                            <behaviors:Interaction.Behaviors>
+                                <drawBehavior:MatchNumberBehavior/>
+                            </behaviors:Interaction.Behaviors>
+                        </TextBox>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                            IsEnabled="{Binding IsChecked, ElementName=radioRanking}">
+                        <TextBlock Text="순위박스너비"/>
+                        <TextBox Text="{Binding BoxWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 MaxLength="3"
+                                 >
+                            <behaviors:Interaction.Behaviors>
+                                <drawBehavior:MatchNumberBehavior/>
+                            </behaviors:Interaction.Behaviors>
+                        </TextBox>
+
+                        <TextBlock Text="순위박스높이"/>
+                        <TextBox Text="{Binding BoxHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 MaxLength="3"
+                                 >
+                            <behaviors:Interaction.Behaviors>
+                                <drawBehavior:MatchNumberBehavior/>
+                            </behaviors:Interaction.Behaviors>
+                        </TextBox>
+                    </StackPanel>
+
+                </StackPanel>
+
+                <!--색상-->
+                <StackPanel Visibility="{Binding ColorSetting}">
+                    <StackPanel.Resources>
+                        <Style TargetType="colorpicker:ColorPicker">
+                            <Setter Property="Width" Value="100"/>
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock Text="배경색"/>
+                        <colorpicker:ColorPicker SelectedColor="{Binding BackgroundColor, Mode=TwoWay}"/>
+
+                        <TextBlock Text="당첨색"/>
+                        <colorpicker:ColorPicker SelectedColor="{Binding WinColor, Mode=TwoWay}" />
+
+                        <TextBlock Text="실패색"/>
+                        <colorpicker:ColorPicker SelectedColor="{Binding FailureColor, Mode=TwoWay}" />
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock Text="글씨색"/>
+                        <colorpicker:ColorPicker SelectedColor="{Binding FontColor, Mode=TwoWay}" />
+
+                        <TextBlock Text="판넬색"/>
+                        <colorpicker:ColorPicker SelectedColor="{Binding PanelColor, Mode=TwoWay}" />
+                    </StackPanel>
+
+                    <!--<StackPanel Orientation="Horizontal"
+                                IsEnabled="{Binding IsChecked, ElementName=radioRanking}">
+                        <TextBlock Text="배경색"/>
+                        <colorpicker:ColorPicker SelectedColor="{Binding BackgroundColor, Mode=TwoWay}"/>
+
+                        <TextBlock Text="1등색"/>
+                        <colorpicker:ColorPicker SelectedColor="{Binding WinColor, Mode=TwoWay}" />
+
+                        <TextBlock Text="2등색"/>
+                        <colorpicker:ColorPicker SelectedColor="{Binding FailureColor, Mode=TwoWay}" />
+
+                        <TextBlock Text="3등색"/>
+                        <colorpicker:ColorPicker SelectedColor="{Binding FontColor, Mode=TwoWay}" />
+
+                        <TextBlock Text="4등색"/>
+                        <colorpicker:ColorPicker SelectedColor="{Binding PanelColor, Mode=TwoWay}" />
+
+                        <TextBlock Text="5등색"/>
+                        <colorpicker:ColorPicker SelectedColor="{Binding PanelColor, Mode=TwoWay}" />
+
+                        <TextBlock Text="6등색"/>
+                        <colorpicker:ColorPicker SelectedColor="{Binding PanelColor, Mode=TwoWay}" />
+
+                        <TextBlock Text="7등색"/>
+                        <colorpicker:ColorPicker SelectedColor="{Binding PanelColor, Mode=TwoWay}" />
+
+                        <TextBlock Text="판넬색"/>
+                        <colorpicker:ColorPicker SelectedColor="{Binding PanelColor, Mode=TwoWay}" />
+                    </StackPanel>-->
+
+                </StackPanel>
+
+                <!--소리-->
+                <StackPanel Orientation="Vertical"
+                        Visibility="{Binding SoundSetting}">
+
+                    <StackPanel Orientation="Horizontal"
+                            Margin="0,0,0,4">
+                        <Button Content="당첨소리"
+                            Margin="0"
+                            Height="32"
+                            Width="80"
+                            VerticalContentAlignment="Center"
+                            Style="{StaticResource defaultButtonStyle}"
+                            Command="{Binding WinSoundCommand}"/>
+                        <Button Content="X"
+                            Margin="5,0"
+                            Height="32"
+                            Width="30"
+                            Style="{StaticResource defaultButtonStyle}"
+                            Command="{Binding WinSoundClearCommand}"/>
+                        <Slider x:Name="sliderWin"
+                            Width="70"
+                            Minimum="0"
+                            Maximum="1"
+                            Ticks="0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1"
+                            Value="{Binding WinVolume, Mode=TwoWay}">
+                        </Slider>
+                        <TextBlock Margin="10,0"
+                               Text="{Binding WinSoundPath}"/>
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="실패소리"
+                            Margin="0"
+                            Height="32"
+                            Width="80"
+                            VerticalContentAlignment="Center"
+                            Style="{StaticResource defaultButtonStyle}"
+                            Command="{Binding FailureSoundCommand}"/>
+                        <Button Content="X"
+                            Margin="5,0"
+                            Height="32"
+                            Width="30"
+                            Style="{StaticResource defaultButtonStyle}"
+                            Command="{Binding FailureSoundClearCommand}"/>
+                        <Slider x:Name="sliderFailure"
+                            Width="70"
+                            Minimum="0"
+                            Maximum="1"
+                            Ticks="0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1"
+                            Value="{Binding FailureVolume, Mode=TwoWay}"/>
+                        <TextBlock Margin="10,0"
+                               Text="{Binding FailureSoundPath}"/>
+
+                    </StackPanel>
+                </StackPanel>
+
+                <!--기타-->
+                <StackPanel Orientation="Horizontal"
+                        Visibility="{Binding EtcSetting}">
+                    <!--<TextBlock Text="투명도"/>
+                <Slider x:Name="slider"
+                        Width="60"
+                        Minimum="0"
+                        Maximum="1"
+                        Value="1"/>-->
+
+                    <!--<TextBlock>
+                        <Hyperlink RequestNavigate="Hyperlink_RequestNavigate"
+                                   NavigateUri="https://blog.naver.com/redcassio">문의</Hyperlink>
+                    </TextBlock>-->
+                </StackPanel>
+
+            </Grid>
+        </ScrollViewer>
+
+        <Grid Grid.Row="1"
+              Grid.Column="1">
+
+            <!--당첨박스-->
+            <ListBox ItemsSource="{Binding DrawWinFailureList}"
+                     Background="{Binding PanelColor, Converter={StaticResource ColorToBrushConverter}}"
+                     Visibility="{Binding IsChecked, ElementName=radioWinFailure, Converter={StaticResource BoolToVisibilityConverter}}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"
+                                       Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid, Mode=FindAncestor}}"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="{Binding DataContext.BackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"
+                                BorderThickness="1"
+                                CornerRadius="3">
+                            <!--<Border.Effect>
+                                    <DropShadowEffect BlurRadius="30" ShadowDepth="10" Color="Red"/>
+                                </Border.Effect>-->
+
+                            <Button Width="{Binding DataContext.BoxWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                    Height="{Binding DataContext.BoxHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                    Command="{Binding DataContext.DrawOpenCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                    CommandParameter="{Binding}"
+                                    BorderThickness="0">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="{Binding DataContext.BackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsOpen}" Value="True"/>
+                                                    <Condition Binding="{Binding IsWin}" Value="True"/>
+                                                </MultiDataTrigger.Conditions>
+
+                                                <Setter Property="Background" Value="{Binding DataContext.WinColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+                                            </MultiDataTrigger>
+
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsOpen}" Value="True"/>
+                                                    <Condition Binding="{Binding IsWin}" Value="False"/>
+                                                </MultiDataTrigger.Conditions>
+
+                                                <Setter Property="Background" Value="{Binding DataContext.FailureColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+                                            </MultiDataTrigger>
+
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#22ffffff"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+
+                                <Grid>
+                                    <TextBlock Text="{Binding UnitNumber}"
+                                               FontSize="{Binding DataContext.NumberTextSize, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                               FontFamily="{Binding DataContext.SelectedWinFailureFont, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                               Foreground="{Binding DataContext.FontColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Visibility" Value="Visible"/>
+
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsOpen}" Value="True">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+
+                                    <TextBlock FontSize="{Binding DataContext.WinFailureTextSize, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                               FontFamily="{Binding DataContext.SelectedWinFailureFont, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                               Foreground="{Binding DataContext.FontColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Setter Property="Text" Value="{Binding DataContext.FailureText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsOpen}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IsWin}" Value="True">
+                                                        <Setter Property="Text" Value="{Binding DataContext.WinText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Grid>
+                            </Button>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <!--순위박스-->
+            <ListBox ItemsSource="{Binding DrawRankingList}"
+                     Background="{Binding PanelColor, Converter={StaticResource ColorToBrushConverter}}"
+                     Visibility="{Binding IsChecked, ElementName=radioRanking, Converter={StaticResource BoolToVisibilityConverter}}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"
+                                       Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid, Mode=FindAncestor}}"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="{Binding DataContext.BackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"
+                                BorderThickness="1"
+                                CornerRadius="3">
+                            <!--<Border.Effect>
+                                    <DropShadowEffect BlurRadius="30" ShadowDepth="10" Color="Red"/>
+                                </Border.Effect>-->
+
+                            <Button Width="{Binding DataContext.BoxWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                    Height="{Binding DataContext.BoxHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                    Command="{Binding DataContext.DrawOpenCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                    CommandParameter="{Binding}"
+                                    BorderThickness="0">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="{Binding DataContext.BackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsOpen}" Value="True"/>
+                                                    <Condition Binding="{Binding IsWin}" Value="True"/>
+                                                </MultiDataTrigger.Conditions>
+
+                                                <Setter Property="Background" Value="{Binding DataContext.WinColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+                                            </MultiDataTrigger>
+
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsOpen}" Value="True"/>
+                                                    <Condition Binding="{Binding IsWin}" Value="False"/>
+                                                </MultiDataTrigger.Conditions>
+
+                                                <Setter Property="Background" Value="{Binding DataContext.FailureColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+                                            </MultiDataTrigger>
+
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#22ffffff"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+
+                                <Grid>
+                                    <TextBlock Text="{Binding UnitNumber}"
+                                               FontSize="{Binding DataContext.NumberTextSize, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                               FontFamily="{Binding DataContext.SelectedRankingFont, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                               Foreground="{Binding DataContext.FontColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Visibility" Value="Visible"/>
+
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsOpen}" Value="True">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+
+                                    <TextBlock FontSize="{Binding DataContext.WinFailureTextSize, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                               FontFamily="{Binding DataContext.SelectedRankingFont, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                               Foreground="{Binding DataContext.FontColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Setter Property="Text" Value="{Binding DataContext.FailureText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsOpen}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IsWin}" Value="True">
+                                                        <Setter Property="Text" Value="{Binding RankingText}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Grid>
+                            </Button>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+        </Grid>
+
+    </Grid>
+</Window>

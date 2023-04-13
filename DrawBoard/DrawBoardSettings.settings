@@ -1,0 +1,66 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DrawBoard" GeneratedClassName="DrawBoardSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="AllNumber" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="WinNumber" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="WinText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">당첨</Value>
+    </Setting>
+    <Setting Name="FailureText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">꽝</Value>
+    </Setting>
+    <Setting Name="WinFailureTextSize" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="BackgroundColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF0F0E0E</Value>
+    </Setting>
+    <Setting Name="FailureColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFFF0000</Value>
+    </Setting>
+    <Setting Name="FontColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFF0FFFF</Value>
+    </Setting>
+    <Setting Name="BoxWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="BoxHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="WinColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF00008B</Value>
+    </Setting>
+    <Setting Name="WindowWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">730</Value>
+    </Setting>
+    <Setting Name="WindowHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">700</Value>
+    </Setting>
+    <Setting Name="SelectedFont" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Magic R</Value>
+    </Setting>
+    <Setting Name="NumberTextSize" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">40</Value>
+    </Setting>
+    <Setting Name="WinSoundPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">없음</Value>
+    </Setting>
+    <Setting Name="FailureSoundPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">없음</Value>
+    </Setting>
+    <Setting Name="PanelColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#2B2B2B</Value>
+    </Setting>
+    <Setting Name="WinVolume" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="FailureVolume" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
