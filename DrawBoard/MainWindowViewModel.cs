@@ -146,7 +146,7 @@ namespace DrawBoard
         private Visibility _etcSetting = Visibility.Collapsed;
 
         [ObservableProperty]
-        private bool _focusOnOf;
+        private bool _isFocusOnOf;
 
         #endregion
 
@@ -165,7 +165,7 @@ namespace DrawBoard
         }
 
         private void SetDefaultValue()
-        {
+        { 
             WinFailureAllCount = DrawBoardSettings.Default.AllNumber;
             WinCount = DrawBoardSettings.Default.WinNumber;
             WinText = DrawBoardSettings.Default.WinText;
@@ -195,14 +195,14 @@ namespace DrawBoard
         [RelayCommand]
         private void MakeWinFailure()
         {
-            FocusOnOf = !FocusOnOf;
+            IsFocusOnOf = !IsFocusOnOf;
             MakeDrawWinFailureList(WinFailureAllCount);
         }
 
         [RelayCommand]
         private void MakeRanking()
         {
-            FocusOnOf = !FocusOnOf;
+            IsFocusOnOf = !IsFocusOnOf;
             MakeRankingList(RankingAllCount);
         }
 

@@ -3,12 +3,13 @@ using System.Windows;
 
 namespace DrawBoard.Behaviors
 {
-    public class WindowCloseBehavior : Behavior<Window>
+    public class WindowBehavior : Behavior<Window>
     {
         protected override void OnAttached()
         {
             base.OnAttached();
 
+            AssociatedObject.MouseDown += AssociatedObject_MouseDown;
             AssociatedObject.Closed += AssociatedObject_Closed;
         }
 
@@ -16,7 +17,16 @@ namespace DrawBoard.Behaviors
         {
             base.OnDetaching();
 
+            AssociatedObject.MouseDown -= AssociatedObject_MouseDown;
             AssociatedObject.Closed -= AssociatedObject_Closed;
+        }
+
+        private void AssociatedObject_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+            {
+                AssociatedObject.DragMove();
+            }
         }
 
         private void AssociatedObject_Closed(object? sender, System.EventArgs e)
