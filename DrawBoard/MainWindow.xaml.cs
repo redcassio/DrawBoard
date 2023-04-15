@@ -29,8 +29,15 @@ namespace DrawBoard
 
         private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
-            e.Handled = true;
+            var psi = new ProcessStartInfo
+            {
+                FileName = "cmd",
+                WindowStyle = ProcessWindowStyle.Hidden,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                Arguments = $"/c start {e.Uri.AbsoluteUri}"
+            };
+            Process.Start(psi);
         }
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]

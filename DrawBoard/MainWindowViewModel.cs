@@ -14,6 +14,18 @@ namespace DrawBoard
     {
         #region :: Members ::
 
+        #region :: Window ::
+
+        [ObservableProperty]
+        private double _windowWidth = 730d;
+
+        [ObservableProperty]
+        private double _windowHeight = 700d;
+
+        #endregion
+
+        #region :: Game Count ::
+
         [ObservableProperty]
         //[property: RegularExpression(@"[^0-9]+")]
         private int _winFailureAllCount = 50;
@@ -37,7 +49,18 @@ namespace DrawBoard
         private int _sixthCount = 2;
         [ObservableProperty]
         private int _seventhCount = 7;
-                
+
+        #endregion
+
+        #region :: Text ::
+
+        [ObservableProperty]
+        private string _winText = "당첨";
+        [ObservableProperty]
+        private string _failureText = "꽝";
+
+        [ObservableProperty]
+        private string _rankingFailureText = "꽝";
         [ObservableProperty]
         private string _firstText = "1등";
         [ObservableProperty]
@@ -54,24 +77,14 @@ namespace DrawBoard
         private string _seventhText = "7등";
 
         [ObservableProperty]
-        private string _winText = "당첨";
-        [ObservableProperty]
-        private string _failureText = "꽝";
-
-        [ObservableProperty]
-        private string _rankingFailureText = "꽝";
-
-        [ObservableProperty]
         private double _numberTextSize = 40d;
 
         [ObservableProperty]
         private double _winFailureTextSize = 30d;
 
-        [ObservableProperty]
-        private double _boxWidth = 100d;
+        #endregion
 
-        [ObservableProperty]
-        private double _boxHeight = 60d;
+        #region :: Color ::
 
         [ObservableProperty]
         private Color? _backgroundColor;
@@ -88,6 +101,10 @@ namespace DrawBoard
         [ObservableProperty]
         private Color? _panelColor;
 
+        #endregion
+
+        #region :: Font ::
+
         [ObservableProperty]
         private ObservableCollection<string> _fontList = new();
 
@@ -96,11 +113,9 @@ namespace DrawBoard
         [ObservableProperty]
         private string? _selectedRankingFont = "Expo M";
 
-        [ObservableProperty]
-        private double _windowWidth = 730d;
+        #endregion
 
-        [ObservableProperty]
-        private double _windowHeight = 700d;
+        #region :: Sound ::
 
         [ObservableProperty]
         private double _winVolume = 0.5d;
@@ -114,6 +129,10 @@ namespace DrawBoard
         [ObservableProperty]
         private string? _failureSoundPath;
 
+        #endregion
+
+        #region :: MediaElement ::
+
         [ObservableProperty]
         private Uri? _winMediaElementSource;
 
@@ -126,6 +145,10 @@ namespace DrawBoard
         [ObservableProperty]
         private bool _isFailureMediaElementPlay;
 
+        #endregion
+
+        #region :: ListBox ::
+
         [ObservableProperty]
         private ObservableCollection<DrawModel> _drawWinFailureList = new();
 
@@ -133,7 +156,17 @@ namespace DrawBoard
         private ObservableCollection<DrawModel> _drawRankingList = new();
 
         [ObservableProperty]
-        private Visibility _numberSetting = Visibility.Visible;
+        private double _boxWidth = 100d;
+
+        [ObservableProperty]
+        private double _boxHeight = 60d;
+
+        #endregion
+
+        #region :: Visible ::
+
+        [ObservableProperty]
+        private Visibility _ruleSetting = Visibility.Collapsed;
         [ObservableProperty]
         private Visibility _textSetting = Visibility.Collapsed;
         [ObservableProperty]
@@ -145,8 +178,10 @@ namespace DrawBoard
         [ObservableProperty]
         private Visibility _etcSetting = Visibility.Collapsed;
 
+        #endregion
+
         [ObservableProperty]
-        private bool _isFocusOnOf;
+        private bool _isFocusOnOff;
 
         #endregion
 
@@ -195,14 +230,14 @@ namespace DrawBoard
         [RelayCommand]
         private void MakeWinFailure()
         {
-            IsFocusOnOf = !IsFocusOnOf;
+            IsFocusOnOff = !IsFocusOnOff;
             MakeDrawWinFailureList(WinFailureAllCount);
         }
 
         [RelayCommand]
         private void MakeRanking()
         {
-            IsFocusOnOf = !IsFocusOnOf;
+            IsFocusOnOff = !IsFocusOnOff;
             MakeRankingList(RankingAllCount);
         }
 
@@ -234,7 +269,7 @@ namespace DrawBoard
         [RelayCommand]
         private void SettingChange(SettingButtons settings)
         {
-            NumberSetting = Visibility.Collapsed;
+            RuleSetting = Visibility.Collapsed;
             TextSetting = Visibility.Collapsed;
             BoxSetting = Visibility.Collapsed;
             ColorSetting = Visibility.Collapsed;
@@ -243,8 +278,10 @@ namespace DrawBoard
 
             switch (settings)
             {
-                case SettingButtons.Number:
-                    NumberSetting = Visibility.Visible;
+                case SettingButtons.Home:
+                    break;
+                case SettingButtons.Rule:
+                    RuleSetting = Visibility.Visible;
                     break;
                 case SettingButtons.Text:
                     TextSetting = Visibility.Visible;

@@ -12,8 +12,8 @@
                 <!--<ResourceDictionary Source="/ColorPickerLib;component/Themes/LightBrushs.xaml" />-->
                 <!-- Other merged dictionaries here -->
 
-                <ResourceDictionary Source="/Dictionary/DrawBoardDictionary.xaml"/>
-                <ResourceDictionary Source="/Dictionary/SliderDictionary.xaml"/>
+                <ResourceDictionary Source="/Dictionarys/DrawBoardDictionary.xaml"/>
+                <ResourceDictionary Source="/Dictionarys/SliderDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
             <!-- Other app resources here -->

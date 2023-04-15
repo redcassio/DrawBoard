@@ -2,7 +2,8 @@
 {
     public enum SettingButtons
     {
-        Number,
+        Home,
+        Rule,
         Text,
         Box,
         Color,
