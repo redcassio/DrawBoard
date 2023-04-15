@@ -49,7 +49,7 @@ namespace DrawBoard.Behaviors
                 DrawBoardSettings.Default.BackgroundColor = vm.BackgroundColor.ToString();
                 DrawBoardSettings.Default.FailureColor = vm.FailureColor.ToString();
                 DrawBoardSettings.Default.WinColor = vm.WinColor.ToString();
-                DrawBoardSettings.Default.FontColor = vm.FontColor.ToString();
+                //DrawBoardSettings.Default.FontColor = vm.FontColor.ToString();
                 DrawBoardSettings.Default.PanelColor = vm.PanelColor.ToString();
                 DrawBoardSettings.Default.WinSoundPath = vm.WinSoundPath;
                 DrawBoardSettings.Default.FailureSoundPath = vm.FailureSoundPath;

@@ -92,13 +92,19 @@ namespace DrawBoard
         private Color? _backgroundColor;
 
         [ObservableProperty]
-        private Color? _failureColor;
+        private Color? _numberColor;
+
+        [ObservableProperty]
+        private Color? _winBackgroundColor;
+
+        [ObservableProperty]
+        private Color? _failureBackgroundColor;
 
         [ObservableProperty]
         private Color? _winColor;
 
         [ObservableProperty]
-        private Color? _fontColor;
+        private Color? _failureColor;
 
         [ObservableProperty]
         private Color? _panelColor;
@@ -171,19 +177,19 @@ namespace DrawBoard
         #region :: Visible ::
 
         [ObservableProperty]
-        private Visibility _winFailureSetting = Visibility.Visible;
+        private Visibility _winFailureSettingVisible = Visibility.Visible;
         [ObservableProperty]
-        private Visibility _rankingSetting = Visibility.Collapsed;
+        private Visibility _rankingSettingVisible = Visibility.Collapsed;
         [ObservableProperty]
-        private Visibility _textSetting = Visibility.Collapsed;
+        private Visibility _textSettingVisible = Visibility.Collapsed;
         [ObservableProperty]
-        private Visibility _boxSetting = Visibility.Collapsed;
+        private Visibility _boxSettingVisible = Visibility.Collapsed;
         [ObservableProperty]
-        private Visibility _colorSetting = Visibility.Collapsed;
+        private Visibility _colorSettingVisible = Visibility.Collapsed;
         [ObservableProperty]
-        private Visibility _soundSetting = Visibility.Collapsed;
+        private Visibility _soundSettingVisible = Visibility.Collapsed;
         [ObservableProperty]
-        private Visibility _etcSetting = Visibility.Collapsed;
+        private Visibility _etcSettingVisible = Visibility.Collapsed;
 
         [ObservableProperty]
         private Visibility _winFailureListBoxVisible = Visibility.Visible;
@@ -207,8 +213,7 @@ namespace DrawBoard
             }
 
             SetDefaultValue();
-
-            //MakeDrawWinFailureList(AllNumber);
+            UseImage();
         }
 
         private void SetDefaultValue()
@@ -231,7 +236,7 @@ namespace DrawBoard
             BackgroundColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.BackgroundColor);
             FailureColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.FailureColor);
             WinColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.WinColor);
-            FontColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.FontColor);
+            //FontColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.FontColor);
             PanelColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.PanelColor);
         }
 
@@ -281,40 +286,40 @@ namespace DrawBoard
         [RelayCommand]
         private void SettingChange(SettingButtons settings)
         {
-            WinFailureSetting = Visibility.Collapsed;
-            RankingSetting = Visibility.Collapsed;
-            TextSetting = Visibility.Collapsed;
-            BoxSetting = Visibility.Collapsed;
-            ColorSetting = Visibility.Collapsed;
-            SoundSetting = Visibility.Collapsed;
-            EtcSetting = Visibility.Collapsed;
+            WinFailureSettingVisible = Visibility.Collapsed;
+            RankingSettingVisible = Visibility.Collapsed;
+            TextSettingVisible = Visibility.Collapsed;
+            BoxSettingVisible = Visibility.Collapsed;
+            ColorSettingVisible = Visibility.Collapsed;
+            SoundSettingVisible = Visibility.Collapsed;
+            EtcSettingVisible = Visibility.Collapsed;
             
             switch (settings)
             {
                 case SettingButtons.WinFailure:
-                    WinFailureSetting = Visibility.Visible;
+                    WinFailureSettingVisible = Visibility.Visible;
                     RankingListBoxVisible = Visibility.Collapsed;
                     WinFailureListBoxVisible = Visibility.Visible;
                     break;
                 case SettingButtons.Ranking:
-                    RankingSetting = Visibility.Visible;
+                    RankingSettingVisible = Visibility.Visible;
                     WinFailureListBoxVisible = Visibility.Collapsed;
                     RankingListBoxVisible = Visibility.Visible;
                     break;
                 case SettingButtons.Text:
-                    TextSetting = Visibility.Visible;
+                    TextSettingVisible = Visibility.Visible;
                     break;
                 case SettingButtons.Box:
-                    BoxSetting = Visibility.Visible;
+                    BoxSettingVisible = Visibility.Visible;
                     break;
                 case SettingButtons.Color:
-                    ColorSetting = Visibility.Visible;
+                    ColorSettingVisible = Visibility.Visible;
                     break;
                 case SettingButtons.Sound:
-                    SoundSetting = Visibility.Visible;
+                    SoundSettingVisible = Visibility.Visible;
                     break;
                 case SettingButtons.Etc:
-                    EtcSetting = Visibility.Visible;
+                    EtcSettingVisible = Visibility.Visible;
                     break;
                 default:
                     break;
