@@ -9,7 +9,7 @@
                 <!--<ui:ThemeResources />
                 <ui:XamlControlsResources />-->
                 <!--<ResourceDictionary Source="/ColorPickerLib;component/Themes/DarkBrushs.xaml" />-->
-                <!--<ResourceDictionary Source="/ColorPickerLib;component/Themes/LightBrushs.xaml" />-->
+                <ResourceDictionary Source="/ColorPickerLib;component/Themes/LightBrushs.xaml" />
                 <!-- Other merged dictionaries here -->
 
                 <ResourceDictionary Source="/Dictionarys/DrawBoardDictionary.xaml"/>

@@ -2,8 +2,8 @@
 {
     public enum SettingButtons
     {
-        Home,
-        Rule,
+        WinFailure,
+        Ranking,
         Text,
         Box,
         Color,

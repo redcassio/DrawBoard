@@ -4,9 +4,11 @@ using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace DrawBoard
 {
@@ -161,12 +163,17 @@ namespace DrawBoard
         [ObservableProperty]
         private double _boxHeight = 60d;
 
+        [ObservableProperty]
+        private Brush _winFailureListBoxBackground;
+
         #endregion
 
         #region :: Visible ::
 
         [ObservableProperty]
-        private Visibility _ruleSetting = Visibility.Collapsed;
+        private Visibility _winFailureSetting = Visibility.Visible;
+        [ObservableProperty]
+        private Visibility _rankingSetting = Visibility.Collapsed;
         [ObservableProperty]
         private Visibility _textSetting = Visibility.Collapsed;
         [ObservableProperty]
@@ -177,6 +184,11 @@ namespace DrawBoard
         private Visibility _soundSetting = Visibility.Collapsed;
         [ObservableProperty]
         private Visibility _etcSetting = Visibility.Collapsed;
+
+        [ObservableProperty]
+        private Visibility _winFailureListBoxVisible = Visibility.Visible;
+        [ObservableProperty]
+        private Visibility _rankingListBoxVisible = Visibility.Collapsed;
 
         #endregion
 
@@ -269,19 +281,25 @@ namespace DrawBoard
         [RelayCommand]
         private void SettingChange(SettingButtons settings)
         {
-            RuleSetting = Visibility.Collapsed;
+            WinFailureSetting = Visibility.Collapsed;
+            RankingSetting = Visibility.Collapsed;
             TextSetting = Visibility.Collapsed;
             BoxSetting = Visibility.Collapsed;
             ColorSetting = Visibility.Collapsed;
             SoundSetting = Visibility.Collapsed;
             EtcSetting = Visibility.Collapsed;
-
+            
             switch (settings)
             {
-                case SettingButtons.Home:
+                case SettingButtons.WinFailure:
+                    WinFailureSetting = Visibility.Visible;
+                    RankingListBoxVisible = Visibility.Collapsed;
+                    WinFailureListBoxVisible = Visibility.Visible;
                     break;
-                case SettingButtons.Rule:
-                    RuleSetting = Visibility.Visible;
+                case SettingButtons.Ranking:
+                    RankingSetting = Visibility.Visible;
+                    WinFailureListBoxVisible = Visibility.Collapsed;
+                    RankingListBoxVisible = Visibility.Visible;
                     break;
                 case SettingButtons.Text:
                     TextSetting = Visibility.Visible;
@@ -302,7 +320,6 @@ namespace DrawBoard
                     break;
             }
         }
-
 
         [RelayCommand]
         private void WinSound()
@@ -336,6 +353,41 @@ namespace DrawBoard
         {
             FailureSoundPath = "없음";
             FailureMediaElementSource = null;
+        }
+
+        [RelayCommand]
+        private void UseImage()
+        {
+            try
+            {
+                var imageBrush = new ImageBrush();
+                var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\1.png";
+                if (File.Exists(path))
+                {
+                    imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Relative));
+
+                    WinFailureListBoxBackground = imageBrush;
+                }
+                else
+                {
+                    MessageBox.Show($"이미지 파일이 없습니다.{Environment.NewLine}{path}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        [RelayCommand]
+        private void UseColor()
+        {
+            Brush brush = Brushes.Transparent;
+            if (PanelColor is Color color)
+            {
+                brush = new SolidColorBrush(color);
+            }
+            WinFailureListBoxBackground = brush;
         }
 
         #endregion
@@ -373,6 +425,8 @@ namespace DrawBoard
                 }
             }
         }
+
+        #region :: Ranking ::
 
         private void MakeRankingList(int allNumber)
         {
@@ -464,14 +518,8 @@ namespace DrawBoard
 
         private int[] GeneratorRandomNumber(int min, int max, int count, int[] refItem)
         {
-            //var allCount = count + refItem.Length;
             var intArray = new int[count];
             var rand = new Random();
-
-            //for (int i = 0; i < refItem.Length; i++)
-            //{
-            //    intArray[i] = refItem[i];
-            //}
 
             for (int i = 0; i < count; i++)
             {
@@ -636,6 +684,8 @@ namespace DrawBoard
 
             return ints;
         }
+
+        #endregion
 
         #endregion
 
