@@ -28,7 +28,14 @@
     <None Remove="etc.png" />
     <None Remove="home.png" />
     <None Remove="Images\1.png" />
+    <None Remove="Images\2.jpg" />
+    <None Remove="Images\3.jpg" />
+    <None Remove="Images\4.jpg" />
+    <None Remove="Images\5.jpg" />
+    <None Remove="Images\6.png" />
+    <None Remove="Images\7.png" />
     <None Remove="Images\sound.png" />
+    <None Remove="SoundEffect\Failure.mp3" />
     <None Remove="text.png" />
   </ItemGroup>
 
@@ -38,6 +45,27 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Images\1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\7.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SoundEffect\Failure.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <Resource Include="Images\box.png">

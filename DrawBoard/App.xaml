@@ -14,6 +14,8 @@
 
                 <ResourceDictionary Source="/Dictionarys/DrawBoardDictionary.xaml"/>
                 <ResourceDictionary Source="/Dictionarys/SliderDictionary.xaml"/>
+                <ResourceDictionary Source="/Dictionarys/ComboBoxDictionary.xaml"/>
+                
             </ResourceDictionary.MergedDictionaries>
             
             <!-- Other app resources here -->

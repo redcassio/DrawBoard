@@ -267,73 +267,32 @@
                                 <!--#region 당첨판-->
                                 <Grid Visibility="{Binding WinFailureSettingVisible}">
                                     <StackPanel Orientation="Horizontal"
-                                                    Margin="0,0,0,4">
+                                                Margin="0,0,0,4">
 
                                         <TextBlock Text="당첨전체개수"
-                                                       Foreground="DarkGray"
-                                                       FontSize="12"
-                                                       FontWeight="Medium"
-                                                       FontFamily="Montserrat"
-                                                       VerticalAlignment="Center"/>
+                                                   Style="{StaticResource headerTextStyle}"/>
                                         <TextBox x:Name="txtUser"
-                                                     FontSize="13"
-                                                     FontWeight="Medium"
-                                                     FontFamily="Montserrat"                            
-                                                     Foreground="White"
-                                                     CaretBrush="LightGray"
-                                                     BorderBrush="DarkGray"
-                                                     BorderThickness="0,0,0,2"
-                                                     Height="28"
-                                                     Width="70"
-                                                     VerticalContentAlignment="Center"
-                                                     Margin="0,5,0,0"
-                                                     Padding="20,0,0,0"
-                                                     Background="Transparent"
-                                                     MaxLength="3"
-                                                     Text="{Binding WinFailureAllCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
+                                                 Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding WinFailureAllCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
                                             <behaviors:Interaction.Behaviors>
                                                 <drawBehavior:MatchNumberBehavior/>
                                             </behaviors:Interaction.Behaviors>
                                         </TextBox>
                                         
-                                        <TextBlock Text="당첨개수"/>
+                                        <TextBlock Text="당첨개수"
+                                                   Style="{StaticResource headerTextStyle}"/>
                                         <TextBox Text="{Binding WinCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}"
-                                                        MaxLength="3"
-                                                        >
+                                                 Style="{StaticResource textBoxStyle}"
+                                                 MaxLength="3">
                                             <behaviors:Interaction.Behaviors>
                                                 <drawBehavior:MatchNumberBehavior/>
                                             </behaviors:Interaction.Behaviors>
                                         </TextBox>
 
                                         <Button Content="당첨만들기"
-                                                BorderThickness="0"
-                                                Foreground="White"
-                                                FontSize="12"
-                                                FontFamily="Montserrat"
-                                                Cursor="Hand"                           
-                                                Margin="0,50,0,0"
-                                                Command="{Binding MakeWinFailureCommand}">
-                                            <Button.Style>
-                                                <Style TargetType="Button">
-                                                    <Setter Property="Background" Value="#462AD8"/>
-                                                    <Style.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Background" Value="#28AEED"/>
-                                                        </Trigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Button.Style>
-                                            <Button.Template>
-                                                <ControlTemplate TargetType="Button">
-                                                    <Border Width="150" Height="40"
-                                                            CornerRadius="20"
-                                                            Background="{TemplateBinding Background}">
-                                                        <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Button.Template>
-                                        </Button>
+                                                Margin="5,0,0,0"
+                                                Style="{StaticResource buttonStyle}"
+                                                Command="{Binding MakeWinFailureCommand}"/>
 
                                         <RadioButton IsChecked="True" Content="이미지사용" Command="{Binding UseImageCommand}"/>
                                         <RadioButton Content="색상사용" Command="{Binding UseColorCommand}"/>
@@ -353,21 +312,20 @@
 
                                         <StackPanel Orientation="Horizontal"
                                                     Margin="0,0,0,4">
-                                            <TextBlock Text="순위전체개수"/>
-                                            <TextBox Text="{Binding RankingAllCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}"
-                                                        MaxLength="3"
-                                                        >
+                                            <TextBlock Text="순위전체개수"
+                                                       Style="{StaticResource headerTextStyle}"/>
+                                            <TextBox Style="{StaticResource textBoxStyle}" 
+                                                     Text="{Binding RankingAllCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}"
+                                                     MaxLength="3">
                                                 <behaviors:Interaction.Behaviors>
                                                     <drawBehavior:MatchNumberBehavior/>
                                                 </behaviors:Interaction.Behaviors>
                                             </TextBox>
 
                                             <Button Content="순위만들기"
-                                                    Margin="10,0,10,0"
-                                                    Height="32"
-                                                    Width="100"
-                                                    Command="{Binding MakeRankingCommand}"
-                                                    />
+                                                    Margin="5,0,0,0"
+                                                    Style="{StaticResource buttonStyle}"
+                                                    Command="{Binding MakeRankingCommand}"/>
                                         </StackPanel>
 
                                         <StackPanel Orientation="Horizontal">
@@ -382,50 +340,64 @@
                                                 </Style>
                                             </StackPanel.Resources>
 
-                                            <TextBlock Text="1등"/>
-                                            <TextBox Text="{Binding FirstCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
+                                            <TextBlock Text="1등"
+                                                       Style="{StaticResource headerTextStyle}"/>
+                                            <TextBox Style="{StaticResource textBoxStyle}" 
+                                                     Text="{Binding FirstCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
                                                 <behaviors:Interaction.Behaviors>
                                                     <drawBehavior:MatchNumberBehavior/>
                                                 </behaviors:Interaction.Behaviors>
                                             </TextBox>
 
-                                            <TextBlock Text="2등"/>
-                                            <TextBox Text="{Binding SecondCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
+                                            <TextBlock Style="{StaticResource headerTextStyle}"
+                                                       Text="2등"/>
+                                            <TextBox Style="{StaticResource textBoxStyle}" 
+                                                     Text="{Binding SecondCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
                                                 <behaviors:Interaction.Behaviors>
                                                     <drawBehavior:MatchNumberBehavior/>
                                                 </behaviors:Interaction.Behaviors>
                                             </TextBox>
 
-                                            <TextBlock Text="3등"/>
-                                            <TextBox Text="{Binding ThirdCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
+                                            <TextBlock Style="{StaticResource headerTextStyle}"
+                                                       Text="3등"/>
+                                            <TextBox Style="{StaticResource textBoxStyle}"
+                                                     Text="{Binding ThirdCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
                                                 <behaviors:Interaction.Behaviors>
                                                     <drawBehavior:MatchNumberBehavior/>
                                                 </behaviors:Interaction.Behaviors>
                                             </TextBox>
 
-                                            <TextBlock Text="4등"/>
-                                            <TextBox Text="{Binding FourthCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
+                                            <TextBlock Style="{StaticResource headerTextStyle}"
+                                                       Text="4등"/>
+                                            <TextBox Style="{StaticResource textBoxStyle}" 
+                                                     Text="{Binding FourthCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
                                                 <behaviors:Interaction.Behaviors>
                                                     <drawBehavior:MatchNumberBehavior/>
                                                 </behaviors:Interaction.Behaviors>
                                             </TextBox>
 
-                                            <TextBlock Text="5등"/>
-                                            <TextBox Text="{Binding FifthCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
+                                            <TextBlock Style="{StaticResource headerTextStyle}"
+                                                       Text="5등"/>
+                                            <TextBox Style="{StaticResource textBoxStyle}" 
+                                                     Text="{Binding FifthCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
                                                 <behaviors:Interaction.Behaviors>
                                                     <drawBehavior:MatchNumberBehavior/>
                                                 </behaviors:Interaction.Behaviors>
                                             </TextBox>
 
-                                            <TextBlock Text="6등"/>
-                                            <TextBox Text="{Binding SixthCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
+                                            <TextBlock Style="{StaticResource headerTextStyle}"
+                                                       Text="6등"/>
+                                            <TextBox Style="{StaticResource textBoxStyle}" 
+                                                     Text="{Binding SixthCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
                                                 <behaviors:Interaction.Behaviors>
                                                     <drawBehavior:MatchNumberBehavior/>
                                                 </behaviors:Interaction.Behaviors>
                                             </TextBox>
 
-                                            <TextBlock Text="7등"/>
-                                            <TextBox Text="{Binding SeventhCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
+                                            <TextBlock Style="{StaticResource headerTextStyle}"
+                                                       Text="7등"/>
+                                            <TextBox Style="{StaticResource textBoxStyle}" 
+                                                     Text="{Binding SeventhCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
                                                 <behaviors:Interaction.Behaviors>
                                                     <drawBehavior:MatchNumberBehavior/>
                                                 </behaviors:Interaction.Behaviors>
@@ -440,29 +412,38 @@
 
                                     <StackPanel Orientation="Horizontal"
                                                 Margin="0,0,0,4">
-                                        <TextBlock Text="당첨명"/>
-                                        <TextBox Text="{Binding WinText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="당첨명"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding WinText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                        <TextBlock Text="실패명"/>
-                                        <TextBox Text="{Binding FailureText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="실패명"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding FailureText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                        <TextBlock Text="숫자크기"/>
-                                        <TextBox Text="{Binding NumberTextSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullCheckConverter}}"
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="숫자크기"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding NumberTextSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullCheckConverter}}"
                                                  MaxLength="2">
                                             <behaviors:Interaction.Behaviors>
                                                 <drawBehavior:MatchNumberBehavior/>
                                             </behaviors:Interaction.Behaviors>
                                         </TextBox>
 
-                                        <TextBlock Text="글자크기"/>
-                                        <TextBox Text="{Binding WinFailureTextSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullCheckConverter}}"
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="글자크기"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding WinFailureTextSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullCheckConverter}}"
                                                  MaxLength="2">
                                             <behaviors:Interaction.Behaviors>
                                                 <drawBehavior:MatchNumberBehavior/>
                                             </behaviors:Interaction.Behaviors>
                                         </TextBox>
 
-                                        <TextBlock Text="당첨폰트"/>
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="당첨폰트"/>
                                         <ComboBox ItemsSource="{Binding FontList}"
                                                   SelectedItem="{Binding SelectedWinFailureFont, Mode=TwoWay}"
                                                   Margin="5,0">
@@ -477,55 +458,76 @@
                                     <StackPanel Orientation="Horizontal" 
                                                 Margin="0,0,0,4">
 
-                                        <TextBlock Text="1등"/>
-                                        <TextBox Text="{Binding FirstText, Mode=TwoWay}"/>
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="1등"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding FirstText, Mode=TwoWay}"/>
 
-                                        <TextBlock Text="2등"/>
-                                        <TextBox Text="{Binding SecondText, Mode=TwoWay}"/>
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="2등"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding SecondText, Mode=TwoWay}"/>
 
-                                        <TextBlock Text="3등"/>
-                                        <TextBox Text="{Binding ThirdText, Mode=TwoWay}">
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="3등"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding ThirdText, Mode=TwoWay}">
                                         </TextBox>
 
-                                        <TextBlock Text="4등"/>
-                                        <TextBox Text="{Binding FourthText, Mode=TwoWay}">
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="4등"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding FourthText, Mode=TwoWay}">
                                         </TextBox>
 
-                                        <TextBlock Text="5등"/>
-                                        <TextBox Text="{Binding FifthText, Mode=TwoWay}">
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="5등"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding FifthText, Mode=TwoWay}">
                                         </TextBox>
 
-                                        <TextBlock Text="6등"/>
-                                        <TextBox Text="{Binding SixthText, Mode=TwoWay}">
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="6등"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding SixthText, Mode=TwoWay}">
                                         </TextBox>
 
-                                        <TextBlock Text="7등"/>
-                                        <TextBox Text="{Binding SeventhText, Mode=TwoWay}">
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="7등"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding SeventhText, Mode=TwoWay}">
                                         </TextBox>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
 
-                                        <TextBlock Text="순위실패명"/>
-                                        <TextBox Text="{Binding RankingFailureText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="순위실패명"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding RankingFailureText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                        <TextBlock Text="순위숫자크기"/>
-                                        <TextBox Text="{Binding NumberTextSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="순위숫자크기"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding NumberTextSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                                  MaxLength="2">
                                             <behaviors:Interaction.Behaviors>
                                                 <drawBehavior:MatchNumberBehavior/>
                                             </behaviors:Interaction.Behaviors>
                                         </TextBox>
 
-                                        <TextBlock Text="순위글자크기"/>
-                                        <TextBox Text="{Binding WinFailureTextSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="순위글자크기"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding WinFailureTextSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                  MaxLength="2">
                                             <behaviors:Interaction.Behaviors>
                                                 <drawBehavior:MatchNumberBehavior/>
                                             </behaviors:Interaction.Behaviors>
                                         </TextBox>
 
-                                        <TextBlock Text="순위폰트"/>
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="순위폰트"/>
                                         <ComboBox ItemsSource="{Binding FontList}"
                                                   SelectedItem="{Binding SelectedRankingFont, Mode=TwoWay}"
                                                   Margin="5,0">
@@ -546,16 +548,20 @@
 
                                     <StackPanel Orientation="Horizontal"
                                                 Margin="0,0,0,4">
-                                        <TextBlock Text="당첨박스너비"/>
-                                        <TextBox Text="{Binding BoxWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="당첨박스너비"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding BoxWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                  MaxLength="3">
                                             <behaviors:Interaction.Behaviors>
                                                 <drawBehavior:MatchNumberBehavior/>
                                             </behaviors:Interaction.Behaviors>
                                         </TextBox>
 
-                                        <TextBlock Text="당첨박스높이"/>
-                                        <TextBox Text="{Binding BoxHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="당첨박스높이"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding BoxHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                  MaxLength="3">
                                             <behaviors:Interaction.Behaviors>
                                                 <drawBehavior:MatchNumberBehavior/>
@@ -564,16 +570,20 @@
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="순위박스너비"/>
-                                        <TextBox Text="{Binding BoxWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="순위박스너비"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding BoxWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                  MaxLength="3">
                                             <behaviors:Interaction.Behaviors>
                                                 <drawBehavior:MatchNumberBehavior/>
                                             </behaviors:Interaction.Behaviors>
                                         </TextBox>
 
-                                        <TextBlock Text="순위박스높이"/>
-                                        <TextBox Text="{Binding BoxHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        <TextBlock Style="{StaticResource headerTextStyle}"
+                                                   Text="순위박스높이"/>
+                                        <TextBox Style="{StaticResource textBoxStyle}"
+                                                 Text="{Binding BoxHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                  MaxLength="3">
                                             <behaviors:Interaction.Behaviors>
                                                 <drawBehavior:MatchNumberBehavior/>
@@ -629,10 +639,8 @@
                                     <StackPanel Orientation="Horizontal"
                                                 Margin="0,0,0,4">
                                         <Button Content="당첨소리"
-                                                Margin="0"
-                                                Height="32"
-                                                Width="80"
-                                                VerticalContentAlignment="Center"
+                                                Margin="5,0,0,0"
+                                                Style="{StaticResource buttonStyle}"
                                                 Command="{Binding WinSoundCommand}"/>
                                         <Button Margin="5,0"
                                                 Height="32"
@@ -660,10 +668,8 @@
 
                                     <StackPanel Orientation="Horizontal">
                                         <Button Content="실패소리"
-                                                Margin="0"
-                                                Height="32"
-                                                Width="80"
-                                                VerticalContentAlignment="Center"
+                                                Margin="5,0,0,0"
+                                                Style="{StaticResource buttonStyle}"
                                                 Command="{Binding FailureSoundCommand}"/>
                                         <Button Margin="5,0"
                                                 Height="32"
@@ -691,9 +697,10 @@
                                 <!--#region 기타-->
                                 <StackPanel Orientation="Horizontal"
                                             Visibility="{Binding EtcSettingVisible}">           
-                                    <TextBlock FontSize="50"> 
+                                    <TextBlock FontSize="40"
+                                               Margin="10,0,0,0"> 
                                         <Hyperlink NavigateUri="https://blog.naver.com/redcassio" 
-                                                   RequestNavigate="Hyperlink_RequestNavigate">문의</Hyperlink>
+                                                   RequestNavigate="Hyperlink_RequestNavigate">홈페이지&amp;문의</Hyperlink>
                                     </TextBlock>
 
                                 </StackPanel>

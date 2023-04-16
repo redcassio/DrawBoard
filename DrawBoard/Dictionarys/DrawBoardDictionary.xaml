@@ -86,8 +86,7 @@
 
     <!--Menu button text-->
     <Style x:Key="menuButtonText" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
-        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>        
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="FontSize" Value="13.5"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -159,6 +158,54 @@
         <Setter Property="Height" Value="16"/>
     </Style>
 
+    <Style x:Key="headerTextStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="DarkGray"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="8,0,0,0"/>
+    </Style>
+
+    <Style x:Key="textBoxStyle" TargetType="TextBox">
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="CaretBrush" Value="LightGray"/>
+        <Setter Property="BorderBrush" Value="DarkGray"/>
+        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+    <Style x:Key="buttonStyle" TargetType="Button">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="#462AD8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="90" 
+                            Height="35"
+                            CornerRadius="15"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#28AEED"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
     <system:Double x:Key="SlideOffSet">130</system:Double>
 

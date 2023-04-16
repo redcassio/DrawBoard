@@ -238,6 +238,11 @@ namespace DrawBoard
             WinColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.WinColor);
             NumberColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.NumberColor);
             PanelColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.PanelColor);
+
+            if (string.IsNullOrEmpty(FailureSoundPath))
+            {
+                FailureSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Failure.mp3";
+            }
         }
 
         #endregion
@@ -366,7 +371,7 @@ namespace DrawBoard
             try
             {
                 var imageBrush = new ImageBrush();
-                var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\1.png";
+                var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\7.png";
                 if (File.Exists(path))
                 {
                     imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Relative));
