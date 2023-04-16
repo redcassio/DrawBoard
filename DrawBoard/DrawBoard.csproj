@@ -36,6 +36,7 @@
     <None Remove="Images\7.png" />
     <None Remove="Images\sound.png" />
     <None Remove="SoundEffect\Failure.mp3" />
+    <None Remove="SoundEffect\Win.mp3" />
     <None Remove="text.png" />
   </ItemGroup>
 
@@ -66,6 +67,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="SoundEffect\Failure.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SoundEffect\Win.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <Resource Include="Images\box.png">
