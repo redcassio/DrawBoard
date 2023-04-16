@@ -9,6 +9,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace DrawBoard
 {
@@ -107,7 +108,7 @@ namespace DrawBoard
         private Color? _failureColor;
 
         [ObservableProperty]
-        private Color? _panelColor;
+        private Color? _winFailurePanelColor;
 
         #endregion
 
@@ -172,6 +173,12 @@ namespace DrawBoard
         [ObservableProperty]
         private Brush _winFailureListBoxBackground;
 
+        [ObservableProperty]
+        private string? _winFailureImagePath;
+
+        [ObservableProperty]
+        private string? _rankingImagePath;
+
         #endregion
 
         #region :: Visible ::
@@ -213,7 +220,7 @@ namespace DrawBoard
             }
 
             SetDefaultValue();
-            UseImage();
+            WinFailureUseImage();
         }
 
         private void SetDefaultValue()
@@ -237,7 +244,7 @@ namespace DrawBoard
             FailureColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.FailureColor);
             WinColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.WinColor);
             NumberColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.NumberColor);
-            PanelColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.PanelColor);
+            WinFailurePanelColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.PanelColor);
 
             if (string.IsNullOrEmpty(FailureSoundPath))
             {
@@ -366,7 +373,30 @@ namespace DrawBoard
         }
 
         [RelayCommand]
-        private void UseImage()
+        private void WinFailureImageSelect()
+        {
+            try
+            {
+                var openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "png files (*.png)|*.png|jpg files (*.jpg)|*.jpg|All files (*.*)|*.*";
+
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    var imageBrush = new ImageBrush();
+                    imageBrush.ImageSource = new BitmapImage(new Uri(openFileDialog.FileName, UriKind.Absolute));
+
+                    WinFailureListBoxBackground = imageBrush;
+                    WinFailureImagePath = openFileDialog.FileName;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        [RelayCommand]
+        private void WinFailureImageRecycle()
         {
             try
             {
@@ -374,9 +404,10 @@ namespace DrawBoard
                 var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background2.png";
                 if (File.Exists(path))
                 {
-                    imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Relative));
+                    imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
 
                     WinFailureListBoxBackground = imageBrush;
+                    WinFailureImagePath = path;
                 }
                 else
                 {
@@ -390,10 +421,80 @@ namespace DrawBoard
         }
 
         [RelayCommand]
-        private void UseColor()
+        private void WinSoundRecycle()
+        {
+            var path = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Win.mp3";
+            if (File.Exists(path))
+            {
+                WinSoundPath = path;
+            }
+            else
+            {
+                MessageBox.Show($"사운드 파일이 없습니다.{Environment.NewLine}{path}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        [RelayCommand]
+        private void FailureSoundRecycle()
+        {
+            var path = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Failure.mp3";
+            if (File.Exists(path))
+            {
+                FailureSoundPath = path;
+            }
+            else
+            {
+                MessageBox.Show($"사운드 파일이 없습니다.{Environment.NewLine}{path}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        [RelayCommand]
+        private void WinFailureUseImage()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(WinFailureImagePath))
+                {
+                    var imageBrush = new ImageBrush();
+                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background2.png";
+                    if (File.Exists(path))
+                    {
+                        imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
+
+                        WinFailureListBoxBackground = imageBrush;
+                        WinFailureImagePath = path;
+                    }
+                    else
+                    {
+                        MessageBox.Show($"이미지 파일이 없습니다.{Environment.NewLine}{path}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                else
+                {
+                    var imageBrush = new ImageBrush();
+                    if (File.Exists(WinFailureImagePath))
+                    {
+                        imageBrush.ImageSource = new BitmapImage(new Uri(WinFailureImagePath, UriKind.Absolute));
+
+                        WinFailureListBoxBackground = imageBrush;
+                    }
+                    else
+                    {
+                        MessageBox.Show($"이미지 파일이 없습니다.{Environment.NewLine}{WinFailureImagePath}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        [RelayCommand]
+        private void WinFailureUseColor()
         {
             Brush brush = Brushes.Transparent;
-            if (PanelColor is Color color)
+            if (WinFailurePanelColor is Color color)
             {
                 brush = new SolidColorBrush(color);
             }
