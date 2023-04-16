@@ -294,8 +294,57 @@
                                                 Style="{StaticResource buttonStyle}"
                                                 Command="{Binding MakeWinFailureCommand}"/>
 
-                                        <RadioButton IsChecked="True" Content="이미지사용" Command="{Binding UseImageCommand}"/>
-                                        <RadioButton Content="색상사용" Command="{Binding UseColorCommand}"/>
+                                        <StackPanel Margin="20,10,0,0"
+                                                    VerticalAlignment="Top">
+                                            <TextBlock Text="배경"
+                                                       TextDecorations="Underline"
+                                                       Margin="0,0,0,10"/>
+                                            
+                                            <StackPanel Orientation="Horizontal">
+                                                <RadioButton x:Name="radioWinFailureUseImage" 
+                                                             IsChecked="True" 
+                                                             Content="이미지사용" 
+                                                             Command="{Binding UseImageCommand}"
+                                                             Foreground="White"/>
+
+                                                <RadioButton x:Name="radioWinFailureUseColor" 
+                                                             Content="색상사용" 
+                                                             Command="{Binding UseColorCommand}"
+                                                             Foreground="White"
+                                                             Margin="10,0,0,0"/>
+                                            </StackPanel>
+                                            
+                                            <StackPanel Orientation="Horizontal"
+                                                        Margin="0,5,0,0"
+                                                        Visibility="{Binding IsChecked, ElementName=radioWinFailureUseImage, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                <Button Content="이미지선택"
+                                                        Margin="5,0,0,0"
+                                                        Style="{StaticResource buttonStyle}"
+                                                        Command="{Binding WinSoundCommand}"/>
+                                                <Button Margin="5,0"
+                                                        Height="32"
+                                                        Width="30"
+                                                        Background="Transparent"
+                                                        Command="{Binding WinSoundClearCommand}">
+                                                    <fa:IconImage Icon="Recycle" 
+                                                                  Margin="1,0,0,0"
+                                                                  Width="22"
+                                                                  Height="22"
+                                                                  Foreground="{StaticResource color6}"/>
+                                                </Button>                                                
+                                                <TextBlock Margin="5,0"
+                                                           Text="{Binding WinSoundPath}"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal"
+                                                        Margin="0,5,0,0"
+                                                        Visibility="{Binding IsChecked, ElementName=radioWinFailureUseColor, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                <TextBlock Text="판넬색"/>
+                                                <colorpicker:ColorPicker SelectedColor="{Binding PanelColor, Mode=TwoWay}" 
+                                                                         Width="100"/>
+                                            </StackPanel>
+
+                                        </StackPanel>
                                     </StackPanel>
                                 </Grid>
                                 <!--#endregion-->
@@ -626,8 +675,6 @@
                                         <TextBlock Text="실패색"/>
                                         <colorpicker:ColorPicker SelectedColor="{Binding FailureColor, Mode=TwoWay}" />
 
-                                        <TextBlock Text="판넬색"/>
-                                        <colorpicker:ColorPicker SelectedColor="{Binding PanelColor, Mode=TwoWay}" />
                                     </StackPanel>
 
                                 </StackPanel>

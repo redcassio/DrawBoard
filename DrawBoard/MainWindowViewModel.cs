@@ -371,7 +371,7 @@ namespace DrawBoard
             try
             {
                 var imageBrush = new ImageBrush();
-                var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\7.png";
+                var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background2.png";
                 if (File.Exists(path))
                 {
                     imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Relative));
