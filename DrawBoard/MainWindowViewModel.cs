@@ -236,7 +236,7 @@ namespace DrawBoard
             BackgroundColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.BackgroundColor);
             FailureColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.FailureColor);
             WinColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.WinColor);
-            //FontColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.FontColor);
+            NumberColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.NumberColor);
             PanelColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.PanelColor);
         }
 

@@ -85,7 +85,7 @@ namespace DrawBoard {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF0F0E0E")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#00FFFFFF")]
         public string BackgroundColor {
             get {
                 return ((string)(this["BackgroundColor"]));
@@ -260,6 +260,18 @@ namespace DrawBoard {
             }
             set {
                 this["FailureVolume"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string NumberColor {
+            get {
+                return ((string)(this["NumberColor"]));
+            }
+            set {
+                this["NumberColor"] = value;
             }
         }
     }

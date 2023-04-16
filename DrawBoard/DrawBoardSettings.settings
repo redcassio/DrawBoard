@@ -18,7 +18,7 @@
       <Value Profile="(Default)">30</Value>
     </Setting>
     <Setting Name="BackgroundColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#FF0F0E0E</Value>
+      <Value Profile="(Default)">#00FFFFFF</Value>
     </Setting>
     <Setting Name="FailureColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFFF0000</Value>
@@ -61,6 +61,9 @@
     </Setting>
     <Setting Name="FailureVolume" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="NumberColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFFFFF</Value>
     </Setting>
   </Settings>
 </SettingsFile>
