@@ -203,6 +203,11 @@ namespace DrawBoard
         [ObservableProperty]
         private Visibility _rankingListBoxVisible = Visibility.Collapsed;
 
+        [ObservableProperty]
+        private bool _isRadioWinFailureUse = true;
+        [ObservableProperty]
+        private bool _isRadioRankingUse = false;
+
         #endregion
 
         [ObservableProperty]
