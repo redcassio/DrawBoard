@@ -30,26 +30,24 @@ namespace DrawBoard
         #region :: Game Count ::
 
         [ObservableProperty]
-        //[property: RegularExpression(@"[^0-9]+")]
-        private int _winFailureAllCount = 50;
-        [ObservableProperty]
-        private int _rankingAllCount = 30;
-
+        private int _winLoseAllCount = 50;
         [ObservableProperty]
         private int _winCount = 3;
 
+        [ObservableProperty]
+        private int _rankingAllCount = 30;
         [ObservableProperty]
         private int _firstCount = 1;
         [ObservableProperty]
         private int _secondCount = 2;
         [ObservableProperty]
-        private int _thirdCount = 2;
+        private int _thirdCount = 3;
         [ObservableProperty]
-        private int _fourthCount = 2;
+        private int _fourthCount = 4;
         [ObservableProperty]
-        private int _fifthCount = 2;
+        private int _fifthCount = 5;
         [ObservableProperty]
-        private int _sixthCount = 2;
+        private int _sixthCount = 6;
         [ObservableProperty]
         private int _seventhCount = 7;
 
@@ -60,10 +58,10 @@ namespace DrawBoard
         [ObservableProperty]
         private string _winText = "당첨";
         [ObservableProperty]
-        private string _failureText = "꽝";
+        private string _loseText = "꽝";
 
         [ObservableProperty]
-        private string _rankingFailureText = "꽝";
+        private string _rankingLoseText = "꽝";
         [ObservableProperty]
         private string _firstText = "1등";
         [ObservableProperty]
@@ -80,35 +78,53 @@ namespace DrawBoard
         private string _seventhText = "7등";
 
         [ObservableProperty]
-        private double _numberTextSize = 40d;
+        private double _winLoseTextSize = 30d;
+        [ObservableProperty]
+        private double _winLoseNumberTextSize = 40d;
 
         [ObservableProperty]
-        private double _winFailureTextSize = 30d;
+        private double _rankingTextSize = 30d;
+        [ObservableProperty]
+        private double _rankingNumberTextSize = 40d;
 
         #endregion
 
         #region :: Color ::
 
         [ObservableProperty]
-        private Color? _backgroundColor;
+        private Color? _winLoseBackgroundColor;
+        [ObservableProperty]
+        private Color? _rankingBackgroundColor;
 
         [ObservableProperty]
-        private Color? _numberColor;
+        private Color? _winLoseWinBackgroundColor;
+        [ObservableProperty]
+        private Color? _rankingWinBackgroundColor;
 
         [ObservableProperty]
-        private Color? _winBackgroundColor;
+        private Color? _winLoseLoseBackgroundColor;
+        [ObservableProperty]
+        private Color? _rankingLoseBackgroundColor;
 
         [ObservableProperty]
-        private Color? _failureBackgroundColor;
+        private Color? _winLoseNumberColor;
+        [ObservableProperty]
+        private Color? _rankingNumberColor;
 
         [ObservableProperty]
-        private Color? _winColor;
+        private Color? _winLoseWinColor;
+        [ObservableProperty]
+        private Color? _rankingWinColor;
 
         [ObservableProperty]
-        private Color? _failureColor;
+        private Color? _winLoseLoseColor;
+        [ObservableProperty]
+        private Color? _rankingLoseColor;
 
         [ObservableProperty]
-        private Color? _winFailurePanelColor;
+        private Color? _winLosePanelColor;
+        [ObservableProperty]
+        private Color? _rankingPanelColor;
 
         #endregion
 
@@ -118,9 +134,9 @@ namespace DrawBoard
         private ObservableCollection<string> _fontList = new();
 
         [ObservableProperty]
-        private string? _selectedWinFailureFont;
+        private string? _selectedWinLoseFont;
         [ObservableProperty]
-        private string? _selectedRankingFont = "Expo M";
+        private string? _selectedRankingFont;
 
         #endregion
 
@@ -130,13 +146,13 @@ namespace DrawBoard
         private double _winVolume = 0.5d;
 
         [ObservableProperty]
-        private double _failureVolume = 0.5d;
+        private double _loseVolume = 0.5d;
 
         [ObservableProperty]
         private string? _winSoundPath;
 
         [ObservableProperty]
-        private string? _failureSoundPath;
+        private string? _loseSoundPath;
 
         #endregion
 
@@ -144,38 +160,40 @@ namespace DrawBoard
 
         [ObservableProperty]
         private Uri? _winMediaElementSource;
-
         [ObservableProperty]
-        private Uri? _FailureMediaElementSource;
-
+        private Uri? _loseMediaElementSource;
         [ObservableProperty]
         private bool _isWinMediaElementPlay;
-
         [ObservableProperty]
-        private bool _isFailureMediaElementPlay;
+        private bool _isLoseMediaElementPlay;
 
         #endregion
 
         #region :: ListBox ::
 
         [ObservableProperty]
-        private ObservableCollection<DrawModel> _drawWinFailureList = new();
+        private ObservableCollection<DrawModel> _drawWinLoseList = new();
 
         [ObservableProperty]
         private ObservableCollection<DrawModel> _drawRankingList = new();
 
         [ObservableProperty]
-        private double _boxWidth = 100d;
+        private double _winLoseBoxWidth = 100d;
+        [ObservableProperty]
+        private double _winLoseBoxHeight = 60d;
 
         [ObservableProperty]
-        private double _boxHeight = 60d;
+        private double _rankingBoxWidth = 100d;
+        [ObservableProperty]
+        private double _rankingBoxHeight = 60d;
 
         [ObservableProperty]
-        private Brush _winFailureListBoxBackground;
+        private Brush _winLoseListBoxBackground;
+        [ObservableProperty]
+        private string? _winLoseImagePath;
 
         [ObservableProperty]
-        private string? _winFailureImagePath;
-
+        private Brush _rankingListBoxBackground;
         [ObservableProperty]
         private string? _rankingImagePath;
 
@@ -184,7 +202,7 @@ namespace DrawBoard
         #region :: Visible ::
 
         [ObservableProperty]
-        private Visibility _winFailureSettingVisible = Visibility.Visible;
+        private Visibility _winLoseSettingVisible = Visibility.Visible;
         [ObservableProperty]
         private Visibility _rankingSettingVisible = Visibility.Collapsed;
         [ObservableProperty]
@@ -199,12 +217,12 @@ namespace DrawBoard
         private Visibility _etcSettingVisible = Visibility.Collapsed;
 
         [ObservableProperty]
-        private Visibility _winFailureListBoxVisible = Visibility.Visible;
+        private Visibility _winLoseListBoxVisible = Visibility.Visible;
         [ObservableProperty]
         private Visibility _rankingListBoxVisible = Visibility.Collapsed;
 
         [ObservableProperty]
-        private bool _isRadioWinFailureUse = true;
+        private bool _isRadioWinLoseUse = true;
         [ObservableProperty]
         private bool _isRadioRankingUse = false;
 
@@ -225,35 +243,36 @@ namespace DrawBoard
             }
 
             SetDefaultValue();
-            WinFailureUseImage();
+            WinLoseUseImage();
+            RankingUseImage();
         }
 
         private void SetDefaultValue()
         { 
-            WinFailureAllCount = DrawBoardSettings.Default.AllNumber;
+            WinLoseAllCount = DrawBoardSettings.Default.AllNumber;
             WinCount = DrawBoardSettings.Default.WinNumber;
             WinText = DrawBoardSettings.Default.WinText;
-            FailureText = DrawBoardSettings.Default.FailureText;
-            NumberTextSize = DrawBoardSettings.Default.NumberTextSize;
-            WinFailureTextSize = DrawBoardSettings.Default.WinFailureTextSize;
-            BoxWidth = DrawBoardSettings.Default.BoxWidth;
-            BoxHeight = DrawBoardSettings.Default.BoxHeight;
+            //LoseText = DrawBoardSettings.Default.LoseText;
+            //NumberTextSize = DrawBoardSettings.Default.NumberTextSize;
+            //WinLoseTextSize = DrawBoardSettings.Default.WinLoseTextSize;
+            //BoxWidth = DrawBoardSettings.Default.BoxWidth;
+            //BoxHeight = DrawBoardSettings.Default.BoxHeight;
             WindowWidth = DrawBoardSettings.Default.WindowWidth;
             WindowHeight = DrawBoardSettings.Default.WindowHeight;
-            SelectedWinFailureFont = DrawBoardSettings.Default.SelectedFont;
+            SelectedWinLoseFont = DrawBoardSettings.Default.SelectedFont;
             WinSoundPath = DrawBoardSettings.Default.WinSoundPath;
-            FailureSoundPath = DrawBoardSettings.Default.FailureSoundPath;
+            //LoseSoundPath = DrawBoardSettings.Default.LoseSoundPath;
             WinVolume = DrawBoardSettings.Default.WinVolume;
-            FailureVolume = DrawBoardSettings.Default.FailureVolume;
-            BackgroundColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.BackgroundColor);
-            FailureColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.FailureColor);
-            WinColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.WinColor);
-            NumberColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.NumberColor);
-            WinFailurePanelColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.PanelColor);
+            //LoseVolume = DrawBoardSettings.Default.LoseVolume;
+            //BackgroundColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.BackgroundColor);
+            //LoseColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.LoseColor);
+            //WinColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.WinColor);
+            //NumberColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.NumberColor);
+            WinLosePanelColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.PanelColor);
 
-            if (string.IsNullOrEmpty(FailureSoundPath))
+            if (string.IsNullOrEmpty(LoseSoundPath))
             {
-                FailureSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Failure.mp3";
+                LoseSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Lose.mp3";
             }
         }
 
@@ -262,10 +281,10 @@ namespace DrawBoard
         #region :: Commands ::
 
         [RelayCommand]
-        private void MakeWinFailure()
+        private void MakeWinLose()
         {
             IsFocusOnOff = !IsFocusOnOff;
-            MakeDrawWinFailureList(WinFailureAllCount);
+            MakeDrawWinLoseList(WinLoseAllCount);
         }
 
         [RelayCommand]
@@ -284,18 +303,18 @@ namespace DrawBoard
             {
                 if (!string.IsNullOrEmpty(WinSoundPath) && WinSoundPath != "없음")
                 {
-                    FailureMediaElementSource = null;
+                    LoseMediaElementSource = null;
                     WinMediaElementSource = new Uri(WinSoundPath);
                     IsWinMediaElementPlay = !IsWinMediaElementPlay;
                 }
             }
             else 
             {
-                if (!string.IsNullOrEmpty(FailureSoundPath) && FailureSoundPath != "없음")
+                if (!string.IsNullOrEmpty(LoseSoundPath) && LoseSoundPath != "없음")
                 {
                     WinMediaElementSource = null;
-                    FailureMediaElementSource = new Uri(FailureSoundPath);
-                    IsFailureMediaElementPlay = !IsFailureMediaElementPlay;
+                    LoseMediaElementSource = new Uri(LoseSoundPath);
+                    IsLoseMediaElementPlay = !IsLoseMediaElementPlay;
                 }
             }
         }
@@ -303,7 +322,7 @@ namespace DrawBoard
         [RelayCommand]
         private void SettingChange(SettingButtons settings)
         {
-            WinFailureSettingVisible = Visibility.Collapsed;
+            WinLoseSettingVisible = Visibility.Collapsed;
             RankingSettingVisible = Visibility.Collapsed;
             TextSettingVisible = Visibility.Collapsed;
             BoxSettingVisible = Visibility.Collapsed;
@@ -313,15 +332,17 @@ namespace DrawBoard
             
             switch (settings)
             {
-                case SettingButtons.WinFailure:
-                    WinFailureSettingVisible = Visibility.Visible;
+                case SettingButtons.WinLose:
+                    WinLoseSettingVisible = Visibility.Visible;
                     RankingListBoxVisible = Visibility.Collapsed;
-                    WinFailureListBoxVisible = Visibility.Visible;
+                    WinLoseListBoxVisible = Visibility.Visible;
+                    IsRadioWinLoseUse = true;
                     break;
                 case SettingButtons.Ranking:
                     RankingSettingVisible = Visibility.Visible;
-                    WinFailureListBoxVisible = Visibility.Collapsed;
+                    WinLoseListBoxVisible = Visibility.Collapsed;
                     RankingListBoxVisible = Visibility.Visible;
+                    IsRadioRankingUse = true;
                     break;
                 case SettingButtons.Text:
                     TextSettingVisible = Visibility.Visible;
@@ -354,12 +375,12 @@ namespace DrawBoard
         }
 
         [RelayCommand]
-        private void FailureSound()
+        private void LoseSound()
         {
             var openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
-                FailureSoundPath = openFileDialog.FileName;
+                LoseSoundPath = openFileDialog.FileName;
             }
         }
 
@@ -371,14 +392,14 @@ namespace DrawBoard
         }
 
         [RelayCommand]
-        private void FailureSoundClear()
+        private void LoseSoundClear()
         {
-            FailureSoundPath = "없음";
-            FailureMediaElementSource = null;
+            LoseSoundPath = "없음";
+            LoseMediaElementSource = null;
         }
 
         [RelayCommand]
-        private void WinFailureImageSelect()
+        private void WinLoseImageSelect()
         {
             try
             {
@@ -390,8 +411,8 @@ namespace DrawBoard
                     var imageBrush = new ImageBrush();
                     imageBrush.ImageSource = new BitmapImage(new Uri(openFileDialog.FileName, UriKind.Absolute));
 
-                    WinFailureListBoxBackground = imageBrush;
-                    WinFailureImagePath = openFileDialog.FileName;
+                    WinLoseListBoxBackground = imageBrush;
+                    WinLoseImagePath = openFileDialog.FileName;
                 }
             }
             catch (Exception ex)
@@ -401,7 +422,7 @@ namespace DrawBoard
         }
 
         [RelayCommand]
-        private void WinFailureImageRecycle()
+        private void WinLoseImageRecycle()
         {
             try
             {
@@ -411,8 +432,8 @@ namespace DrawBoard
                 {
                     imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
 
-                    WinFailureListBoxBackground = imageBrush;
-                    WinFailureImagePath = path;
+                    WinLoseListBoxBackground = imageBrush;
+                    WinLoseImagePath = path;
                 }
                 else
                 {
@@ -428,7 +449,7 @@ namespace DrawBoard
         [RelayCommand]
         private void WinSoundRecycle()
         {
-            var path = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Win.mp3";
+            var path = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\win.mp3";
             if (File.Exists(path))
             {
                 WinSoundPath = path;
@@ -440,12 +461,12 @@ namespace DrawBoard
         }
 
         [RelayCommand]
-        private void FailureSoundRecycle()
+        private void LoseSoundRecycle()
         {
-            var path = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Failure.mp3";
+            var path = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Lose.mp3";
             if (File.Exists(path))
             {
-                FailureSoundPath = path;
+                LoseSoundPath = path;
             }
             else
             {
@@ -454,20 +475,20 @@ namespace DrawBoard
         }
 
         [RelayCommand]
-        private void WinFailureUseImage()
+        private void WinLoseUseImage()
         {
             try
             {
-                if (string.IsNullOrEmpty(WinFailureImagePath))
+                if (string.IsNullOrEmpty(WinLoseImagePath))
                 {
                     var imageBrush = new ImageBrush();
-                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background2.png";
+                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background1.png";
                     if (File.Exists(path))
                     {
                         imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
 
-                        WinFailureListBoxBackground = imageBrush;
-                        WinFailureImagePath = path;
+                        WinLoseListBoxBackground = imageBrush;
+                        WinLoseImagePath = path;
                     }
                     else
                     {
@@ -477,15 +498,15 @@ namespace DrawBoard
                 else
                 {
                     var imageBrush = new ImageBrush();
-                    if (File.Exists(WinFailureImagePath))
+                    if (File.Exists(WinLoseImagePath))
                     {
-                        imageBrush.ImageSource = new BitmapImage(new Uri(WinFailureImagePath, UriKind.Absolute));
+                        imageBrush.ImageSource = new BitmapImage(new Uri(WinLoseImagePath, UriKind.Absolute));
 
-                        WinFailureListBoxBackground = imageBrush;
+                        WinLoseListBoxBackground = imageBrush;
                     }
                     else
                     {
-                        MessageBox.Show($"이미지 파일이 없습니다.{Environment.NewLine}{WinFailureImagePath}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show($"이미지 파일이 없습니다.{Environment.NewLine}{WinLoseImagePath}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
             }
@@ -496,48 +517,139 @@ namespace DrawBoard
         }
 
         [RelayCommand]
-        private void WinFailureUseColor()
+        private void WinLoseUseColor()
         {
             Brush brush = Brushes.Transparent;
-            if (WinFailurePanelColor is Color color)
+            if (WinLosePanelColor is Color color)
             {
                 brush = new SolidColorBrush(color);
             }
-            WinFailureListBoxBackground = brush;
+            WinLoseListBoxBackground = brush;
+        }
+
+        [RelayCommand]
+        private void RankingUseImage()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(RankingImagePath))
+                {
+                    var imageBrush = new ImageBrush();
+                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background2.png";
+                    if (File.Exists(path))
+                    {
+                        imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
+
+                        RankingListBoxBackground = imageBrush;
+                        RankingImagePath = path;
+                    }
+                    else
+                    {
+                        MessageBox.Show($"이미지 파일이 없습니다.{Environment.NewLine}{path}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                else
+                {
+                    var imageBrush = new ImageBrush();
+                    if (File.Exists(RankingImagePath))
+                    {
+                        imageBrush.ImageSource = new BitmapImage(new Uri(RankingImagePath, UriKind.Absolute));
+
+                        RankingListBoxBackground = imageBrush;
+                    }
+                    else
+                    {
+                        MessageBox.Show($"이미지 파일이 없습니다.{Environment.NewLine}{RankingImagePath}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        [RelayCommand]
+        private void RankingUseColor()
+        {
+            Brush brush = Brushes.Transparent;
+            if (RankingPanelColor is Color color)
+            {
+                brush = new SolidColorBrush(color);
+            }
+            RankingListBoxBackground = brush;
+        }
+
+        [RelayCommand]
+        private void RadioWinLoseUse()
+        {
+            WinLoseListBoxVisible = Visibility.Visible;
+            RankingListBoxVisible = Visibility.Collapsed;
+        }
+
+        [RelayCommand]
+        private void RadioRankingUse()
+        {
+            WinLoseListBoxVisible = Visibility.Collapsed;
+            RankingListBoxVisible = Visibility.Visible;
         }
 
         #endregion
 
         #region :: Methods ::
 
-        private void MakeDrawWinFailureList(int allNumber)
+        private int[] GeneratorRandomNumber(int min, int max, int count)
         {
-            FailureMediaElementSource = null;
+            var intArray = new int[count];
+            var rand = new Random();
+
+            for (int i = 0; i < count; i++)
+            {
+                // 랜덤 값 생성
+                int randNumber = rand.Next(min, max + 1);
+
+                // 랜덤 값이 배열에 존재하면 loop를 1 감소
+                if (intArray.Contains(randNumber))
+                {
+                    i--;
+                }
+                // 랜덤 값이 배열에 없으면 배열에 추가
+                else
+                {
+                    intArray[i] = randNumber;
+                }
+            }
+            return intArray;
+        }
+
+        private void MakeDrawWinLoseList(int allNumber)
+        {
+            LoseMediaElementSource = null;
             WinMediaElementSource = null;
 
-            if (WinFailureAllCount <= 1)
+            if (WinLoseAllCount <= 1)
             {
                 MessageBox.Show("1보다 큰 수를 입력해 주세요.", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
-                WinFailureAllCount = 2;
+                WinLoseAllCount = 2;
             }
             else if (WinCount <= 0)
             {
                 MessageBox.Show("0보다 큰 수를 입력해 주세요.", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
                 WinCount = 1;
             }
-            else if (WinFailureAllCount < WinCount)
+            else if (WinLoseAllCount < WinCount)
             {
                 MessageBox.Show("당첨 개수가 전체 개수보다 큽니다.", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
-                WinFailureAllCount = WinCount;
+                WinLoseAllCount = WinCount;
             }
             else
             {
-                DrawWinFailureList.Clear();
-                var array = GeneratorRandomNumber(1, WinFailureAllCount, WinCount);
+                DrawWinLoseList.Clear();
+                var array = GeneratorRandomNumber(1, WinLoseAllCount, WinCount);
 
                 foreach (var number in Enumerable.Range(1, allNumber))
                 {
-                    DrawWinFailureList.Add(new() { UnitNumber = number, IsWin = array.Contains(number) ? true : false });
+                    DrawWinLoseList.Add(new() { UnitNumber = number, IsWin = array.Contains(number) ? true : false });
                 }
             }
         }
@@ -546,7 +658,7 @@ namespace DrawBoard
 
         private void MakeRankingList(int allNumber)
         {
-            FailureMediaElementSource = null;
+            LoseMediaElementSource = null;
             WinMediaElementSource = null;
 
             if (RankingAllCount <= 1)
@@ -602,34 +714,10 @@ namespace DrawBoard
                     }
                     else
                     {
-                        DrawRankingList.Add(new() { UnitNumber = number, IsWin = false, RankingText = RankingFailureText });
+                        DrawRankingList.Add(new() { UnitNumber = number, IsWin = false, RankingText = RankingLoseText });
                     }
                 }
             }
-        }
-
-        private int[] GeneratorRandomNumber(int min, int max, int count)
-        {
-            var intArray = new int[count];
-            var rand = new Random();
-
-            for (int i = 0; i < count; i++)
-            {
-                // 랜덤 값 생성
-                int randNumber = rand.Next(min, max + 1);
-
-                // 랜덤 값이 배열에 존재하면 loop를 1 감소
-                if (intArray.Contains(randNumber))
-                {
-                    i--;
-                }
-                // 랜덤 값이 배열에 없으면 배열에 추가
-                else
-                {
-                    intArray[i] = randNumber;
-                }
-            }
-            return intArray;
         }
 
         private int[] GeneratorRandomNumber(int min, int max, int count, int[] refItem)
@@ -802,6 +890,16 @@ namespace DrawBoard
         }
 
         #endregion
+
+        partial void OnWinLosePanelColorChanged(Color? value)
+        {
+            WinLoseUseColor();
+        }
+
+        partial void OnRankingPanelColorChanged(Color? value)
+        {
+            RankingUseColor();
+        }
 
         #endregion
 

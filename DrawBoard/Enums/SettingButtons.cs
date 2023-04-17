@@ -2,7 +2,7 @@
 {
     public enum SettingButtons
     {
-        WinFailure,
+        WinLose,
         Ranking,
         Text,
         Box,
