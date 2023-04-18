@@ -25,25 +25,145 @@ namespace DrawBoard {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
-        public int AllNumber {
+        [global::System.Configuration.DefaultSettingValueAttribute("882")]
+        public double WindowWidth {
             get {
-                return ((int)(this["AllNumber"]));
+                return ((double)(this["WindowWidth"]));
             }
             set {
-                this["AllNumber"] = value;
+                this["WindowWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("720")]
+        public double WindowHeight {
+            get {
+                return ((double)(this["WindowHeight"]));
+            }
+            set {
+                this["WindowHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int WinLoseGameCount {
+            get {
+                return ((int)(this["WinLoseGameCount"]));
+            }
+            set {
+                this["WinLoseGameCount"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public int WinNumber {
+        public int WinCount {
             get {
-                return ((int)(this["WinNumber"]));
+                return ((int)(this["WinCount"]));
             }
             set {
-                this["WinNumber"] = value;
+                this["WinCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int RankingGameCount {
+            get {
+                return ((int)(this["RankingGameCount"]));
+            }
+            set {
+                this["RankingGameCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int FirstCount {
+            get {
+                return ((int)(this["FirstCount"]));
+            }
+            set {
+                this["FirstCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int SecondCount {
+            get {
+                return ((int)(this["SecondCount"]));
+            }
+            set {
+                this["SecondCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int ThirdCount {
+            get {
+                return ((int)(this["ThirdCount"]));
+            }
+            set {
+                this["ThirdCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public int FourthCount {
+            get {
+                return ((int)(this["FourthCount"]));
+            }
+            set {
+                this["FourthCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int FifthCount {
+            get {
+                return ((int)(this["FifthCount"]));
+            }
+            set {
+                this["FifthCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("6")]
+        public int SixthCount {
+            get {
+                return ((int)(this["SixthCount"]));
+            }
+            set {
+                this["SixthCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        public int SeventhCount {
+            get {
+                return ((int)(this["SeventhCount"]));
+            }
+            set {
+                this["SeventhCount"] = value;
             }
         }
         
@@ -62,180 +182,348 @@ namespace DrawBoard {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("꽝")]
-        public string FailureText {
+        public string LoseText {
             get {
-                return ((string)(this["FailureText"]));
+                return ((string)(this["LoseText"]));
             }
             set {
-                this["FailureText"] = value;
+                this["LoseText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("꽝")]
+        public string RankingLoseText {
+            get {
+                return ((string)(this["RankingLoseText"]));
+            }
+            set {
+                this["RankingLoseText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1등")]
+        public string FirstText {
+            get {
+                return ((string)(this["FirstText"]));
+            }
+            set {
+                this["FirstText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2등")]
+        public string SecondText {
+            get {
+                return ((string)(this["SecondText"]));
+            }
+            set {
+                this["SecondText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3등")]
+        public string ThirdText {
+            get {
+                return ((string)(this["ThirdText"]));
+            }
+            set {
+                this["ThirdText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4등")]
+        public string FourthText {
+            get {
+                return ((string)(this["FourthText"]));
+            }
+            set {
+                this["FourthText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5등")]
+        public string FifthText {
+            get {
+                return ((string)(this["FifthText"]));
+            }
+            set {
+                this["FifthText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("6등")]
+        public string SixthText {
+            get {
+                return ((string)(this["SixthText"]));
+            }
+            set {
+                this["SixthText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7등")]
+        public string SeventhText {
+            get {
+                return ((string)(this["SeventhText"]));
+            }
+            set {
+                this["SeventhText"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("30")]
-        public double WinFailureTextSize {
+        public double WinLoseTextSize {
             get {
-                return ((double)(this["WinFailureTextSize"]));
+                return ((double)(this["WinLoseTextSize"]));
             }
             set {
-                this["WinFailureTextSize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#00FFFFFF")]
-        public string BackgroundColor {
-            get {
-                return ((string)(this["BackgroundColor"]));
-            }
-            set {
-                this["BackgroundColor"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FFFF0000")]
-        public string FailureColor {
-            get {
-                return ((string)(this["FailureColor"]));
-            }
-            set {
-                this["FailureColor"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FFF0FFFF")]
-        public string FontColor {
-            get {
-                return ((string)(this["FontColor"]));
-            }
-            set {
-                this["FontColor"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
-        public double BoxWidth {
-            get {
-                return ((double)(this["BoxWidth"]));
-            }
-            set {
-                this["BoxWidth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("60")]
-        public double BoxHeight {
-            get {
-                return ((double)(this["BoxHeight"]));
-            }
-            set {
-                this["BoxHeight"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF00008B")]
-        public string WinColor {
-            get {
-                return ((string)(this["WinColor"]));
-            }
-            set {
-                this["WinColor"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("730")]
-        public double WindowWidth {
-            get {
-                return ((double)(this["WindowWidth"]));
-            }
-            set {
-                this["WindowWidth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("700")]
-        public double WindowHeight {
-            get {
-                return ((double)(this["WindowHeight"]));
-            }
-            set {
-                this["WindowHeight"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Magic R")]
-        public string SelectedFont {
-            get {
-                return ((string)(this["SelectedFont"]));
-            }
-            set {
-                this["SelectedFont"] = value;
+                this["WinLoseTextSize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("40")]
-        public double NumberTextSize {
+        public double WinLoseNumberTextSize {
             get {
-                return ((double)(this["NumberTextSize"]));
+                return ((double)(this["WinLoseNumberTextSize"]));
             }
             set {
-                this["NumberTextSize"] = value;
+                this["WinLoseNumberTextSize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("없음")]
-        public string WinSoundPath {
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public double RankingTextSize {
             get {
-                return ((string)(this["WinSoundPath"]));
+                return ((double)(this["RankingTextSize"]));
             }
             set {
-                this["WinSoundPath"] = value;
+                this["RankingTextSize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("없음")]
-        public string FailureSoundPath {
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
+        public double RankingNumberTextSize {
             get {
-                return ((string)(this["FailureSoundPath"]));
+                return ((double)(this["RankingNumberTextSize"]));
             }
             set {
-                this["FailureSoundPath"] = value;
+                this["RankingNumberTextSize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#2B2B2B")]
-        public string PanelColor {
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF4B0082")]
+        public string WinLoseBackgroundColor {
             get {
-                return ((string)(this["PanelColor"]));
+                return ((string)(this["WinLoseBackgroundColor"]));
             }
             set {
-                this["PanelColor"] = value;
+                this["WinLoseBackgroundColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF4B0082")]
+        public string RankingBackgroundColor {
+            get {
+                return ((string)(this["RankingBackgroundColor"]));
+            }
+            set {
+                this["RankingBackgroundColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#00FFFFFF")]
+        public string WinLoseWinBackgroundColor {
+            get {
+                return ((string)(this["WinLoseWinBackgroundColor"]));
+            }
+            set {
+                this["WinLoseWinBackgroundColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#00FFFFFF")]
+        public string RankingWinBackgroundColor {
+            get {
+                return ((string)(this["RankingWinBackgroundColor"]));
+            }
+            set {
+                this["RankingWinBackgroundColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#00FFFFFF")]
+        public string WinLoseLoseBackgroundColor {
+            get {
+                return ((string)(this["WinLoseLoseBackgroundColor"]));
+            }
+            set {
+                this["WinLoseLoseBackgroundColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#00FFFFFF")]
+        public string RankingLoseBackgroundColor {
+            get {
+                return ((string)(this["RankingLoseBackgroundColor"]));
+            }
+            set {
+                this["RankingLoseBackgroundColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFEEE8AA")]
+        public string WinLoseNumberColor {
+            get {
+                return ((string)(this["WinLoseNumberColor"]));
+            }
+            set {
+                this["WinLoseNumberColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFEEE8AA")]
+        public string RankingNumberColor {
+            get {
+                return ((string)(this["RankingNumberColor"]));
+            }
+            set {
+                this["RankingNumberColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF00")]
+        public string WinLoseWinColor {
+            get {
+                return ((string)(this["WinLoseWinColor"]));
+            }
+            set {
+                this["WinLoseWinColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF00")]
+        public string RankingWinColor {
+            get {
+                return ((string)(this["RankingWinColor"]));
+            }
+            set {
+                this["RankingWinColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFF0000")]
+        public string WinLoseLoseColor {
+            get {
+                return ((string)(this["WinLoseLoseColor"]));
+            }
+            set {
+                this["WinLoseLoseColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFF0000")]
+        public string RankingLoseColor {
+            get {
+                return ((string)(this["RankingLoseColor"]));
+            }
+            set {
+                this["RankingLoseColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#00FFFFFF")]
+        public string WinLosePanelColor {
+            get {
+                return ((string)(this["WinLosePanelColor"]));
+            }
+            set {
+                this["WinLosePanelColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#00FFFFFF")]
+        public string RankingPanelColor {
+            get {
+                return ((string)(this["RankingPanelColor"]));
+            }
+            set {
+                this["RankingPanelColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("GulimChe")]
+        public string SelectedWinLoseFont {
+            get {
+                return ((string)(this["SelectedWinLoseFont"]));
+            }
+            set {
+                this["SelectedWinLoseFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("GulimChe")]
+        public string SelectedRankingFont {
+            get {
+                return ((string)(this["SelectedRankingFont"]));
+            }
+            set {
+                this["SelectedRankingFont"] = value;
             }
         }
         
@@ -254,24 +542,36 @@ namespace DrawBoard {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
-        public double FailureVolume {
+        public double LoseVolume {
             get {
-                return ((double)(this["FailureVolume"]));
+                return ((double)(this["LoseVolume"]));
             }
             set {
-                this["FailureVolume"] = value;
+                this["LoseVolume"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
-        public string NumberColor {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string WinSoundPath {
             get {
-                return ((string)(this["NumberColor"]));
+                return ((string)(this["WinSoundPath"]));
             }
             set {
-                this["NumberColor"] = value;
+                this["WinSoundPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LoseSoundPath {
+            get {
+                return ((string)(this["LoseSoundPath"]));
+            }
+            set {
+                this["LoseSoundPath"] = value;
             }
         }
     }

@@ -2,68 +2,143 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DrawBoard" GeneratedClassName="DrawBoardSettings">
   <Profiles />
   <Settings>
-    <Setting Name="AllNumber" Type="System.Int32" Scope="User">
+    <Setting Name="WindowWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">882</Value>
+    </Setting>
+    <Setting Name="WindowHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">720</Value>
+    </Setting>
+    <Setting Name="WinLoseGameCount" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">50</Value>
     </Setting>
-    <Setting Name="WinNumber" Type="System.Int32" Scope="User">
+    <Setting Name="WinCount" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="RankingGameCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="FirstCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="SecondCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="ThirdCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="FourthCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="FifthCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="SixthCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">6</Value>
+    </Setting>
+    <Setting Name="SeventhCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">7</Value>
     </Setting>
     <Setting Name="WinText" Type="System.String" Scope="User">
       <Value Profile="(Default)">당첨</Value>
     </Setting>
-    <Setting Name="FailureText" Type="System.String" Scope="User">
+    <Setting Name="LoseText" Type="System.String" Scope="User">
       <Value Profile="(Default)">꽝</Value>
     </Setting>
-    <Setting Name="WinFailureTextSize" Type="System.Double" Scope="User">
+    <Setting Name="RankingLoseText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">꽝</Value>
+    </Setting>
+    <Setting Name="FirstText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1등</Value>
+    </Setting>
+    <Setting Name="SecondText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2등</Value>
+    </Setting>
+    <Setting Name="ThirdText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">3등</Value>
+    </Setting>
+    <Setting Name="FourthText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">4등</Value>
+    </Setting>
+    <Setting Name="FifthText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">5등</Value>
+    </Setting>
+    <Setting Name="SixthText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">6등</Value>
+    </Setting>
+    <Setting Name="SeventhText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">7등</Value>
+    </Setting>
+    <Setting Name="WinLoseTextSize" Type="System.Double" Scope="User">
       <Value Profile="(Default)">30</Value>
     </Setting>
-    <Setting Name="BackgroundColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#00FFFFFF</Value>
-    </Setting>
-    <Setting Name="FailureColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#FFFF0000</Value>
-    </Setting>
-    <Setting Name="FontColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#FFF0FFFF</Value>
-    </Setting>
-    <Setting Name="BoxWidth" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">100</Value>
-    </Setting>
-    <Setting Name="BoxHeight" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">60</Value>
-    </Setting>
-    <Setting Name="WinColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#FF00008B</Value>
-    </Setting>
-    <Setting Name="WindowWidth" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">730</Value>
-    </Setting>
-    <Setting Name="WindowHeight" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">700</Value>
-    </Setting>
-    <Setting Name="SelectedFont" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Magic R</Value>
-    </Setting>
-    <Setting Name="NumberTextSize" Type="System.Double" Scope="User">
+    <Setting Name="WinLoseNumberTextSize" Type="System.Double" Scope="User">
       <Value Profile="(Default)">40</Value>
     </Setting>
-    <Setting Name="WinSoundPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">없음</Value>
+    <Setting Name="RankingTextSize" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">30</Value>
     </Setting>
-    <Setting Name="FailureSoundPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">없음</Value>
+    <Setting Name="RankingNumberTextSize" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">40</Value>
     </Setting>
-    <Setting Name="PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#2B2B2B</Value>
+    <Setting Name="WinLoseBackgroundColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF4B0082</Value>
+    </Setting>
+    <Setting Name="RankingBackgroundColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF4B0082</Value>
+    </Setting>
+    <Setting Name="WinLoseWinBackgroundColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#00FFFFFF</Value>
+    </Setting>
+    <Setting Name="RankingWinBackgroundColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#00FFFFFF</Value>
+    </Setting>
+    <Setting Name="WinLoseLoseBackgroundColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#00FFFFFF</Value>
+    </Setting>
+    <Setting Name="RankingLoseBackgroundColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#00FFFFFF</Value>
+    </Setting>
+    <Setting Name="WinLoseNumberColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFEEE8AA</Value>
+    </Setting>
+    <Setting Name="RankingNumberColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFEEE8AA</Value>
+    </Setting>
+    <Setting Name="WinLoseWinColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF00FF00</Value>
+    </Setting>
+    <Setting Name="RankingWinColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF00FF00</Value>
+    </Setting>
+    <Setting Name="WinLoseLoseColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFFF0000</Value>
+    </Setting>
+    <Setting Name="RankingLoseColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFFF0000</Value>
+    </Setting>
+    <Setting Name="WinLosePanelColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#00FFFFFF</Value>
+    </Setting>
+    <Setting Name="RankingPanelColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#00FFFFFF</Value>
+    </Setting>
+    <Setting Name="SelectedWinLoseFont" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GulimChe</Value>
+    </Setting>
+    <Setting Name="SelectedRankingFont" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GulimChe</Value>
     </Setting>
     <Setting Name="WinVolume" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.5</Value>
     </Setting>
-    <Setting Name="FailureVolume" Type="System.Double" Scope="User">
+    <Setting Name="LoseVolume" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.5</Value>
     </Setting>
-    <Setting Name="NumberColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#FFFFFF</Value>
+    <Setting Name="WinSoundPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LoseSoundPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

@@ -2,6 +2,7 @@
 using System.Xml.Serialization;
 using System.Xml;
 using System;
+using System.Text;
 
 namespace DrawBoard.XmlSerialize
 {
@@ -10,7 +11,7 @@ namespace DrawBoard.XmlSerialize
         public static String Serialize<T>(T t)
         {
             using (StringWriter sw = new StringWriter())
-            using (XmlWriter xw = XmlWriter.Create(sw))
+            using (XmlWriter xw = XmlWriter.Create(sw, new XmlWriterSettings { Encoding = Encoding.UTF8 }))
             {
                 new XmlSerializer(typeof(T)).Serialize(xw, t);
                 return sw.GetStringBuilder().ToString();
@@ -22,5 +23,86 @@ namespace DrawBoard.XmlSerialize
             using (XmlReader xw = XmlReader.Create(new StringReader(s_xml)))
                 return (T)new XmlSerializer(typeof(T)).Deserialize(xw);
         }
+
+        public static void Save<T>(T file, String path)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
+
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                serializer.Serialize(writer, file);
+            }
+        }
+
+        public static T Read<T>(String path, Type type)
+        {
+            // Create a new serializer
+            XmlSerializer serializer = new XmlSerializer(type);
+
+            // Create a StreamReader
+            TextReader reader = new StreamReader(path);
+
+            // Deserialize the file
+            T file = (T)serializer.Deserialize(reader);
+
+            // Close the reader
+            reader.Close();
+
+            // Return the object
+            return file;
+        }
+
+        //public static T Read<T>(String path, Type type)
+        //{
+        //    // Create a new serializer
+        //    XmlSerializer serializer = new XmlSerializer(type);
+
+        //    // Create a StreamReader
+        //    TextReader reader = new StreamReader(path);
+
+        //    // Deserialize the file
+        //    Object file;
+        //    file = (Object)serializer.Deserialize(reader);
+
+        //    // Close the reader
+        //    reader.Close();
+
+        //    // Return the object
+        //    return file;
+        //}
+
+        //public static void Save(Object file, String path, Type type)
+        //{
+        //    // Create a new Serializer
+        //    XmlSerializer serializer = new XmlSerializer(type);
+
+        //    // Create a new StreamWriter
+        //    TextWriter writer = new StreamWriter(path);
+
+        //    // Serialize the file
+        //    serializer.Serialize(writer, file);
+
+        //    // Close the writer
+        //    writer.Close();
+        //}
+
+        //public static object Read(String path, Type type)
+        //{
+        //    // Create a new serializer
+        //    XmlSerializer serializer = new XmlSerializer(type);
+
+        //    // Create a StreamReader
+        //    TextReader reader = new StreamReader(path);
+
+        //    // Deserialize the file
+        //    Object file;
+        //    file = (Object)serializer.Deserialize(reader);
+
+        //    // Close the reader
+        //    reader.Close();
+
+        //    // Return the object
+        //    return file;
+        //}
     }
 }

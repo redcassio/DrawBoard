@@ -1,15 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DrawBoard.EncryptionDecryption;
+using DrawBoard.Models;
 using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Xml;
 
 namespace DrawBoard
 {
@@ -20,22 +22,21 @@ namespace DrawBoard
         #region :: Window ::
 
         [ObservableProperty]
-        private double _windowWidth = 730d;
-
+        private double _windowWidth = 885d;
         [ObservableProperty]
-        private double _windowHeight = 700d;
+        private double _windowHeight = 635d;
 
         #endregion
 
         #region :: Game Count ::
 
         [ObservableProperty]
-        private int _winLoseAllCount = 50;
+        private int _winLoseGameCount = 50;
         [ObservableProperty]
         private int _winCount = 3;
 
         [ObservableProperty]
-        private int _rankingAllCount = 30;
+        private int _rankingGameCount = 50;
         [ObservableProperty]
         private int _firstCount = 1;
         [ObservableProperty]
@@ -92,39 +93,39 @@ namespace DrawBoard
         #region :: Color ::
 
         [ObservableProperty]
-        private Color? _winLoseBackgroundColor;
+        private Color? _winLoseBackgroundColor = (Color)ColorConverter.ConvertFromString("#FF4B0082");
         [ObservableProperty]
-        private Color? _rankingBackgroundColor;
+        private Color? _rankingBackgroundColor = (Color)ColorConverter.ConvertFromString("#FF4B0082");
 
         [ObservableProperty]
-        private Color? _winLoseWinBackgroundColor;
+        private Color? _winLoseWinBackgroundColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
         [ObservableProperty]
-        private Color? _rankingWinBackgroundColor;
+        private Color? _rankingWinBackgroundColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
 
         [ObservableProperty]
-        private Color? _winLoseLoseBackgroundColor;
+        private Color? _winLoseLoseBackgroundColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
         [ObservableProperty]
-        private Color? _rankingLoseBackgroundColor;
+        private Color? _rankingLoseBackgroundColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
 
         [ObservableProperty]
-        private Color? _winLoseNumberColor;
+        private Color? _winLoseNumberColor = (Color)ColorConverter.ConvertFromString("#FFEEE8AA");
         [ObservableProperty]
-        private Color? _rankingNumberColor;
+        private Color? _rankingNumberColor = (Color)ColorConverter.ConvertFromString("#FFEEE8AA");
 
         [ObservableProperty]
-        private Color? _winLoseWinColor;
+        private Color? _winLoseWinColor = (Color)ColorConverter.ConvertFromString("#FFFFD700");
         [ObservableProperty]
-        private Color? _rankingWinColor;
+        private Color? _rankingWinColor = (Color)ColorConverter.ConvertFromString("#FFFFD700");
 
         [ObservableProperty]
-        private Color? _winLoseLoseColor;
+        private Color? _winLoseLoseColor = (Color)ColorConverter.ConvertFromString("#FFDC143C");
         [ObservableProperty]
-        private Color? _rankingLoseColor;
+        private Color? _rankingLoseColor = (Color)ColorConverter.ConvertFromString("#FFDC143C");
 
         [ObservableProperty]
-        private Color? _winLosePanelColor;
+        private Color? _winLosePanelColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
         [ObservableProperty]
-        private Color? _rankingPanelColor;
+        private Color? _rankingPanelColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
 
         #endregion
 
@@ -134,9 +135,9 @@ namespace DrawBoard
         private ObservableCollection<string> _fontList = new();
 
         [ObservableProperty]
-        private string? _selectedWinLoseFont;
+        private string? _selectedWinLoseFont = "GulimChe";
         [ObservableProperty]
-        private string? _selectedRankingFont;
+        private string? _selectedRankingFont = "GulimChe";
 
         #endregion
 
@@ -149,23 +150,10 @@ namespace DrawBoard
         private double _loseVolume = 0.5d;
 
         [ObservableProperty]
-        private string? _winSoundPath;
+        private string? _winSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Win.mp3";
 
         [ObservableProperty]
-        private string? _loseSoundPath;
-
-        #endregion
-
-        #region :: MediaElement ::
-
-        [ObservableProperty]
-        private Uri? _winMediaElementSource;
-        [ObservableProperty]
-        private Uri? _loseMediaElementSource;
-        [ObservableProperty]
-        private bool _isWinMediaElementPlay;
-        [ObservableProperty]
-        private bool _isLoseMediaElementPlay;
+        private string? _loseSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Lose.mp3";
 
         #endregion
 
@@ -188,14 +176,37 @@ namespace DrawBoard
         private double _rankingBoxHeight = 60d;
 
         [ObservableProperty]
-        private Brush _winLoseListBoxBackground;
+        private Brush? _winLoseListBoxBackground;
         [ObservableProperty]
         private string? _winLoseImagePath;
 
         [ObservableProperty]
-        private Brush _rankingListBoxBackground;
+        private Brush? _rankingListBoxBackground;
         [ObservableProperty]
         private string? _rankingImagePath;
+
+        [ObservableProperty]
+        private Stretch _winLoseImageStretch = Stretch.None;
+        [ObservableProperty]
+        private Stretch _rankingImageStretch = Stretch.None;
+
+        [ObservableProperty]
+        private bool _isWinLoseStretchNone = true;
+        [ObservableProperty]
+        private bool _isWinLoseStretchFill;
+        [ObservableProperty]
+        private bool _isWinLoseStretchUniform;
+        [ObservableProperty]
+        private bool _isWinLoseStretchNoneUniformToFill;
+
+        [ObservableProperty]
+        private bool _isRankingStretchNone = true;
+        [ObservableProperty]
+        private bool _isRankingStretchFill;
+        [ObservableProperty]
+        private bool _isRankingStretchUniform;
+        [ObservableProperty]
+        private bool _isRankingStretchNoneUniformToFill;
 
         #endregion
 
@@ -228,6 +239,20 @@ namespace DrawBoard
 
         #endregion
 
+
+        #region :: MediaElement ::
+
+        [ObservableProperty]
+        private Uri? _winMediaElementSource;
+        [ObservableProperty]
+        private Uri? _loseMediaElementSource;
+        [ObservableProperty]
+        private bool _isWinMediaElementPlay;
+        [ObservableProperty]
+        private bool _isLoseMediaElementPlay;
+
+        #endregion
+
         [ObservableProperty]
         private bool _isFocusOnOff;
 
@@ -248,31 +273,37 @@ namespace DrawBoard
         }
 
         private void SetDefaultValue()
-        { 
-            WinLoseAllCount = DrawBoardSettings.Default.AllNumber;
-            WinCount = DrawBoardSettings.Default.WinNumber;
-            WinText = DrawBoardSettings.Default.WinText;
-            //LoseText = DrawBoardSettings.Default.LoseText;
-            //NumberTextSize = DrawBoardSettings.Default.NumberTextSize;
-            //WinLoseTextSize = DrawBoardSettings.Default.WinLoseTextSize;
-            //BoxWidth = DrawBoardSettings.Default.BoxWidth;
-            //BoxHeight = DrawBoardSettings.Default.BoxHeight;
-            WindowWidth = DrawBoardSettings.Default.WindowWidth;
-            WindowHeight = DrawBoardSettings.Default.WindowHeight;
-            SelectedWinLoseFont = DrawBoardSettings.Default.SelectedFont;
-            WinSoundPath = DrawBoardSettings.Default.WinSoundPath;
-            //LoseSoundPath = DrawBoardSettings.Default.LoseSoundPath;
-            WinVolume = DrawBoardSettings.Default.WinVolume;
-            //LoseVolume = DrawBoardSettings.Default.LoseVolume;
-            //BackgroundColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.BackgroundColor);
-            //LoseColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.LoseColor);
-            //WinColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.WinColor);
-            //NumberColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.NumberColor);
-            WinLosePanelColor = (Color)ColorConverter.ConvertFromString(DrawBoardSettings.Default.PanelColor);
-
-            if (string.IsNullOrEmpty(LoseSoundPath))
+        {
+            try
             {
-                LoseSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Lose.mp3";
+
+                var path = $"{AppDomain.CurrentDomain.BaseDirectory}DrawBoardSave.txt";
+                if (File.Exists(path))
+                {
+                    var file = File.ReadAllText(path);
+                    var decryptData = EncryptDecrypt.Unprotect(file);
+
+                    var data = XmlSerialize.XmlSerialize.Deserialize<SaveModel>(decryptData);
+
+                    //var dd = XmlSerialize.XmlSerialize.Deserialize<SaveModel>(xmlData);
+
+                    //var parsed = new XmlDocument();
+                    //parsed.LoadXml(xmlData);
+
+                    //var saveFileDialog = new SaveFileDialog();
+                    //saveFileDialog.FileName = path;
+                    //File.WriteAllText(saveFileDialog.FileName, xmlData);
+
+
+                    //var file = XmlSerialize.XmlSerialize.Read<string>(path, typeof(string));
+                    //var decryptData = EncryptDecrypt.EncryptString(file, "drawboard");
+                    //var deserializeData = XmlSerialize.XmlSerialize.Deserialize<XmlSerializeModel>(decryptData);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("설정을 불러오는 도중 오류가 발생했습니다.", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -284,14 +315,14 @@ namespace DrawBoard
         private void MakeWinLose()
         {
             IsFocusOnOff = !IsFocusOnOff;
-            MakeDrawWinLoseList(WinLoseAllCount);
+            MakeDrawWinLoseList(WinLoseGameCount);
         }
 
         [RelayCommand]
         private void MakeRanking()
         {
             IsFocusOnOff = !IsFocusOnOff;
-            MakeRankingList(RankingAllCount);
+            MakeRankingList(RankingGameCount);
         }
 
         [RelayCommand]
@@ -486,7 +517,7 @@ namespace DrawBoard
                     if (File.Exists(path))
                     {
                         imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
-
+                        imageBrush.Stretch = WinLoseImageStretch;
                         WinLoseListBoxBackground = imageBrush;
                         WinLoseImagePath = path;
                     }
@@ -501,7 +532,7 @@ namespace DrawBoard
                     if (File.Exists(WinLoseImagePath))
                     {
                         imageBrush.ImageSource = new BitmapImage(new Uri(WinLoseImagePath, UriKind.Absolute));
-
+                        imageBrush.Stretch = WinLoseImageStretch;
                         WinLoseListBoxBackground = imageBrush;
                     }
                     else
@@ -513,6 +544,102 @@ namespace DrawBoard
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        [RelayCommand]
+        private void WinLoseSetImageStretch(Stretch stretch = Stretch.None)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(WinLoseImagePath))
+                {
+                    var imageBrush = new ImageBrush();
+                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background1.png";
+                    if (File.Exists(path))
+                    {
+                        imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
+                        imageBrush.Stretch = WinLoseImageStretch = stretch;
+                        SetWinLoseRadioStretch(stretch);
+                        WinLoseListBoxBackground = imageBrush;
+                        WinLoseImagePath = path;
+                    }
+                    else
+                    {
+                        MessageBox.Show($"이미지 파일이 없습니다.{Environment.NewLine}{path}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                else
+                {
+                    var imageBrush = new ImageBrush();
+                    if (File.Exists(WinLoseImagePath))
+                    {
+                        imageBrush.ImageSource = new BitmapImage(new Uri(WinLoseImagePath, UriKind.Absolute));
+                        imageBrush.Stretch = WinLoseImageStretch = stretch;
+                        SetWinLoseRadioStretch(stretch);
+                        WinLoseListBoxBackground = imageBrush;
+                    }
+                    else
+                    {
+                        MessageBox.Show($"이미지 파일이 없습니다.{Environment.NewLine}{WinLoseImagePath}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void SetWinLoseRadioStretch(Stretch stretch)
+        {
+            IsWinLoseStretchNone = false;
+            IsWinLoseStretchFill = false;
+            IsWinLoseStretchUniform = false;
+            IsWinLoseStretchNoneUniformToFill = false;
+
+            switch (stretch)
+            {
+                case Stretch.None:
+                    IsWinLoseStretchNone = true;
+                    break;
+                case Stretch.Fill:
+                    IsWinLoseStretchFill = true;
+                    break;
+                case Stretch.Uniform:
+                    IsWinLoseStretchUniform = true;
+                    break;
+                case Stretch.UniformToFill:
+                    IsWinLoseStretchNoneUniformToFill = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void SetRankingRadioStretch(Stretch stretch)
+        {
+            IsRankingStretchNone = false;
+            IsRankingStretchFill = false;
+            IsRankingStretchUniform = false;
+            IsRankingStretchNoneUniformToFill = false;
+
+            switch (stretch)
+            {
+                case Stretch.None:
+                    IsRankingStretchNone = true;
+                    break;
+                case Stretch.Fill:
+                    IsRankingStretchFill = true;
+                    break;
+                case Stretch.Uniform:
+                    IsRankingStretchUniform = true;
+                    break;
+                case Stretch.UniformToFill:
+                    IsRankingStretchNoneUniformToFill = true;
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -539,7 +666,7 @@ namespace DrawBoard
                     if (File.Exists(path))
                     {
                         imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
-
+                        imageBrush.Stretch = RankingImageStretch;
                         RankingListBoxBackground = imageBrush;
                         RankingImagePath = path;
                     }
@@ -554,7 +681,49 @@ namespace DrawBoard
                     if (File.Exists(RankingImagePath))
                     {
                         imageBrush.ImageSource = new BitmapImage(new Uri(RankingImagePath, UriKind.Absolute));
+                        imageBrush.Stretch = RankingImageStretch;
+                        RankingListBoxBackground = imageBrush;
+                    }
+                    else
+                    {
+                        MessageBox.Show($"이미지 파일이 없습니다.{Environment.NewLine}{RankingImagePath}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
 
+        [RelayCommand]
+        private void RankingSetImageStretch(Stretch stretch = Stretch.None)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(RankingImagePath))
+                {
+                    var imageBrush = new ImageBrush();
+                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background1.png";
+                    if (File.Exists(path))
+                    {
+                        imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
+                        imageBrush.Stretch = RankingImageStretch = stretch;
+                        RankingListBoxBackground = imageBrush;
+                        RankingImagePath = path;
+                    }
+                    else
+                    {
+                        MessageBox.Show($"이미지 파일이 없습니다.{Environment.NewLine}{path}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                else
+                {
+                    var imageBrush = new ImageBrush();
+                    if (File.Exists(RankingImagePath))
+                    {
+                        imageBrush.ImageSource = new BitmapImage(new Uri(RankingImagePath, UriKind.Absolute));
+                        imageBrush.Stretch = RankingImageStretch = stretch;
                         RankingListBoxBackground = imageBrush;
                     }
                     else
@@ -627,25 +796,25 @@ namespace DrawBoard
             LoseMediaElementSource = null;
             WinMediaElementSource = null;
 
-            if (WinLoseAllCount <= 1)
+            if (WinLoseGameCount <= 1)
             {
                 MessageBox.Show("1보다 큰 수를 입력해 주세요.", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
-                WinLoseAllCount = 2;
+                WinLoseGameCount = 2;
             }
             else if (WinCount <= 0)
             {
                 MessageBox.Show("0보다 큰 수를 입력해 주세요.", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
                 WinCount = 1;
             }
-            else if (WinLoseAllCount < WinCount)
+            else if (WinLoseGameCount < WinCount)
             {
                 MessageBox.Show("당첨 개수가 전체 개수보다 큽니다.", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
-                WinLoseAllCount = WinCount;
+                WinLoseGameCount = WinCount;
             }
             else
             {
                 DrawWinLoseList.Clear();
-                var array = GeneratorRandomNumber(1, WinLoseAllCount, WinCount);
+                var array = GeneratorRandomNumber(1, WinLoseGameCount, WinCount);
 
                 foreach (var number in Enumerable.Range(1, allNumber))
                 {
@@ -661,26 +830,26 @@ namespace DrawBoard
             LoseMediaElementSource = null;
             WinMediaElementSource = null;
 
-            if (RankingAllCount <= 1)
+            if (RankingGameCount <= 1)
             {
                 MessageBox.Show("1보다 큰 수를 입력해 주세요.", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
-                RankingAllCount = 2;
+                RankingGameCount = 2;
             }
-            else if (RankingAllCount < (FirstCount + SecondCount + ThirdCount + FourthCount + FifthCount + SixthCount + SeventhCount))
+            else if (RankingGameCount < (FirstCount + SecondCount + ThirdCount + FourthCount + FifthCount + SixthCount + SeventhCount))
             {
                 MessageBox.Show("당첨 개수가 전체 개수보다 큽니다.", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
-                RankingAllCount = (FirstCount + SecondCount + ThirdCount + FourthCount + FifthCount + SixthCount + SeventhCount);
+                RankingGameCount = (FirstCount + SecondCount + ThirdCount + FourthCount + FifthCount + SixthCount + SeventhCount);
             }
             else
             {
                 DrawRankingList.Clear();
-                var item1 = GeneratorRandomNumber(1, RankingAllCount, FirstCount);
-                var item2 = GeneratorRandomNumber(1, RankingAllCount, SecondCount, item1);
-                var item3 = GeneratorRandomNumber(1, RankingAllCount, ThirdCount, GeneratorSum(item1, item2));
-                var item4 = GeneratorRandomNumber(1, RankingAllCount, FourthCount, GeneratorSum(item1, item2, item3));
-                var item5 = GeneratorRandomNumber(1, RankingAllCount, FifthCount, GeneratorSum(item1, item2, item3, item4));
-                var item6 = GeneratorRandomNumber(1, RankingAllCount, SixthCount, GeneratorSum(item1, item2, item3, item4, item5));
-                var item7 = GeneratorRandomNumber(1, RankingAllCount, SeventhCount, GeneratorSum(item1, item2, item3, item4, item5, item6));
+                var item1 = GeneratorRandomNumber(1, RankingGameCount, FirstCount);
+                var item2 = GeneratorRandomNumber(1, RankingGameCount, SecondCount, item1);
+                var item3 = GeneratorRandomNumber(1, RankingGameCount, ThirdCount, GeneratorSum(item1, item2));
+                var item4 = GeneratorRandomNumber(1, RankingGameCount, FourthCount, GeneratorSum(item1, item2, item3));
+                var item5 = GeneratorRandomNumber(1, RankingGameCount, FifthCount, GeneratorSum(item1, item2, item3, item4));
+                var item6 = GeneratorRandomNumber(1, RankingGameCount, SixthCount, GeneratorSum(item1, item2, item3, item4, item5));
+                var item7 = GeneratorRandomNumber(1, RankingGameCount, SeventhCount, GeneratorSum(item1, item2, item3, item4, item5, item6));
 
                 foreach (var number in Enumerable.Range(1, allNumber))
                 {
