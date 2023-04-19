@@ -17,8 +17,7 @@
         MinHeight="200"
         Background="Transparent"
         Width="{Binding WindowWidth, Mode=TwoWay}"
-        Height="{Binding WindowHeight, Mode=TwoWay}" 
-        Title="뽑기판(ver 2.0)">
+        Height="{Binding WindowHeight, Mode=TwoWay}">
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
@@ -110,13 +109,17 @@
                                 Margin="15,25,0,40">
 
                             <!--<Image Source="/Images/Logo.png" Height="30"/>-->
-                            <TextBlock Text="뽑기판"
-                                   Foreground="{StaticResource titleColor2}"
-                                   FontSize="20"
-                                   FontFamily="Montserrat"
-                                   FontWeight="Medium"
-                                   VerticalAlignment="Center"
-                                   Margin="10,0,0,0"/>
+                            <TextBlock Foreground="{StaticResource titleColor2}"
+                                       FontSize="20"
+                                       FontFamily="Montserrat"
+                                       FontWeight="Medium"
+                                       VerticalAlignment="Center"
+                                       Margin="5,0,0,0">
+                                <TextBlock.Inlines>
+                                    <Run Text="뽑기판"/>
+                                    <Run Text="(ver 2.0)" FontSize="12"/>
+                                </TextBlock.Inlines>
+                            </TextBlock>
                         </StackPanel>
 
                         <!--#region 당첨판 버튼-->
@@ -805,12 +808,12 @@
                                                             Visibility="{Binding IsChecked, ElementName=radioRankingUseImage, Converter={StaticResource BoolToVisibilityConverter}}">
                                                     <Button Content="이미지선택"
                                                             Style="{StaticResource buttonStyle}"
-                                                            Command="{Binding WinLoseImageSelectCommand}"/>
+                                                            Command="{Binding RankingImageSelectCommand}"/>
                                                     <Button Margin="5,0"
                                                             Height="32"
                                                             Width="30"
                                                             Background="Transparent"
-                                                            Command="{Binding WinLoseImageRecycleCommand}">
+                                                            Command="{Binding RankingImageRecycleCommand}">
                                                         <fa:IconImage Icon="Recycle" 
                                                                       Margin="1,0,0,0"
                                                                       Width="22"
@@ -1059,15 +1062,30 @@
                                 <!--#endregion-->
 
                                 <!--#region 기타-->
-                                <StackPanel Orientation="Horizontal"
-                                            Visibility="{Binding EtcSettingVisible}">
-                                    <TextBlock FontSize="40"
-                                               Margin="10,0,0,0"> 
+                                <Grid HorizontalAlignment="Stretch" 
+                                      Visibility="{Binding EtcSettingVisible}">
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Left">
+                                        <Button Content="현재설정&#10;저장하기"
+                                                TextBlock.TextAlignment="Center"
+                                                Margin="10,0,0,0"
+                                                Style="{StaticResource buttonStyle}"
+                                                Command="{Binding SaveSettingCommand}"/>
+                                        <Button Content="설정&#10;불러오기"
+                                                TextBlock.TextAlignment="Center"
+                                                Margin="10,0,0,0"
+                                                Style="{StaticResource buttonStyle}"
+                                                Command="{Binding OpenSettingCommand}"/>
+                                    </StackPanel>
+
+                                    <TextBlock FontSize="25"
+                                               Margin="0,0,20,0"
+                                               HorizontalAlignment="Right"> 
                                         <Hyperlink NavigateUri="https://blog.naver.com/redcassio" 
                                                    RequestNavigate="Hyperlink_RequestNavigate">홈페이지&amp;문의</Hyperlink>
                                     </TextBlock>
 
-                                </StackPanel>
+                                </Grid>
                                 <!--#endregion-->
 
                             </Grid>
@@ -1144,7 +1162,7 @@
                                                                     <Setter Property="Background" Value="{Binding DataContext.WinLoseLoseBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
                                                                 </MultiDataTrigger>
                                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                                    <Setter Property="Background" Value="#22ffffff"/>
+                                                                    <Setter Property="Background" Value="{Binding DataContext.WinLoseBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
                                                                 </Trigger>
                                                             </Style.Triggers>
                                                         </Style>
@@ -1218,7 +1236,7 @@
                                             <Setter Property="Margin" Value="0"/>
                                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                             <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                            <Setter Property="Opacity" Value="{Binding Value, ElementName=sliderWinLoseBoxtransparency}"/>
+                                            <Setter Property="Opacity" Value="{Binding Value, ElementName=sliderRankingBoxtransparency}"/>
                                         </Style>
                                     </ListBox.ItemContainerStyle>
 
@@ -1260,7 +1278,7 @@
                                                                     <Setter Property="Background" Value="{Binding DataContext.RankingLoseBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
                                                                 </MultiDataTrigger>
                                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                                    <Setter Property="Background" Value="#22ffffff"/>
+                                                                    <Setter Property="Background" Value="{Binding DataContext.RankingBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
                                                                 </Trigger>
                                                             </Style.Triggers>
                                                         </Style>

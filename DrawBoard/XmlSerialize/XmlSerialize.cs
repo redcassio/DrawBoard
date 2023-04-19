@@ -1,8 +1,8 @@
-﻿using System.IO;
-using System.Xml.Serialization;
-using System.Xml;
-using System;
+﻿using System;
+using System.IO;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace DrawBoard.XmlSerialize
 {

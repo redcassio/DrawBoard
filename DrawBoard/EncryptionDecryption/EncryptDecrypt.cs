@@ -3,7 +3,6 @@ using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-using System.Windows;
 
 namespace DrawBoard.EncryptionDecryption
 {
@@ -58,8 +57,8 @@ namespace DrawBoard.EncryptionDecryption
                 // 암호화된 데이터를 Base64 인코딩된 문자열로 변환한다.
                 EncryptedData = Convert.ToBase64String(CipherBytes);
             }
-            catch 
-            { 
+            catch
+            {
                 //MessageBox.Show("암호화 실패"); 
             }
             // 최종 결과를 리턴
@@ -102,8 +101,8 @@ namespace DrawBoard.EncryptionDecryption
                 DecryptedData = Encoding.Unicode.GetString(PlainText, 0, DecryptedCount);
 
             }
-            catch 
-            { 
+            catch
+            {
                 //MessageBox.Show("복호화 실패");
             }
             // 최종 결과 리턴
@@ -112,8 +111,8 @@ namespace DrawBoard.EncryptionDecryption
 
         public static string Protect(string str)
         {
-            byte[] entropy = Encoding.ASCII.GetBytes(Assembly.GetExecutingAssembly().FullName);
-            byte[] data = Encoding.ASCII.GetBytes(str);
+            byte[] entropy = Encoding.UTF8.GetBytes(Assembly.GetExecutingAssembly().FullName);
+            byte[] data = Encoding.UTF8.GetBytes(str);
             string protectedData = Convert.ToBase64String(ProtectedData.Protect(data, entropy, DataProtectionScope.CurrentUser));
             return protectedData;
         }
@@ -121,8 +120,8 @@ namespace DrawBoard.EncryptionDecryption
         public static string Unprotect(string str)
         {
             byte[] protectedData = Convert.FromBase64String(str);
-            byte[] entropy = Encoding.ASCII.GetBytes(Assembly.GetExecutingAssembly().FullName);
-            string data = Encoding.ASCII.GetString(ProtectedData.Unprotect(protectedData, entropy, DataProtectionScope.CurrentUser));
+            byte[] entropy = Encoding.UTF8.GetBytes(Assembly.GetExecutingAssembly().FullName);
+            string data = Encoding.UTF8.GetString(ProtectedData.Unprotect(protectedData, entropy, DataProtectionScope.CurrentUser));
             return data;
         }
     }

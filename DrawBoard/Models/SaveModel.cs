@@ -1,8 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
-using System.Windows;
-using System;
 
 namespace DrawBoard.Models
 {
@@ -177,25 +176,25 @@ namespace DrawBoard.Models
         private string? _rankingImagePath;
 
         [ObservableProperty]
-        private Stretch _winLoseImageStretch = Stretch.None;
+        private Stretch _winLoseImageStretch = Stretch.Uniform;
         [ObservableProperty]
-        private Stretch _rankingImageStretch = Stretch.None;
+        private Stretch _rankingImageStretch = Stretch.Uniform;
 
         [ObservableProperty]
-        private bool _isWinLoseStretchNone = true;
+        private bool _isWinLoseStretchNone;
         [ObservableProperty]
         private bool _isWinLoseStretchFill;
         [ObservableProperty]
-        private bool _isWinLoseStretchUniform;
+        private bool _isWinLoseStretchUniform = true;
         [ObservableProperty]
         private bool _isWinLoseStretchNoneUniformToFill;
 
         [ObservableProperty]
-        private bool _isRankingStretchNone = true;
+        private bool _isRankingStretchNone;
         [ObservableProperty]
         private bool _isRankingStretchFill;
         [ObservableProperty]
-        private bool _isRankingStretchUniform;
+        private bool _isRankingStretchUniform = true;
         [ObservableProperty]
         private bool _isRankingStretchNoneUniformToFill;
 
@@ -230,7 +229,308 @@ namespace DrawBoard.Models
 
         #endregion
 
-
         #endregion
+
+        public static SaveModel SaveSetting(MainWindowViewModel viewModel)
+        {
+            var model = new SaveModel();
+
+            #region :: Model ::
+
+            model.WindowWidth = viewModel.WindowWidth;
+            model.WindowHeight = viewModel.WindowHeight;
+            model.WinLoseGameCount = viewModel.WinLoseGameCount;
+            model.WinCount = viewModel.WinCount;
+            model.RankingGameCount = viewModel.RankingGameCount;
+            model.FirstCount = viewModel.FirstCount;
+            model.SecondCount = viewModel.SecondCount;
+
+            model.ThirdCount = viewModel.ThirdCount;
+            model.FourthCount = viewModel.FourthCount;
+            model.FifthCount = viewModel.FifthCount;
+            model.SixthCount = viewModel.SixthCount;
+            model.SeventhCount = viewModel.SeventhCount;
+
+            model.WinText = viewModel.WinText;
+            model.LoseText = viewModel.LoseText;
+            model.RankingLoseText = viewModel.RankingLoseText;
+            model.FirstText = viewModel.FirstText;
+            model.SecondText = viewModel.SecondText;
+            model.ThirdText = viewModel.ThirdText;
+            model.FourthText = viewModel.FourthText;
+            model.FifthText = viewModel.FifthText;
+            model.SixthText = viewModel.SixthText;
+            model.SeventhText = viewModel.SeventhText;
+            model.WinLoseTextSize = viewModel.WinLoseTextSize;
+            model.WinLoseNumberTextSize = viewModel.WinLoseNumberTextSize;
+            model.RankingTextSize = viewModel.RankingTextSize;
+            model.RankingNumberTextSize = viewModel.RankingNumberTextSize;
+
+            model.WinLoseBackgroundColor = viewModel.WinLoseBackgroundColor;
+            model.RankingBackgroundColor = viewModel.RankingBackgroundColor;
+            model.WinLoseWinBackgroundColor = viewModel.WinLoseWinBackgroundColor;
+            model.RankingWinBackgroundColor = viewModel.RankingWinBackgroundColor;
+            model.WinLoseLoseBackgroundColor = viewModel.WinLoseLoseBackgroundColor;
+            model.RankingLoseBackgroundColor = viewModel.RankingLoseBackgroundColor;
+            model.WinLoseNumberColor = viewModel.WinLoseNumberColor;
+            model.RankingNumberColor = viewModel.RankingNumberColor;
+            model.WinLoseWinColor = viewModel.WinLoseWinColor;
+            model.RankingWinColor = viewModel.RankingWinColor;
+            model.WinLoseLoseColor = viewModel.WinLoseLoseColor;
+            model.RankingLoseColor = viewModel.RankingLoseColor;
+            model.WinLosePanelColor = viewModel.WinLosePanelColor;
+            model.RankingPanelColor = viewModel.RankingPanelColor;
+
+            model.SelectedWinLoseFont = viewModel.SelectedWinLoseFont;
+            model.SelectedRankingFont = viewModel.SelectedRankingFont;
+
+            model.WinVolume = viewModel.WinVolume;
+            model.LoseVolume = viewModel.LoseVolume;
+            model.WinSoundPath = viewModel.WinSoundPath;
+            model.LoseSoundPath = viewModel.LoseSoundPath;
+
+            //model.DrawWinLoseList = viewModel.DrawWinLoseList;
+            //model.DrawRankingList = viewModel.DrawRankingList;
+
+            model.WinLoseBoxWidth = viewModel.WinLoseBoxWidth;
+            model.WinLoseBoxHeight = viewModel.WinLoseBoxHeight;
+            model.RankingBoxWidth = viewModel.RankingBoxWidth;
+            model.RankingBoxHeight = viewModel.RankingBoxHeight;
+
+            //model.WinLoseListBoxBackground = viewModel.WinLoseListBoxBackground;
+            model.WinLoseImagePath = viewModel.WinLoseImagePath;
+
+            //model.RankingListBoxBackground = viewModel.RankingListBoxBackground;
+            model.RankingImagePath = viewModel.RankingImagePath;
+
+            model.WinLoseImageStretch = viewModel.WinLoseImageStretch;
+            model.RankingImageStretch = viewModel.RankingImageStretch;
+
+            model.IsWinLoseStretchNone = viewModel.IsWinLoseStretchNone;
+            model.IsWinLoseStretchFill = viewModel.IsWinLoseStretchFill;
+            model.IsWinLoseStretchUniform = viewModel.IsWinLoseStretchUniform;
+            model.IsWinLoseStretchNoneUniformToFill = viewModel.IsWinLoseStretchNoneUniformToFill;
+
+            model.IsRankingStretchNone = viewModel.IsRankingStretchNone;
+            model.IsRankingStretchFill = viewModel.IsRankingStretchFill;
+            model.IsRankingStretchUniform = viewModel.IsRankingStretchUniform;
+            model.IsRankingStretchNoneUniformToFill = viewModel.IsRankingStretchNoneUniformToFill;
+
+            #region :: Visible ::
+
+            //private Visibility _winLoseSettingVisible = Visibility.Visible;                
+            //private Visibility _rankingSettingVisible = Visibility.Collapsed;
+            //private Visibility _textSettingVisible = Visibility.Collapsed;
+            //private Visibility _boxSettingVisible = Visibility.Collapsed;
+            //private Visibility _colorSettingVisible = Visibility.Collapsed;
+            //private Visibility _soundSettingVisible = Visibility.Collapsed;
+            //private Visibility _etcSettingVisible = Visibility.Collapsed;
+
+            //private Visibility _winLoseListBoxVisible = Visibility.Visible;
+            //private Visibility _rankingListBoxVisible = Visibility.Collapsed;
+
+            //private bool _isRadioWinLoseUse = true;
+            //private bool _isRadioRankingUse = false;
+
+            #endregion
+
+            #endregion
+
+            return model;
+        }
+
+        public static void OpenSetting(SaveModel model, MainWindowViewModel viewModel)
+        {
+            #region :: Model ::
+
+            viewModel.WindowWidth = model.WindowWidth;
+            viewModel.WindowHeight = model.WindowHeight;
+            viewModel.WinLoseGameCount = model.WinLoseGameCount;
+            viewModel.WinCount = model.WinCount;
+            viewModel.RankingGameCount = model.RankingGameCount;
+            viewModel.FirstCount = model.FirstCount;
+            viewModel.SecondCount = model.SecondCount;
+
+            viewModel.ThirdCount = model.ThirdCount;
+            viewModel.FourthCount = model.FourthCount;
+            viewModel.FifthCount = model.FifthCount;
+            viewModel.SixthCount = model.SixthCount;
+            viewModel.SeventhCount = model.SeventhCount;
+
+            viewModel.WinText = model.WinText;
+            viewModel.LoseText = model.LoseText;
+            viewModel.RankingLoseText = model.RankingLoseText;
+            viewModel.FirstText = model.FirstText;
+            viewModel.SecondText = model.SecondText;
+            viewModel.ThirdText = model.ThirdText;
+            viewModel.FourthText = model.FourthText;
+            viewModel.FifthText = model.FifthText;
+            viewModel.SixthText = model.SixthText;
+            viewModel.SeventhText = model.SeventhText;
+            viewModel.WinLoseTextSize = model.WinLoseTextSize;
+            viewModel.WinLoseNumberTextSize = model.WinLoseNumberTextSize;
+            viewModel.RankingTextSize = model.RankingTextSize;
+            viewModel.RankingNumberTextSize = model.RankingNumberTextSize;
+
+            viewModel.WinLoseBackgroundColor = model.WinLoseBackgroundColor;
+            viewModel.RankingBackgroundColor = model.RankingBackgroundColor;
+            viewModel.WinLoseWinBackgroundColor = model.WinLoseWinBackgroundColor;
+            viewModel.RankingWinBackgroundColor = model.RankingWinBackgroundColor;
+            viewModel.WinLoseLoseBackgroundColor = model.WinLoseLoseBackgroundColor;
+            viewModel.RankingLoseBackgroundColor = model.RankingLoseBackgroundColor;
+            viewModel.WinLoseNumberColor = model.WinLoseNumberColor;
+            viewModel.RankingNumberColor = model.RankingNumberColor;
+            viewModel.WinLoseWinColor = model.WinLoseWinColor;
+            viewModel.RankingWinColor = model.RankingWinColor;
+            viewModel.WinLoseLoseColor = model.WinLoseLoseColor;
+            viewModel.RankingLoseColor = model.RankingLoseColor;
+            viewModel.WinLosePanelColor = model.WinLosePanelColor;
+            viewModel.RankingPanelColor = model.RankingPanelColor;
+
+            viewModel.SelectedWinLoseFont = model.SelectedWinLoseFont;
+            viewModel.SelectedRankingFont = model.SelectedRankingFont;
+
+            viewModel.WinVolume = model.WinVolume;
+            viewModel.LoseVolume = model.LoseVolume;
+            viewModel.WinSoundPath = model.WinSoundPath;
+            viewModel.LoseSoundPath = model.LoseSoundPath;
+
+            //viewModel.DrawWinLoseList = model.DrawWinLoseList;
+            //viewModel.DrawRankingList = model.DrawRankingList;
+
+            viewModel.WinLoseBoxWidth = model.WinLoseBoxWidth;
+            viewModel.WinLoseBoxHeight = model.WinLoseBoxHeight;
+            viewModel.RankingBoxWidth = model.RankingBoxWidth;
+            viewModel.RankingBoxHeight = model.RankingBoxHeight;
+
+            //WinLoseListBoxBackground = model.WinLoseListBoxBackground;
+            viewModel.WinLoseImagePath = model.WinLoseImagePath;
+
+            //RankingListBoxBackground = model.RankingListBoxBackground;
+            viewModel.RankingImagePath = model.RankingImagePath;
+
+            viewModel.WinLoseImageStretch = model.WinLoseImageStretch;
+            viewModel.RankingImageStretch = model.RankingImageStretch;
+
+            viewModel.IsWinLoseStretchNone = model.IsWinLoseStretchNone;
+            viewModel.IsWinLoseStretchFill = model.IsWinLoseStretchFill;
+            viewModel.IsWinLoseStretchUniform = model.IsWinLoseStretchUniform;
+            viewModel.IsWinLoseStretchNoneUniformToFill = model.IsWinLoseStretchNoneUniformToFill;
+
+            viewModel.IsRankingStretchNone = model.IsRankingStretchNone;
+            viewModel.IsRankingStretchFill = model.IsRankingStretchFill;
+            viewModel.IsRankingStretchUniform = model.IsRankingStretchUniform;
+            viewModel.IsRankingStretchNoneUniformToFill = model.IsRankingStretchNoneUniformToFill;
+
+            #endregion
+        }
+
+        public static SaveModel WindowSaveSetting(MainWindowViewModel viewModel)
+        {
+            var model = new SaveModel();
+
+            #region :: Model ::
+
+            model.WindowWidth = viewModel.WindowWidth;
+            model.WindowHeight = viewModel.WindowHeight;
+            model.WinLoseGameCount = viewModel.WinLoseGameCount;
+            model.WinCount = viewModel.WinCount;
+            model.RankingGameCount = viewModel.RankingGameCount;
+            model.FirstCount = viewModel.FirstCount;
+            model.SecondCount = viewModel.SecondCount;
+
+            model.ThirdCount = viewModel.ThirdCount;
+            model.FourthCount = viewModel.FourthCount;
+            model.FifthCount = viewModel.FifthCount;
+            model.SixthCount = viewModel.SixthCount;
+            model.SeventhCount = viewModel.SeventhCount;
+
+            model.WinText = viewModel.WinText;
+            model.LoseText = viewModel.LoseText;
+            model.RankingLoseText = viewModel.RankingLoseText;
+            model.FirstText = viewModel.FirstText;
+            model.SecondText = viewModel.SecondText;
+            model.ThirdText = viewModel.ThirdText;
+            model.FourthText = viewModel.FourthText;
+            model.FifthText = viewModel.FifthText;
+            model.SixthText = viewModel.SixthText;
+            model.SeventhText = viewModel.SeventhText;
+            model.WinLoseTextSize = viewModel.WinLoseTextSize;
+            model.WinLoseNumberTextSize = viewModel.WinLoseNumberTextSize;
+            model.RankingTextSize = viewModel.RankingTextSize;
+            model.RankingNumberTextSize = viewModel.RankingNumberTextSize;
+
+            model.WinLoseBackgroundColor = viewModel.WinLoseBackgroundColor;
+            model.RankingBackgroundColor = viewModel.RankingBackgroundColor;
+            model.WinLoseWinBackgroundColor = viewModel.WinLoseWinBackgroundColor;
+            model.RankingWinBackgroundColor = viewModel.RankingWinBackgroundColor;
+            model.WinLoseLoseBackgroundColor = viewModel.WinLoseLoseBackgroundColor;
+            model.RankingLoseBackgroundColor = viewModel.RankingLoseBackgroundColor;
+            model.WinLoseNumberColor = viewModel.WinLoseNumberColor;
+            model.RankingNumberColor = viewModel.RankingNumberColor;
+            model.WinLoseWinColor = viewModel.WinLoseWinColor;
+            model.RankingWinColor = viewModel.RankingWinColor;
+            model.WinLoseLoseColor = viewModel.WinLoseLoseColor;
+            model.RankingLoseColor = viewModel.RankingLoseColor;
+            model.WinLosePanelColor = viewModel.WinLosePanelColor;
+            model.RankingPanelColor = viewModel.RankingPanelColor;
+
+            model.SelectedWinLoseFont = viewModel.SelectedWinLoseFont;
+            model.SelectedRankingFont = viewModel.SelectedRankingFont;
+
+            model.WinVolume = viewModel.WinVolume;
+            model.LoseVolume = viewModel.LoseVolume;
+            model.WinSoundPath = viewModel.WinSoundPath;
+            model.LoseSoundPath = viewModel.LoseSoundPath;
+
+            model.DrawWinLoseList = viewModel.DrawWinLoseList;
+            model.DrawRankingList = viewModel.DrawRankingList;
+
+            model.WinLoseBoxWidth = viewModel.WinLoseBoxWidth;
+            model.WinLoseBoxHeight = viewModel.WinLoseBoxHeight;
+            model.RankingBoxWidth = viewModel.RankingBoxWidth;
+            model.RankingBoxHeight = viewModel.RankingBoxHeight;
+
+            //model.WinLoseListBoxBackground = viewModel.WinLoseListBoxBackground;
+            model.WinLoseImagePath = viewModel.WinLoseImagePath;
+
+            //model.RankingListBoxBackground = viewModel.RankingListBoxBackground;
+            model.RankingImagePath = viewModel.RankingImagePath;
+
+            model.WinLoseImageStretch = viewModel.WinLoseImageStretch;
+            model.RankingImageStretch = viewModel.RankingImageStretch;
+
+            model.IsWinLoseStretchNone = viewModel.IsWinLoseStretchNone;
+            model.IsWinLoseStretchFill = viewModel.IsWinLoseStretchFill;
+            model.IsWinLoseStretchUniform = viewModel.IsWinLoseStretchUniform;
+            model.IsWinLoseStretchNoneUniformToFill = viewModel.IsWinLoseStretchNoneUniformToFill;
+
+            model.IsRankingStretchNone = viewModel.IsRankingStretchNone;
+            model.IsRankingStretchFill = viewModel.IsRankingStretchFill;
+            model.IsRankingStretchUniform = viewModel.IsRankingStretchUniform;
+            model.IsRankingStretchNoneUniformToFill = viewModel.IsRankingStretchNoneUniformToFill;
+
+            #region :: Visible ::
+
+            //private Visibility _winLoseSettingVisible = Visibility.Visible;                
+            //private Visibility _rankingSettingVisible = Visibility.Collapsed;
+            //private Visibility _textSettingVisible = Visibility.Collapsed;
+            //private Visibility _boxSettingVisible = Visibility.Collapsed;
+            //private Visibility _colorSettingVisible = Visibility.Collapsed;
+            //private Visibility _soundSettingVisible = Visibility.Collapsed;
+            //private Visibility _etcSettingVisible = Visibility.Collapsed;
+
+            //private Visibility _winLoseListBoxVisible = Visibility.Visible;
+            //private Visibility _rankingListBoxVisible = Visibility.Collapsed;
+
+            //private bool _isRadioWinLoseUse = true;
+            //private bool _isRadioRankingUse = false;
+
+            #endregion
+
+            #endregion
+
+            return model;
+        }
     }
 }

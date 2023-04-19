@@ -2,16 +2,16 @@
 using CommunityToolkit.Mvvm.Input;
 using DrawBoard.EncryptionDecryption;
 using DrawBoard.Models;
-using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Security.Cryptography.Xml;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Xml;
+using File = System.IO.File;
+using MessageBox = System.Windows.MessageBox;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace DrawBoard
 {
@@ -113,9 +113,9 @@ namespace DrawBoard
         private Color? _rankingNumberColor = (Color)ColorConverter.ConvertFromString("#FFEEE8AA");
 
         [ObservableProperty]
-        private Color? _winLoseWinColor = (Color)ColorConverter.ConvertFromString("#FFFFD700");
+        private Color? _winLoseWinColor = (Color)ColorConverter.ConvertFromString("#FF00FA9A");
         [ObservableProperty]
-        private Color? _rankingWinColor = (Color)ColorConverter.ConvertFromString("#FFFFD700");
+        private Color? _rankingWinColor = (Color)ColorConverter.ConvertFromString("#FF00FA9A");
 
         [ObservableProperty]
         private Color? _winLoseLoseColor = (Color)ColorConverter.ConvertFromString("#FFDC143C");
@@ -186,25 +186,25 @@ namespace DrawBoard
         private string? _rankingImagePath;
 
         [ObservableProperty]
-        private Stretch _winLoseImageStretch = Stretch.None;
+        private Stretch _winLoseImageStretch = Stretch.Uniform;
         [ObservableProperty]
-        private Stretch _rankingImageStretch = Stretch.None;
+        private Stretch _rankingImageStretch = Stretch.Uniform;
 
         [ObservableProperty]
-        private bool _isWinLoseStretchNone = true;
+        private bool _isWinLoseStretchNone;
         [ObservableProperty]
         private bool _isWinLoseStretchFill;
         [ObservableProperty]
-        private bool _isWinLoseStretchUniform;
+        private bool _isWinLoseStretchUniform = true;
         [ObservableProperty]
         private bool _isWinLoseStretchNoneUniformToFill;
 
         [ObservableProperty]
-        private bool _isRankingStretchNone = true;
+        private bool _isRankingStretchNone;
         [ObservableProperty]
         private bool _isRankingStretchFill;
         [ObservableProperty]
-        private bool _isRankingStretchUniform;
+        private bool _isRankingStretchUniform = true;
         [ObservableProperty]
         private bool _isRankingStretchNoneUniformToFill;
 
@@ -276,40 +276,161 @@ namespace DrawBoard
         {
             try
             {
-
                 var path = $"{AppDomain.CurrentDomain.BaseDirectory}DrawBoardSave.txt";
                 if (File.Exists(path))
                 {
                     var file = File.ReadAllText(path);
                     var decryptData = EncryptDecrypt.Unprotect(file);
+                    var model = XmlSerialize.XmlSerialize.Deserialize<SaveModel>(decryptData);
 
-                    var data = XmlSerialize.XmlSerialize.Deserialize<SaveModel>(decryptData);
+                    #region :: Model ::
 
-                    //var dd = XmlSerialize.XmlSerialize.Deserialize<SaveModel>(xmlData);
+                    WindowWidth = model.WindowWidth;
+                    WindowHeight = model.WindowHeight;
+                    WinLoseGameCount = model.WinLoseGameCount;
+                    WinCount = model.WinCount;
+                    RankingGameCount = model.RankingGameCount;
+                    FirstCount = model.FirstCount;
+                    SecondCount = model.SecondCount;
 
-                    //var parsed = new XmlDocument();
-                    //parsed.LoadXml(xmlData);
+                    ThirdCount = model.ThirdCount;
+                    FourthCount = model.FourthCount;
+                    FifthCount = model.FifthCount;
+                    SixthCount = model.SixthCount;
+                    SeventhCount = model.SeventhCount;
 
-                    //var saveFileDialog = new SaveFileDialog();
-                    //saveFileDialog.FileName = path;
-                    //File.WriteAllText(saveFileDialog.FileName, xmlData);
+                    WinText = model.WinText;
+                    LoseText = model.LoseText;
+                    RankingLoseText = model.RankingLoseText;
+                    FirstText = model.FirstText;
+                    SecondText = model.SecondText;
+                    ThirdText = model.ThirdText;
+                    FourthText = model.FourthText;
+                    FifthText = model.FifthText;
+                    SixthText = model.SixthText;
+                    SeventhText = model.SeventhText;
+                    WinLoseTextSize = model.WinLoseTextSize;
+                    WinLoseNumberTextSize = model.WinLoseNumberTextSize;
+                    RankingTextSize = model.RankingTextSize;
+                    RankingNumberTextSize = model.RankingNumberTextSize;
 
+                    WinLoseBackgroundColor = model.WinLoseBackgroundColor;
+                    RankingBackgroundColor = model.RankingBackgroundColor;
+                    WinLoseWinBackgroundColor = model.WinLoseWinBackgroundColor;
+                    RankingWinBackgroundColor = model.RankingWinBackgroundColor;
+                    WinLoseLoseBackgroundColor = model.WinLoseLoseBackgroundColor;
+                    RankingLoseBackgroundColor = model.RankingLoseBackgroundColor;
+                    WinLoseNumberColor = model.WinLoseNumberColor;
+                    RankingNumberColor = model.RankingNumberColor;
+                    WinLoseWinColor = model.WinLoseWinColor;
+                    RankingWinColor = model.RankingWinColor;
+                    WinLoseLoseColor = model.WinLoseLoseColor;
+                    RankingLoseColor = model.RankingLoseColor;
+                    WinLosePanelColor = model.WinLosePanelColor;
+                    RankingPanelColor = model.RankingPanelColor;
 
-                    //var file = XmlSerialize.XmlSerialize.Read<string>(path, typeof(string));
-                    //var decryptData = EncryptDecrypt.EncryptString(file, "drawboard");
-                    //var deserializeData = XmlSerialize.XmlSerialize.Deserialize<XmlSerializeModel>(decryptData);
+                    SelectedWinLoseFont = model.SelectedWinLoseFont;
+                    SelectedRankingFont = model.SelectedRankingFont;
 
+                    WinVolume = model.WinVolume;
+                    LoseVolume = model.LoseVolume;
+                    WinSoundPath = model.WinSoundPath;
+                    LoseSoundPath = model.LoseSoundPath;
+
+                    DrawWinLoseList = model.DrawWinLoseList;
+                    DrawRankingList = model.DrawRankingList;
+
+                    WinLoseBoxWidth = model.WinLoseBoxWidth;
+                    WinLoseBoxHeight = model.WinLoseBoxHeight;
+                    RankingBoxWidth = model.RankingBoxWidth;
+                    RankingBoxHeight = model.RankingBoxHeight;
+
+                    //WinLoseListBoxBackground = model.WinLoseListBoxBackground;
+                    WinLoseImagePath = model.WinLoseImagePath;
+
+                    //RankingListBoxBackground = model.RankingListBoxBackground;
+                    RankingImagePath = model.RankingImagePath;
+
+                    WinLoseImageStretch = model.WinLoseImageStretch;
+                    RankingImageStretch = model.RankingImageStretch;
+
+                    IsWinLoseStretchNone = model.IsWinLoseStretchNone;
+                    IsWinLoseStretchFill = model.IsWinLoseStretchFill;
+                    IsWinLoseStretchUniform = model.IsWinLoseStretchUniform;
+                    IsWinLoseStretchNoneUniformToFill = model.IsWinLoseStretchNoneUniformToFill;
+
+                    IsRankingStretchNone = model.IsRankingStretchNone;
+                    IsRankingStretchFill = model.IsRankingStretchFill;
+                    IsRankingStretchUniform = model.IsRankingStretchUniform;
+                    IsRankingStretchNoneUniformToFill = model.IsRankingStretchNoneUniformToFill;
+
+                    #endregion
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("설정을 불러오는 도중 오류가 발생했습니다.", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("설정을 불러오는 중 오류가 발생하였습니다.", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         #endregion
 
         #region :: Commands ::
+
+        [RelayCommand]
+        private void SaveSetting()
+        {
+            var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "txt files (*.txt)|*.txt";
+            saveFileDialog.FileName = "SaveSetting.txt";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    var model = new SaveModel();
+                    model = SaveModel.SaveSetting(this);
+
+                    var serializeData = XmlSerialize.XmlSerialize.Serialize(model);
+                    var encryptData = EncryptDecrypt.Protect(serializeData);
+                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}DrawBoardSave.txt";
+
+                    File.WriteAllText(saveFileDialog.FileName, encryptData);
+
+                    MessageBox.Show($"설정만 저장됩니다. {Environment.NewLine}당첨판, 순위판 데이터는 저장되지 않습니다.", "정보", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("설정을 저장하는 중 오류가 발생하였습니다.", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
+
+        [RelayCommand]
+        private void OpenSetting()
+        {
+            var openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "txt files (*.txt)|*.txt";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    var file = File.ReadAllText(openFileDialog.FileName);
+                    var decryptData = EncryptDecrypt.Unprotect(file);
+                    var model = XmlSerialize.XmlSerialize.Deserialize<SaveModel>(decryptData);
+
+                    SaveModel.OpenSetting(model, this);
+
+                    MessageBox.Show($"설정만 불러옵니다. {Environment.NewLine}당첨판, 순위판 데이터는 변하지 않습니다.", "정보", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("설정을 불러오는 중 오류가 발생하였습니다. ", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
 
         [RelayCommand]
         private void MakeWinLose()
@@ -339,7 +460,7 @@ namespace DrawBoard
                     IsWinMediaElementPlay = !IsWinMediaElementPlay;
                 }
             }
-            else 
+            else
             {
                 if (!string.IsNullOrEmpty(LoseSoundPath) && LoseSoundPath != "없음")
                 {
@@ -360,7 +481,7 @@ namespace DrawBoard
             ColorSettingVisible = Visibility.Collapsed;
             SoundSettingVisible = Visibility.Collapsed;
             EtcSettingVisible = Visibility.Collapsed;
-            
+
             switch (settings)
             {
                 case SettingButtons.WinLose:
@@ -441,6 +562,7 @@ namespace DrawBoard
                 {
                     var imageBrush = new ImageBrush();
                     imageBrush.ImageSource = new BitmapImage(new Uri(openFileDialog.FileName, UriKind.Absolute));
+                    imageBrush.Stretch = WinLoseImageStretch;
 
                     WinLoseListBoxBackground = imageBrush;
                     WinLoseImagePath = openFileDialog.FileName;
@@ -457,11 +579,12 @@ namespace DrawBoard
         {
             try
             {
-                var imageBrush = new ImageBrush();
-                var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background2.png";
+                var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background3.png";
                 if (File.Exists(path))
                 {
+                    var imageBrush = new ImageBrush();
                     imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
+                    imageBrush.Stretch = WinLoseImageStretch;
 
                     WinLoseListBoxBackground = imageBrush;
                     WinLoseImagePath = path;
@@ -478,9 +601,59 @@ namespace DrawBoard
         }
 
         [RelayCommand]
+        private void RankingImageSelect()
+        {
+            try
+            {
+                var openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "png files (*.png)|*.png|jpg files (*.jpg)|*.jpg|All files (*.*)|*.*";
+
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    var imageBrush = new ImageBrush();
+                    imageBrush.ImageSource = new BitmapImage(new Uri(openFileDialog.FileName, UriKind.Absolute));
+                    imageBrush.Stretch = RankingImageStretch;
+
+                    RankingListBoxBackground = imageBrush;
+                    RankingImagePath = openFileDialog.FileName;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        [RelayCommand]
+        private void RankingImageRecycle()
+        {
+            try
+            {
+                var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background4.png";
+                if (File.Exists(path))
+                {
+                    var imageBrush = new ImageBrush();
+                    imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
+                    imageBrush.Stretch = RankingImageStretch;
+
+                    RankingListBoxBackground = imageBrush;
+                    RankingImagePath = path;
+                }
+                else
+                {
+                    MessageBox.Show($"이미지 파일이 없습니다.{Environment.NewLine}{path}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        [RelayCommand]
         private void WinSoundRecycle()
         {
-            var path = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\win.mp3";
+            var path = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Win.mp3";
             if (File.Exists(path))
             {
                 WinSoundPath = path;
@@ -513,7 +686,7 @@ namespace DrawBoard
                 if (string.IsNullOrEmpty(WinLoseImagePath))
                 {
                     var imageBrush = new ImageBrush();
-                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background1.png";
+                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background3.png";
                     if (File.Exists(path))
                     {
                         imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
@@ -555,7 +728,7 @@ namespace DrawBoard
                 if (string.IsNullOrEmpty(WinLoseImagePath))
                 {
                     var imageBrush = new ImageBrush();
-                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background1.png";
+                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background3.png";
                     if (File.Exists(path))
                     {
                         imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
@@ -662,7 +835,7 @@ namespace DrawBoard
                 if (string.IsNullOrEmpty(RankingImagePath))
                 {
                     var imageBrush = new ImageBrush();
-                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background2.png";
+                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background4.png";
                     if (File.Exists(path))
                     {
                         imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
@@ -704,7 +877,7 @@ namespace DrawBoard
                 if (string.IsNullOrEmpty(RankingImagePath))
                 {
                     var imageBrush = new ImageBrush();
-                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background1.png";
+                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background4.png";
                     if (File.Exists(path))
                     {
                         imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
@@ -863,7 +1036,7 @@ namespace DrawBoard
                     }
                     else if (item3.Contains(number))
                     {
-                        DrawRankingList.Add(new() { UnitNumber = number, IsWin = true, RankingText = ThirdText});
+                        DrawRankingList.Add(new() { UnitNumber = number, IsWin = true, RankingText = ThirdText });
                     }
                     else if (item4.Contains(number))
                     {
@@ -928,7 +1101,7 @@ namespace DrawBoard
                 ints[count] = item2[i];
                 count++;
             }
-            
+
             return ints;
         }
 

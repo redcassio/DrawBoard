@@ -9,7 +9,7 @@ namespace DrawBoard.Behaviors
     {
         public static readonly DependencyProperty IsFocusProperty =
             DependencyProperty.Register("IsFocus", typeof(bool), typeof(FocusOnOffBehavior), new PropertyMetadata(false, propertyChangedCallback: IsFocusPropertyChanged));
-     
+
         public bool IsFocus
         {
             get { return (bool)GetValue(IsFocusProperty); }
