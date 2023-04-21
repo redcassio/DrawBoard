@@ -348,7 +348,7 @@ namespace DrawBoard
                     {
                         WinSoundPath = model.WinSoundPath;
                     }
-                    else 
+                    else
                     {
                         WinSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Win.mp3";
                     }
@@ -389,7 +389,7 @@ namespace DrawBoard
                     {
                         RankingImagePath = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background4.png";
                     }
-                    
+
 
                     WinLoseImageStretch = model.WinLoseImageStretch;
                     RankingImageStretch = model.RankingImageStretch;
@@ -415,8 +415,7 @@ namespace DrawBoard
 
         #endregion
 
-        #region :: Commands ::
-
+        #region :: Clear ::
         [RelayCommand]
         private void WinLoseGameClear()
         {
@@ -428,6 +427,10 @@ namespace DrawBoard
         {
             DrawRankingList?.Clear();
         }
+
+        #endregion
+
+        #region :: Save, Open Setting Button ::
 
         [RelayCommand]
         private void SaveSetting()
@@ -483,6 +486,9 @@ namespace DrawBoard
                 }
             }
         }
+        #endregion
+
+        #region :: Make List ::
 
         [RelayCommand]
         private void MakeWinLose()
@@ -498,31 +504,9 @@ namespace DrawBoard
             MakeRankingList(RankingGameCount);
         }
 
-        [RelayCommand]
-        private void DrawOpen(DrawModel model)
-        {
-            model.IsOpen = true;
+        #endregion
 
-            if (model.IsWin)
-            {
-                if (!string.IsNullOrEmpty(WinSoundPath) && WinSoundPath != "없음")
-                {
-                    LoseMediaElementSource = null;
-                    WinMediaElementSource = new Uri(WinSoundPath);
-                    IsWinMediaElementPlay = !IsWinMediaElementPlay;
-                }
-            }
-            else
-            {
-                if (!string.IsNullOrEmpty(LoseSoundPath) && LoseSoundPath != "없음")
-                {
-                    WinMediaElementSource = null;
-                    LoseMediaElementSource = new Uri(LoseSoundPath);
-                    IsLoseMediaElementPlay = !IsLoseMediaElementPlay;
-                }
-            }
-        }
-
+        #region :: Menu Change ::
         [RelayCommand]
         private void SettingChange(SettingButtons settings)
         {
@@ -567,6 +551,9 @@ namespace DrawBoard
                     break;
             }
         }
+        #endregion
+
+        #region :: Sound ::
 
         [RelayCommand]
         private void WinSound()
@@ -602,6 +589,37 @@ namespace DrawBoard
             LoseMediaElementSource = null;
         }
 
+        [RelayCommand]
+        private void WinSoundRecycle()
+        {
+            var path = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Win.mp3";
+            if (File.Exists(path))
+            {
+                WinSoundPath = path;
+            }
+            else
+            {
+                MessageBox.Show($"사운드 파일이 없습니다.{Environment.NewLine}{path}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        [RelayCommand]
+        private void LoseSoundRecycle()
+        {
+            var path = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Lose.mp3";
+            if (File.Exists(path))
+            {
+                LoseSoundPath = path;
+            }
+            else
+            {
+                MessageBox.Show($"사운드 파일이 없습니다.{Environment.NewLine}{path}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        #endregion
+
+        #region :: Image ::
         [RelayCommand]
         private void WinLoseImageSelect()
         {
@@ -699,34 +717,6 @@ namespace DrawBoard
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "오류", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
-
-        [RelayCommand]
-        private void WinSoundRecycle()
-        {
-            var path = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Win.mp3";
-            if (File.Exists(path))
-            {
-                WinSoundPath = path;
-            }
-            else
-            {
-                MessageBox.Show($"사운드 파일이 없습니다.{Environment.NewLine}{path}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
-
-        [RelayCommand]
-        private void LoseSoundRecycle()
-        {
-            var path = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Lose.mp3";
-            if (File.Exists(path))
-            {
-                LoseSoundPath = path;
-            }
-            else
-            {
-                MessageBox.Show($"사운드 파일이 없습니다.{Environment.NewLine}{path}", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -869,17 +859,6 @@ namespace DrawBoard
         }
 
         [RelayCommand]
-        private void WinLoseUseColor()
-        {
-            Brush brush = Brushes.Transparent;
-            if (WinLosePanelColor is Color color)
-            {
-                brush = new SolidColorBrush(color);
-            }
-            WinLoseListBoxBackground = brush;
-        }
-
-        [RelayCommand]
         private void RankingUseImage()
         {
             try
@@ -963,6 +942,20 @@ namespace DrawBoard
             }
         }
 
+        #endregion
+
+        #region :: Color ::
+        [RelayCommand]
+        private void WinLoseUseColor()
+        {
+            Brush brush = Brushes.Transparent;
+            if (WinLosePanelColor is Color color)
+            {
+                brush = new SolidColorBrush(color);
+            }
+            WinLoseListBoxBackground = brush;
+        }
+
         [RelayCommand]
         private void RankingUseColor()
         {
@@ -974,6 +967,46 @@ namespace DrawBoard
             RankingListBoxBackground = brush;
         }
 
+        partial void OnWinLosePanelColorChanged(Color? value)
+        {
+            WinLoseUseColor();
+        }
+
+        partial void OnRankingPanelColorChanged(Color? value)
+        {
+            RankingUseColor();
+        }
+
+        #endregion
+
+        #region :: List Box Open ::
+        [RelayCommand]
+        private void DrawOpen(DrawModel model)
+        {
+            model.IsOpen = true;
+
+            if (model.IsWin)
+            {
+                if (!string.IsNullOrEmpty(WinSoundPath) && WinSoundPath != "없음")
+                {
+                    LoseMediaElementSource = null;
+                    WinMediaElementSource = new Uri(WinSoundPath);
+                    IsWinMediaElementPlay = !IsWinMediaElementPlay;
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(LoseSoundPath) && LoseSoundPath != "없음")
+                {
+                    WinMediaElementSource = null;
+                    LoseMediaElementSource = new Uri(LoseSoundPath);
+                    IsLoseMediaElementPlay = !IsLoseMediaElementPlay;
+                }
+            }
+        }
+        #endregion
+
+        #region :: Radio WinLose, Ranking Use ::
         [RelayCommand]
         private void RadioWinLoseUse()
         {
@@ -987,10 +1020,9 @@ namespace DrawBoard
             WinLoseListBoxVisible = Visibility.Collapsed;
             RankingListBoxVisible = Visibility.Visible;
         }
-
         #endregion
 
-        #region :: Methods ::
+        #region :: Make List ::
 
         private int[] GeneratorRandomNumber(int min, int max, int count)
         {
@@ -1285,17 +1317,6 @@ namespace DrawBoard
 
         #endregion
 
-        partial void OnWinLosePanelColorChanged(Color? value)
-        {
-            WinLoseUseColor();
-        }
-
-        partial void OnRankingPanelColorChanged(Color? value)
-        {
-            RankingUseColor();
-        }
-
         #endregion
-
     }
 }
