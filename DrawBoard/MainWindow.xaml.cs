@@ -13,6 +13,12 @@ namespace DrawBoard
     /// </summary>
     public partial class MainWindow : Window
     {
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,12 +37,7 @@ namespace DrawBoard
             Process.Start(psi);
         }
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
-
-        [DllImportAttribute("user32.dll")]
-        public static extern bool ReleaseCapture();
-
+        #region :: Resize ::
         private void WindowResizeNorth(object sender, MouseButtonEventArgs e)
         {
             var hwndSource = PresentationSource.FromVisual((Visual)sender) as HwndSource;
@@ -94,15 +95,12 @@ namespace DrawBoard
             WindowInteropHelper helper = new WindowInteropHelper(this);
             SendMessage(helper.Handle, 161, (IntPtr)2, (IntPtr)0);
         }
+        #endregion
 
+        #region :: Window Control Button ::
         private void pnlControlBar_MouseEnter(object sender, MouseEventArgs e)
         {
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-        }
-
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
@@ -116,5 +114,11 @@ namespace DrawBoard
                 this.WindowState = WindowState.Maximized;
             else this.WindowState = WindowState.Normal;
         }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+        #endregion
     }
 }

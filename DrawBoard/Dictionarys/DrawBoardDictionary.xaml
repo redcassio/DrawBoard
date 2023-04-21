@@ -221,23 +221,4 @@
                               Duration="0:0:0.3" />
     </Storyboard>
 
-    <!--<Grid.Style>
-            <Style TargetType="Grid">
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding IsChecked, ElementName=SlideState}" Value="True">
-                        <DataTrigger.EnterActions>
-                            <BeginStoryboard Storyboard="{StaticResource SlideRight}" />
-                        </DataTrigger.EnterActions>
-                        <DataTrigger.ExitActions>
-                            <BeginStoryboard Storyboard="{StaticResource SlideLeft}" />
-                        </DataTrigger.ExitActions>
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </Grid.Style>
-
-        <Grid.RenderTransform>
-            <TranslateTransform />
-        </Grid.RenderTransform>-->
-
 </ResourceDictionary>
