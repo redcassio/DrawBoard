@@ -117,7 +117,7 @@
                                        Margin="5,0,0,0">
                                 <TextBlock.Inlines>
                                     <Run Text="뽑기판"/>
-                                    <Run Text="(ver 2.0)" FontSize="12"/>
+                                    <Run Text="(ver2.1)" FontSize="12"/>
                                 </TextBlock.Inlines>
                             </TextBlock>
                         </StackPanel>
@@ -153,7 +153,8 @@
                         <RadioButton Style="{StaticResource menuButton}"
                                      Tag="{StaticResource color2}"
                                      Command="{Binding SettingChangeCommand}"
-                                     CommandParameter="{x:Static local:SettingButtons.Text}">
+                                     CommandParameter="{x:Static local:SettingButtons.Text}"
+                                     Visibility="{Binding IsSampleModeVisible}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="Font" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="글자" Style="{StaticResource menuButtonText}"/>
@@ -165,7 +166,8 @@
                         <RadioButton Style="{StaticResource menuButton}"
                                      Tag="{StaticResource color5}"
                                      Command="{Binding SettingChangeCommand}"
-                                     CommandParameter="{x:Static local:SettingButtons.Box}">
+                                     CommandParameter="{x:Static local:SettingButtons.Box}"
+                                     Visibility="{Binding IsSampleModeVisible}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="Square" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="박스" Style="{StaticResource menuButtonText}"/>
@@ -177,7 +179,8 @@
                         <RadioButton Style="{StaticResource menuButton}"
                                      Tag="{StaticResource color4}"
                                      Command="{Binding SettingChangeCommand}"
-                                     CommandParameter="{x:Static local:SettingButtons.Color}">
+                                     CommandParameter="{x:Static local:SettingButtons.Color}"
+                                     Visibility="{Binding IsSampleModeVisible}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="Palette" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="색상" Style="{StaticResource menuButtonText}"/>
@@ -189,7 +192,8 @@
                         <RadioButton Style="{StaticResource menuButton}"
                                      Tag="{StaticResource color3}"
                                      Command="{Binding SettingChangeCommand}"
-                                     CommandParameter="{x:Static local:SettingButtons.Sound}">
+                                     CommandParameter="{x:Static local:SettingButtons.Sound}"
+                                     Visibility="{Binding IsSampleModeVisible}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="Music" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="소리" Style="{StaticResource menuButtonText}"/>
@@ -298,6 +302,17 @@
                                                 Margin="5,0,0,0"
                                                 Style="{StaticResource buttonStyle}"
                                                 Command="{Binding MakeWinLoseCommand}"/>
+                                            <Button Height="32"
+                                                    Width="30"
+                                                    Background="Transparent"
+                                                    Command="{Binding WinLoseGameClearCommand}"
+                                                    Margin="5,0,0,0">
+                                                <fa:IconImage Icon="TrashCan" 
+                                                              Margin="1,0,0,0"
+                                                              Width="22"
+                                                              Height="22"
+                                                              Foreground="{StaticResource color6}"/>
+                                            </Button>
                                         </StackPanel>
 
                                     </StackPanel>
@@ -325,6 +340,17 @@
                                                     Margin="5,0,0,0"
                                                     Style="{StaticResource buttonStyle}"
                                                     Command="{Binding MakeRankingCommand}"/>
+                                            <Button Height="32"
+                                                    Width="30"
+                                                    Background="Transparent"
+                                                    Command="{Binding RankingGameClearCommand}"
+                                                    Margin="5,0,0,0">
+                                                <fa:IconImage Icon="TrashCan" 
+                                                              Margin="1,0,0,0"
+                                                              Width="22"
+                                                              Height="22"
+                                                              Foreground="{StaticResource color6}"/>
+                                            </Button>
                                         </StackPanel>
 
                                         <StackPanel Orientation="Horizontal">

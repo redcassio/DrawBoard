@@ -93,9 +93,9 @@ namespace DrawBoard
         #region :: Color ::
 
         [ObservableProperty]
-        private Color? _winLoseBackgroundColor = (Color)ColorConverter.ConvertFromString("#FF4B0082");
+        private Color? _winLoseBackgroundColor = (Color)ColorConverter.ConvertFromString("#FF530C53");
         [ObservableProperty]
-        private Color? _rankingBackgroundColor = (Color)ColorConverter.ConvertFromString("#FF4B0082");
+        private Color? _rankingBackgroundColor = (Color)ColorConverter.ConvertFromString("#FF530C53");
 
         [ObservableProperty]
         private Color? _winLoseWinBackgroundColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
@@ -108,19 +108,19 @@ namespace DrawBoard
         private Color? _rankingLoseBackgroundColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
 
         [ObservableProperty]
-        private Color? _winLoseNumberColor = (Color)ColorConverter.ConvertFromString("#FFEEE8AA");
+        private Color? _winLoseNumberColor = (Color)ColorConverter.ConvertFromString("#FFEBEB09");
         [ObservableProperty]
-        private Color? _rankingNumberColor = (Color)ColorConverter.ConvertFromString("#FFEEE8AA");
+        private Color? _rankingNumberColor = (Color)ColorConverter.ConvertFromString("#FFEBEB09");
 
         [ObservableProperty]
-        private Color? _winLoseWinColor = (Color)ColorConverter.ConvertFromString("#FF00FA9A");
+        private Color? _winLoseWinColor = (Color)ColorConverter.ConvertFromString("#FF00BFFF");
         [ObservableProperty]
-        private Color? _rankingWinColor = (Color)ColorConverter.ConvertFromString("#FF00FA9A");
+        private Color? _rankingWinColor = (Color)ColorConverter.ConvertFromString("#FF00BFFF");
 
         [ObservableProperty]
-        private Color? _winLoseLoseColor = (Color)ColorConverter.ConvertFromString("#FFDC143C");
+        private Color? _winLoseLoseColor = (Color)ColorConverter.ConvertFromString("#FFFF1493");
         [ObservableProperty]
-        private Color? _rankingLoseColor = (Color)ColorConverter.ConvertFromString("#FFDC143C");
+        private Color? _rankingLoseColor = (Color)ColorConverter.ConvertFromString("#FFFF1493");
 
         [ObservableProperty]
         private Color? _winLosePanelColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
@@ -239,7 +239,6 @@ namespace DrawBoard
 
         #endregion
 
-
         #region :: MediaElement ::
 
         [ObservableProperty]
@@ -256,6 +255,11 @@ namespace DrawBoard
         [ObservableProperty]
         private bool _isFocusOnOff;
 
+        [ObservableProperty]
+        private bool _isSampleMode = false;
+        [ObservableProperty]
+        private Visibility _isSampleModeVisible = Visibility.Visible;
+
         #endregion
 
         #region :: Ctor ::
@@ -270,6 +274,11 @@ namespace DrawBoard
             SetDefaultValue();
             WinLoseUseImage();
             RankingUseImage();
+
+            if (IsSampleMode)
+            {
+                IsSampleModeVisible = Visibility.Collapsed;
+            }
         }
 
         private void SetDefaultValue()
@@ -334,8 +343,24 @@ namespace DrawBoard
 
                     WinVolume = model.WinVolume;
                     LoseVolume = model.LoseVolume;
-                    WinSoundPath = model.WinSoundPath;
-                    LoseSoundPath = model.LoseSoundPath;
+
+                    if (File.Exists(model.WinSoundPath))
+                    {
+                        WinSoundPath = model.WinSoundPath;
+                    }
+                    else 
+                    {
+                        WinSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Win.mp3";
+                    }
+
+                    if (File.Exists(model.LoseSoundPath))
+                    {
+                        LoseSoundPath = model.LoseSoundPath;
+                    }
+                    else
+                    {
+                        LoseSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Lose.mp3";
+                    }
 
                     DrawWinLoseList = model.DrawWinLoseList;
                     DrawRankingList = model.DrawRankingList;
@@ -346,10 +371,25 @@ namespace DrawBoard
                     RankingBoxHeight = model.RankingBoxHeight;
 
                     //WinLoseListBoxBackground = model.WinLoseListBoxBackground;
-                    WinLoseImagePath = model.WinLoseImagePath;
+                    if (File.Exists(model.WinLoseImagePath))
+                    {
+                        WinLoseImagePath = model.WinLoseImagePath;
+                    }
+                    else
+                    {
+                        WinLoseImagePath = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background3.png";
+                    }
 
                     //RankingListBoxBackground = model.RankingListBoxBackground;
-                    RankingImagePath = model.RankingImagePath;
+                    if (File.Exists(model.RankingImagePath))
+                    {
+                        RankingImagePath = model.RankingImagePath;
+                    }
+                    else
+                    {
+                        RankingImagePath = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background4.png";
+                    }
+                    
 
                     WinLoseImageStretch = model.WinLoseImageStretch;
                     RankingImageStretch = model.RankingImageStretch;
@@ -376,6 +416,18 @@ namespace DrawBoard
         #endregion
 
         #region :: Commands ::
+
+        [RelayCommand]
+        private void WinLoseGameClear()
+        {
+            DrawWinLoseList?.Clear();
+        }
+
+        [RelayCommand]
+        private void RankingGameClear()
+        {
+            DrawRankingList?.Clear();
+        }
 
         [RelayCommand]
         private void SaveSetting()

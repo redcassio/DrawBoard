@@ -52,57 +52,5 @@ namespace DrawBoard.XmlSerialize
             return file;
         }
 
-        //public static T Read<T>(String path, Type type)
-        //{
-        //    // Create a new serializer
-        //    XmlSerializer serializer = new XmlSerializer(type);
-
-        //    // Create a StreamReader
-        //    TextReader reader = new StreamReader(path);
-
-        //    // Deserialize the file
-        //    Object file;
-        //    file = (Object)serializer.Deserialize(reader);
-
-        //    // Close the reader
-        //    reader.Close();
-
-        //    // Return the object
-        //    return file;
-        //}
-
-        //public static void Save(Object file, String path, Type type)
-        //{
-        //    // Create a new Serializer
-        //    XmlSerializer serializer = new XmlSerializer(type);
-
-        //    // Create a new StreamWriter
-        //    TextWriter writer = new StreamWriter(path);
-
-        //    // Serialize the file
-        //    serializer.Serialize(writer, file);
-
-        //    // Close the writer
-        //    writer.Close();
-        //}
-
-        //public static object Read(String path, Type type)
-        //{
-        //    // Create a new serializer
-        //    XmlSerializer serializer = new XmlSerializer(type);
-
-        //    // Create a StreamReader
-        //    TextReader reader = new StreamReader(path);
-
-        //    // Deserialize the file
-        //    Object file;
-        //    file = (Object)serializer.Deserialize(reader);
-
-        //    // Close the reader
-        //    reader.Close();
-
-        //    // Return the object
-        //    return file;
-        //}
     }
 }
