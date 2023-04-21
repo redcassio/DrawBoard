@@ -1111,6 +1111,12 @@
                                                    RequestNavigate="Hyperlink_RequestNavigate">홈페이지&amp;문의</Hyperlink>
                                     </TextBlock>
 
+                                    <TextBlock Text="ⓒ 2023. 피아소(redcassio) all rights reserved." 
+                                               FontSize="12"
+                                               Margin="0,0,20,5"
+                                               HorizontalAlignment="Right"
+                                               VerticalAlignment="Bottom"/>
+
                                 </Grid>
                                 <!--#endregion-->
 
