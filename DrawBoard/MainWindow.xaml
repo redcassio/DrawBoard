@@ -9,6 +9,7 @@
         xmlns:colorpicker="clr-namespace:ColorPickerLib.Controls;assembly=ColorPickerLib"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:controls="clr-namespace:DrawBoard.UserControls"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -25,24 +26,6 @@
     <behaviors:Interaction.Behaviors>
         <drawBehavior:WindowBehavior/>
     </behaviors:Interaction.Behaviors>
-
-    <Window.Resources>
-
-        <Style TargetType="TextBlock">
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect ShadowDepth="4"
-                                      Direction="330"
-                                      Color="Black"
-                                      Opacity="0.5"
-                                      BlurRadius="4"/>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Foreground" Value="#ffffff"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-        
-    </Window.Resources>
 
     <!--테두리 Border-->
     <Border CornerRadius="10"
@@ -105,21 +88,26 @@
 
                         <!--Logo-->
                         <StackPanel Orientation="Horizontal"
-                                Height="35"
-                                Margin="15,25,0,40">
+                                    Height="35"
+                                    Margin="20,25,0,40">
 
                             <!--<Image Source="/Images/Logo.png" Height="30"/>-->
-                            <TextBlock Foreground="{StaticResource titleColor2}"
-                                       FontSize="20"
-                                       FontFamily="Montserrat"
-                                       FontWeight="Medium"
-                                       VerticalAlignment="Center"
-                                       Margin="5,0,0,0">
-                                <TextBlock.Inlines>
-                                    <Run Text="뽑기판"/>
-                                    <Run Text="(ver2.1)" FontSize="12"/>
-                                </TextBlock.Inlines>
-                            </TextBlock>
+                            <controls:NeonText FontSize="20"
+                                               FontFamily="MoeumT R"
+                                               FontWeight="Medium"
+                                               Foreground="White"
+                                               VerticalAlignment="Center"
+                                               Margin="5,0,0,0"
+                                               Text="뽑기판"
+                                               ActivateBlink="True"/>
+                            <controls:NeonText FontSize="12"
+                                               FontFamily="MoeumT R"
+                                               FontWeight="Medium"
+                                               Foreground="White"
+                                               VerticalAlignment="Bottom"
+                                               Margin="5,0,0,7"
+                                               Text="(ver2.2)"
+                                               ActivateBlink="True"/>
                         </StackPanel>
 
                         <!--#region 당첨판 버튼-->
@@ -1106,16 +1094,18 @@
 
                                     <TextBlock FontSize="25"
                                                Margin="0,0,20,0"
-                                               HorizontalAlignment="Right"> 
+                                               HorizontalAlignment="Right"
+                                               VerticalAlignment="Center"> 
                                         <Hyperlink NavigateUri="https://blog.naver.com/redcassio" 
                                                    RequestNavigate="Hyperlink_RequestNavigate">홈페이지&amp;문의</Hyperlink>
                                     </TextBlock>
 
-                                    <TextBlock Text="ⓒ 2023. 피아소(redcassio) all rights reserved." 
-                                               FontSize="12"
-                                               Margin="0,0,20,5"
-                                               HorizontalAlignment="Right"
-                                               VerticalAlignment="Bottom"/>
+                                    <controls:NeonText Text="ⓒ 2023. 피아소(redcassio) all rights reserved." 
+                                                       ActivateBlink="True"
+                                                       FontSize="12"
+                                                       Margin="0,0,20,5"
+                                                       HorizontalAlignment="Right"
+                                                       VerticalAlignment="Bottom"/>
 
                                 </Grid>
                                 <!--#endregion-->
@@ -1193,9 +1183,9 @@
 
                                                                     <Setter Property="Background" Value="{Binding DataContext.WinLoseLoseBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
                                                                 </MultiDataTrigger>
-                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                <!--<Trigger Property="IsMouseOver" Value="True">
                                                                     <Setter Property="Background" Value="{Binding DataContext.WinLoseBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
-                                                                </Trigger>
+                                                                </Trigger>-->
                                                             </Style.Triggers>
                                                         </Style>
                                                     </Button.Style>
@@ -1309,9 +1299,9 @@
                                                                     </MultiDataTrigger.Conditions>
                                                                     <Setter Property="Background" Value="{Binding DataContext.RankingLoseBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
                                                                 </MultiDataTrigger>
-                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                <!--<Trigger Property="IsMouseOver" Value="True">
                                                                     <Setter Property="Background" Value="{Binding DataContext.RankingBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
-                                                                </Trigger>
+                                                                </Trigger>-->
                                                             </Style.Triggers>
                                                         </Style>
                                                     </Button.Style>

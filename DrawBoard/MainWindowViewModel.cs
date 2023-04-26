@@ -150,10 +150,10 @@ namespace DrawBoard
         private double _loseVolume = 0.5d;
 
         [ObservableProperty]
-        private string? _winSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Win.mp3";
+        private string? _winSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\WinEffect.mp3";
 
         [ObservableProperty]
-        private string? _loseSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Lose.mp3";
+        private string? _loseSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\LoseEffect.mp3";
 
         #endregion
 
@@ -350,7 +350,7 @@ namespace DrawBoard
                     }
                     else
                     {
-                        WinSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Win.mp3";
+                        WinSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\WinEffect.mp3";
                     }
 
                     if (File.Exists(model.LoseSoundPath))
@@ -359,7 +359,7 @@ namespace DrawBoard
                     }
                     else
                     {
-                        LoseSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Lose.mp3";
+                        LoseSoundPath = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\LoseEffect.mp3";
                     }
 
                     DrawWinLoseList = model.DrawWinLoseList;
