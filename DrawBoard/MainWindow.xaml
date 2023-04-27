@@ -95,18 +95,20 @@
                             <controls:NeonText FontSize="20"
                                                FontFamily="MoeumT R"
                                                FontWeight="Medium"
-                                               Foreground="White"
                                                VerticalAlignment="Center"
                                                Margin="5,0,0,0"
                                                Text="뽑기판"
+                                               Foreground="White"
+                                               GlowColor="White"
                                                ActivateBlink="True"/>
                             <controls:NeonText FontSize="12"
                                                FontFamily="MoeumT R"
-                                               FontWeight="Medium"
-                                               Foreground="White"
+                                               FontWeight="Medium"                                               
                                                VerticalAlignment="Bottom"
                                                Margin="5,0,0,7"
                                                Text="(ver2.2)"
+                                               Foreground="White"
+                                               GlowColor="White"
                                                ActivateBlink="True"/>
                         </StackPanel>
 
@@ -1101,6 +1103,8 @@
                                     </TextBlock>
 
                                     <controls:NeonText Text="ⓒ 2023. 피아소(redcassio) all rights reserved." 
+                                                       Foreground="White"
+                                                       GlowColor="White"
                                                        ActivateBlink="True"
                                                        FontSize="12"
                                                        Margin="0,0,20,5"
