@@ -768,7 +768,9 @@
                                                             Orientation="Horizontal"
                                                             Margin="0,5,0,0"
                                                             Visibility="{Binding IsChecked, ElementName=radioWinLoseUseColor, Converter={StaticResource BoolToVisibilityConverter}}">
-                                                    <TextBlock Text="판넬색"/>
+                                                    <TextBlock Text="판넬색"
+                                                               Foreground="White"
+                                                               VerticalAlignment="Center"/>
                                                     <colorpicker:ColorPicker SelectedColor="{Binding WinLosePanelColor, Mode=TwoWay}" 
                                                                              Width="100"
                                                                              Height="33"/>
@@ -877,7 +879,9 @@
                                                             Orientation="Horizontal"
                                                             Margin="0,5,0,0"
                                                             Visibility="{Binding IsChecked, ElementName=radioRankingUseColor, Converter={StaticResource BoolToVisibilityConverter}}">
-                                                    <TextBlock Text="판넬색"/>
+                                                    <TextBlock Text="판넬색"
+                                                               Foreground="White"
+                                                               VerticalAlignment="Center"/>
                                                     <colorpicker:ColorPicker SelectedColor="{Binding RankingPanelColor, Mode=TwoWay}" 
                                                                              Width="100"
                                                                              Height="33"/>
