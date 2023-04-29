@@ -90,8 +90,7 @@
                         <StackPanel Orientation="Horizontal"
                                     Height="35"
                                     Margin="20,25,0,40">
-
-                            <!--<Image Source="/Images/Logo.png" Height="30"/>-->
+                            
                             <controls:NeonText FontSize="20"
                                                FontFamily="MoeumT R"
                                                FontWeight="Medium"
