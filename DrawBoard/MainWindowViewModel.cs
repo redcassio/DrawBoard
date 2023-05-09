@@ -592,7 +592,7 @@ namespace DrawBoard
         [RelayCommand]
         private void WinSoundRecycle()
         {
-            var path = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Win.mp3";
+            var path = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\WinEffect.mp3";
             if (File.Exists(path))
             {
                 WinSoundPath = path;
@@ -606,7 +606,7 @@ namespace DrawBoard
         [RelayCommand]
         private void LoseSoundRecycle()
         {
-            var path = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\Lose.mp3";
+            var path = $"{AppDomain.CurrentDomain.BaseDirectory}SoundEffect\\LoseEffect.mp3";
             if (File.Exists(path))
             {
                 LoseSoundPath = path;

@@ -26,6 +26,10 @@
     <behaviors:Interaction.Behaviors>
         <drawBehavior:WindowBehavior/>
     </behaviors:Interaction.Behaviors>
+    
+    <!--<Border.Effect>
+        <BlurEffect Radius="20" KernelType="Gaussian"/>
+    </Border.Effect>-->
 
     <!--테두리 Border-->
     <Border CornerRadius="10"
@@ -49,7 +53,7 @@
                 </Border.Background>
 
                 <!--#region 전체 컨트롤-->
-                
+
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150"/>
@@ -83,9 +87,9 @@
                     </Grid>
                     <!--#endregion-->
 
-                    <!--#region 메뉴 버튼-->
+                    <!--#region 메뉴 버튼-->              
                     <StackPanel>
-
+                    
                         <!--Logo-->
                         <StackPanel Orientation="Horizontal"
                                     Height="35"
@@ -270,8 +274,9 @@
                                             <TextBlock Text="당첨전체개수"
                                                    Style="{StaticResource headerTextStyle}"/>
                                             <TextBox x:Name="txtUser"
-                                                 Style="{StaticResource textBoxStyle}"
-                                                 Text="{Binding WinLoseGameCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}">
+                                                     Style="{StaticResource textBoxStyle}"
+                                                     Text="{Binding WinLoseGameCount, Mode=TwoWay, Converter={StaticResource NullCheckConverter}}"
+                                                     MaxLength="3">
                                                 <behaviors:Interaction.Behaviors>
                                                     <drawBehavior:MatchNumberBehavior/>
                                                 </behaviors:Interaction.Behaviors>
