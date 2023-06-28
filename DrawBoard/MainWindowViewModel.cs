@@ -407,7 +407,7 @@ namespace DrawBoard
                     #endregion
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("설정을 불러오는 중 오류가 발생하였습니다.", "오류", MessageBoxButton.OK, MessageBoxImage.Information);
             }
