@@ -200,6 +200,12 @@ namespace DrawBoard.Models
 
         #endregion
 
+        #region :: Box ::
+        [ObservableProperty]
+        private double _opacityValue = 0.7d;
+
+        #endregion
+
         #region :: Visible ::
 
         //[ObservableProperty]
@@ -477,6 +483,8 @@ namespace DrawBoard.Models
 
             model.SelectedWinLoseFont = viewModel.SelectedWinLoseFont;
             model.SelectedRankingFont = viewModel.SelectedRankingFont;
+
+            model.OpacityValue = viewModel.OpacityValue;
 
             model.WinVolume = viewModel.WinVolume;
             model.LoseVolume = viewModel.LoseVolume;
