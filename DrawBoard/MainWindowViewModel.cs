@@ -93,9 +93,9 @@ namespace DrawBoard
         #region :: Color ::
 
         [ObservableProperty]
-        private Color? _winLoseBackgroundColor = (Color)ColorConverter.ConvertFromString("#FF530C53");
+        private Color? _winLoseBackgroundColor = (Color)ColorConverter.ConvertFromString("#FFDD2476");
         [ObservableProperty]
-        private Color? _rankingBackgroundColor = (Color)ColorConverter.ConvertFromString("#FF530C53");
+        private Color? _rankingBackgroundColor = (Color)ColorConverter.ConvertFromString("#FFDD2476");
 
         [ObservableProperty]
         private Color? _winLoseWinBackgroundColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
@@ -126,6 +126,11 @@ namespace DrawBoard
         private Color? _winLosePanelColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
         [ObservableProperty]
         private Color? _rankingPanelColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
+
+        [ObservableProperty]
+        private Color? _backgroundColor1 = (Color)ColorConverter.ConvertFromString("#FF561139");
+        [ObservableProperty]
+        private Color? _backgroundColor2 = (Color)ColorConverter.ConvertFromString("#0A38A2D7");
 
         #endregion
 
@@ -241,7 +246,7 @@ namespace DrawBoard
 
         #region :: Box ::
         [ObservableProperty]
-        private double _opacityValue = 0.7d;       
+        private double _opacityValue = 0.8d;       
 
         #endregion
 
@@ -343,6 +348,8 @@ namespace DrawBoard
                     RankingLoseColor = model.RankingLoseColor;
                     WinLosePanelColor = model.WinLosePanelColor;
                     RankingPanelColor = model.RankingPanelColor;
+                    BackgroundColor1 = model.BackgroundColor1;
+                    BackgroundColor2 = model.BackgroundColor2;
 
                     SelectedWinLoseFont = model.SelectedWinLoseFont;
                     SelectedRankingFont = model.SelectedRankingFont;
@@ -385,7 +392,7 @@ namespace DrawBoard
                     }
                     else
                     {
-                        WinLoseImagePath = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background3.png";
+                        WinLoseImagePath = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background7.png";
                     }
 
                     //RankingListBoxBackground = model.RankingListBoxBackground;
@@ -395,7 +402,7 @@ namespace DrawBoard
                     }
                     else
                     {
-                        RankingImagePath = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background4.png";
+                        RankingImagePath = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background5.png";
                     }
 
 
@@ -657,7 +664,7 @@ namespace DrawBoard
         {
             try
             {
-                var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background3.png";
+                var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background7.png";
                 if (File.Exists(path))
                 {
                     var imageBrush = new ImageBrush();
@@ -707,7 +714,7 @@ namespace DrawBoard
         {
             try
             {
-                var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background4.png";
+                var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background5.png";
                 if (File.Exists(path))
                 {
                     var imageBrush = new ImageBrush();
@@ -736,7 +743,7 @@ namespace DrawBoard
                 if (string.IsNullOrEmpty(WinLoseImagePath))
                 {
                     var imageBrush = new ImageBrush();
-                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background3.png";
+                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background7.png";
                     if (File.Exists(path))
                     {
                         imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
@@ -778,7 +785,7 @@ namespace DrawBoard
                 if (string.IsNullOrEmpty(WinLoseImagePath))
                 {
                     var imageBrush = new ImageBrush();
-                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background3.png";
+                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background7.png";
                     if (File.Exists(path))
                     {
                         imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
@@ -874,7 +881,7 @@ namespace DrawBoard
                 if (string.IsNullOrEmpty(RankingImagePath))
                 {
                     var imageBrush = new ImageBrush();
-                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background4.png";
+                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background5.png";
                     if (File.Exists(path))
                     {
                         imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
@@ -916,7 +923,7 @@ namespace DrawBoard
                 if (string.IsNullOrEmpty(RankingImagePath))
                 {
                     var imageBrush = new ImageBrush();
-                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background4.png";
+                    var path = $"{AppDomain.CurrentDomain.BaseDirectory}Images\\background5.png";
                     if (File.Exists(path))
                     {
                         imageBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));

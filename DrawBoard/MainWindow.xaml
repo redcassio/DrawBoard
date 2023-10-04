@@ -18,7 +18,8 @@
         MinHeight="200"
         Background="Transparent"
         Width="{Binding WindowWidth, Mode=TwoWay}"
-        Height="{Binding WindowHeight, Mode=TwoWay}">
+        Height="{Binding WindowHeight, Mode=TwoWay}"
+        x:Name="page">
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
@@ -46,9 +47,9 @@
             <!--#region 전체 배경색-->
             <Border CornerRadius="10">
                 <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
-                        <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
-                        <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.8">
+                        <GradientStop Color="{Binding BackgroundColor1}" Offset="0"/>
+                        <GradientStop Color="{Binding BackgroundColor2}" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
 
@@ -109,7 +110,7 @@
                                                FontWeight="Medium"                                               
                                                VerticalAlignment="Bottom"
                                                Margin="5,0,0,7"
-                                               Text="(ver2.3)"
+                                               Text="(ver2.4)"
                                                Foreground="White"
                                                GlowColor="White"
                                                ActivateBlink="True"/>
@@ -211,13 +212,14 @@
 
                     <!--#region 우측 메인-->
                     <Border CornerRadius="0,10,10,0"
-                            Grid.Column="1">
-                        <Border.Background>
+                            Grid.Column="1"
+                            Background="Transparent">
+                        <!--<Border.Background>
                             <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
                                 <GradientStop Color="{StaticResource primaryBackColor1}" Offset="0"/>
                                 <GradientStop Color="{StaticResource primaryBackColor2}" Offset="1"/>
                             </LinearGradientBrush>
-                        </Border.Background>
+                        </Border.Background>-->
 
                         <Grid>
                             <Grid.RowDefinitions>
@@ -699,14 +701,13 @@
                                                                 Visibility="{Binding IsRadioWinLoseUse, Converter={StaticResource BoolToVisibilityConverter}}">
                                                         <TextBlock Text="박스투명도"
                                                                    Style="{StaticResource headerTextStyle}"/>
-                                                        <Slider x:Name="sliderWinLoseBoxtransparency" 
-                                                                Margin="10,0,0,0"
+                                                        <Slider Margin="10,0,0,0"
                                                                 IsSnapToTickEnabled="True" 
                                                                 Style="{StaticResource CustomSliderStyle}"
                                                                 Width="100"
                                                                 Minimum="0"
                                                                 Maximum="1"
-                                                                Value="{Binding OpacityValue}"
+                                                                Value="{Binding OpacityValue, Mode=TwoWay}"
                                                                 Ticks="0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1"/>
                                                     </StackPanel>
                                                 </StackPanel>
@@ -810,14 +811,13 @@
                                                                 Visibility="{Binding IsRadioRankingUse, Converter={StaticResource BoolToVisibilityConverter}}">
                                                         <TextBlock Text="박스투명도"
                                                                    Style="{StaticResource headerTextStyle}"/>
-                                                        <Slider x:Name="sliderRankingBoxtransparency" 
-                                                                Margin="10,0,0,0"
+                                                        <Slider Margin="10,0,0,0"
                                                                 IsSnapToTickEnabled="True" 
                                                                 Style="{StaticResource CustomSliderStyle}"
                                                                 Width="100"
                                                                 Minimum="0"
                                                                 Maximum="1"
-                                                                Value="1"
+                                                                Value="{Binding OpacityValue, Mode=TwoWay}"
                                                                 Ticks="0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1"/>
                                                     </StackPanel>
                                                     
@@ -940,6 +940,9 @@
                                                 <TextBlock Text="꽝배경색"/>
                                                 <colorpicker:ColorPicker SelectedColor="{Binding WinLoseLoseBackgroundColor, Mode=TwoWay}" />
 
+                                                <TextBlock Text="배경색1" />
+                                                <colorpicker:ColorPicker SelectedColor="{Binding BackgroundColor1, Mode=TwoWay}" />
+
                                             </StackPanel>
 
                                             <StackPanel Orientation="Horizontal">
@@ -952,6 +955,9 @@
 
                                                 <TextBlock Text="꽝색"/>
                                                 <colorpicker:ColorPicker SelectedColor="{Binding WinLoseLoseColor, Mode=TwoWay}" />
+
+                                                <TextBlock Text="배경색2" />
+                                                <colorpicker:ColorPicker SelectedColor="{Binding BackgroundColor2, Mode=TwoWay}" />
 
                                             </StackPanel>
                                         </StackPanel>
@@ -971,6 +977,9 @@
                                                 <TextBlock Text="꽝배경색"/>
                                                 <colorpicker:ColorPicker SelectedColor="{Binding RankingLoseBackgroundColor, Mode=TwoWay}" />
 
+                                                <TextBlock Text="배경색1" />
+                                                <colorpicker:ColorPicker SelectedColor="{Binding BackgroundColor1, Mode=TwoWay}" />
+
                                             </StackPanel>
 
                                             <StackPanel Orientation="Horizontal">
@@ -983,6 +992,9 @@
 
                                                 <TextBlock Text="꽝색"/>
                                                 <colorpicker:ColorPicker SelectedColor="{Binding RankingLoseColor, Mode=TwoWay}" />
+
+                                                <TextBlock Text="배경색2" />
+                                                <colorpicker:ColorPicker SelectedColor="{Binding BackgroundColor2, Mode=TwoWay}" />
 
                                             </StackPanel>
                                         </StackPanel>
@@ -1132,7 +1144,8 @@
                                 <!--#region 당첨판-->
                                 <ListBox ItemsSource="{Binding DrawWinLoseList}"
                                          Background="{Binding WinLoseListBoxBackground}"
-                                         Visibility="{Binding WinLoseListBoxVisible}">
+                                         Visibility="{Binding WinLoseListBoxVisible}"
+                                         BorderThickness="0">
                                     <ListBox.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="7"/>
@@ -1150,109 +1163,111 @@
                                             <Setter Property="Margin" Value="0"/>
                                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                             <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                            <Setter Property="Opacity" Value="{Binding Value, ElementName=sliderWinLoseBoxtransparency}"/>
+                                            <Setter Property="Opacity" Value="{Binding DataContext.OpacityValue, ElementName=page}"/>
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <!--<Border BorderBrush="{Binding DataContext.WinLoseBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"
+                                                                BorderThickness="0"
+                                                                CornerRadius="3">-->
+                                                            <Button Width="{Binding DataContext.WinLoseBoxWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                                                    Height="{Binding DataContext.WinLoseBoxHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                                                    Command="{Binding DataContext.DrawOpenCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                                                    CommandParameter="{Binding}"
+                                                                    BorderThickness="0">
+                                                                <Button.Style>
+                                                                    <Style TargetType="Button">
+                                                                        <Setter Property="Background" Value="{Binding DataContext.WinLoseBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+
+                                                                        <Setter Property="Template">
+                                                                            <Setter.Value>
+                                                                            <ControlTemplate TargetType="{x:Type ButtonBase}">
+                                                                                <Border Background="{TemplateBinding Background}" CornerRadius="3">
+                                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                                </Border>
+                                                                            </ControlTemplate>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+
+                                                                        <Style.Triggers>
+                                                                            <MultiDataTrigger>
+                                                                                <MultiDataTrigger.Conditions>
+                                                                                    <Condition Binding="{Binding IsOpen}" Value="True"/>
+                                                                                    <Condition Binding="{Binding IsWin}" Value="True"/>
+                                                                                </MultiDataTrigger.Conditions>
+
+                                                                                <Setter Property="Background" Value="{Binding DataContext.WinLoseWinBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+                                                                            </MultiDataTrigger>
+                                                                            <MultiDataTrigger>
+                                                                                <MultiDataTrigger.Conditions>
+                                                                                    <Condition Binding="{Binding IsOpen}" Value="True"/>
+                                                                                    <Condition Binding="{Binding IsWin}" Value="False"/>
+                                                                                </MultiDataTrigger.Conditions>
+
+                                                                                <Setter Property="Background" Value="{Binding DataContext.WinLoseLoseBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+                                                                            </MultiDataTrigger>
+                                                                            <!--<Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{Binding DataContext.WinLoseBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+                        </Trigger>-->
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Button.Style>
+
+                                                                <Grid>
+                                                                    <TextBlock Text="{Binding UnitNumber}"
+                                                                               FontSize="{Binding DataContext.WinLoseNumberTextSize, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                                                               FontFamily="{Binding DataContext.SelectedWinLoseFont, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                                                               Foreground="{Binding DataContext.WinLoseNumberColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}">
+                                                                        <TextBlock.Style>
+                                                                            <Style TargetType="TextBlock">
+                                                                                <Setter Property="Visibility" Value="Visible"/>
+
+                                                                                <Style.Triggers>
+                                                                                    <DataTrigger Binding="{Binding IsOpen}" Value="True">
+                                                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                                                    </DataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </TextBlock.Style>
+                                                                    </TextBlock>
+
+                                                                    <TextBlock FontSize="{Binding DataContext.WinLoseTextSize, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                                                               FontFamily="{Binding DataContext.SelectedWinLoseFont, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+                                                                        <TextBlock.Style>
+                                                                            <Style TargetType="TextBlock">
+                                                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                                                <Setter Property="Text" Value="{Binding DataContext.LoseText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"/>
+                                                                                <Style.Triggers>
+                                                                                    <DataTrigger Binding="{Binding IsOpen}" Value="True">
+                                                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                                                    </DataTrigger>
+                                                                                    <DataTrigger Binding="{Binding IsWin}" Value="True">
+                                                                                        <Setter Property="Text" Value="{Binding DataContext.WinText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"/>
+                                                                                        <Setter Property="Foreground" Value="{Binding DataContext.WinLoseWinColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+                                                                                    </DataTrigger>
+                                                                                    <DataTrigger Binding="{Binding IsWin}" Value="False">
+                                                                                        <Setter Property="Foreground" Value="{Binding DataContext.WinLoseLoseColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+                                                                                    </DataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </TextBlock.Style>
+                                                                    </TextBlock>
+                                                                </Grid>
+                                                            </Button>
+                                                        <!--</Border>-->
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
                                         </Style>
                                     </ListBox.ItemContainerStyle>
-
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Border BorderBrush="{Binding DataContext.WinLoseBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"
-                                                    BorderThickness="1"
-                                                    CornerRadius="3">
-                                                <Button Width="{Binding DataContext.WinLoseBoxWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
-                                                        Height="{Binding DataContext.WinLoseBoxHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
-                                                        Command="{Binding DataContext.DrawOpenCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
-                                                        CommandParameter="{Binding}"
-                                                        BorderThickness="0">
-                                                    <Button.Style>
-                                                        <Style TargetType="Button">
-                                                            <Setter Property="Background" Value="{Binding DataContext.WinLoseBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
-
-                                                            <Setter Property="Template">
-                                                                <Setter.Value>
-                                                                    <ControlTemplate TargetType="{x:Type Button}">
-                                                                        <Border Background="{TemplateBinding Background}">
-                                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                                        </Border>
-                                                                    </ControlTemplate>
-                                                                </Setter.Value>
-                                                            </Setter>
-
-                                                            <Style.Triggers>
-                                                                <MultiDataTrigger>
-                                                                    <MultiDataTrigger.Conditions>
-                                                                        <Condition Binding="{Binding IsOpen}" Value="True"/>
-                                                                        <Condition Binding="{Binding IsWin}" Value="True"/>
-                                                                    </MultiDataTrigger.Conditions>
-
-                                                                    <Setter Property="Background" Value="{Binding DataContext.WinLoseWinBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
-                                                                </MultiDataTrigger>
-                                                                <MultiDataTrigger>
-                                                                    <MultiDataTrigger.Conditions>
-                                                                        <Condition Binding="{Binding IsOpen}" Value="True"/>
-                                                                        <Condition Binding="{Binding IsWin}" Value="False"/>
-                                                                    </MultiDataTrigger.Conditions>
-
-                                                                    <Setter Property="Background" Value="{Binding DataContext.WinLoseLoseBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
-                                                                </MultiDataTrigger>
-                                                                <!--<Trigger Property="IsMouseOver" Value="True">
-                                                                    <Setter Property="Background" Value="{Binding DataContext.WinLoseBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
-                                                                </Trigger>-->
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Button.Style>
-
-                                                    <Grid>
-                                                        <TextBlock Text="{Binding UnitNumber}"
-                                                                   FontSize="{Binding DataContext.WinLoseNumberTextSize, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
-                                                                   FontFamily="{Binding DataContext.SelectedWinLoseFont, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
-                                                                   Foreground="{Binding DataContext.WinLoseNumberColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}">
-                                                            <TextBlock.Style>
-                                                                <Style TargetType="TextBlock">
-                                                                    <Setter Property="Visibility" Value="Visible"/>
-
-                                                                    <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding IsOpen}" Value="True">
-                                                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                                                        </DataTrigger>
-                                                                    </Style.Triggers>
-                                                                </Style>
-                                                            </TextBlock.Style>
-                                                        </TextBlock>
-
-                                                        <TextBlock FontSize="{Binding DataContext.WinLoseTextSize, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
-                                                                   FontFamily="{Binding DataContext.SelectedWinLoseFont, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
-                                                            <TextBlock.Style>
-                                                                <Style TargetType="TextBlock">
-                                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                                    <Setter Property="Text" Value="{Binding DataContext.LoseText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"/>
-                                                                    <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding IsOpen}" Value="True">
-                                                                            <Setter Property="Visibility" Value="Visible"/>
-                                                                        </DataTrigger>
-                                                                        <DataTrigger Binding="{Binding IsWin}" Value="True">
-                                                                            <Setter Property="Text" Value="{Binding DataContext.WinText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"/>
-                                                                            <Setter Property="Foreground" Value="{Binding DataContext.WinLoseWinColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
-                                                                        </DataTrigger>
-                                                                        <DataTrigger Binding="{Binding IsWin}" Value="False">
-                                                                            <Setter Property="Foreground" Value="{Binding DataContext.WinLoseLoseColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
-                                                                        </DataTrigger>
-                                                                    </Style.Triggers>
-                                                                </Style>
-                                                            </TextBlock.Style>
-                                                        </TextBlock>
-                                                    </Grid>
-                                                </Button>
-                                            </Border>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
                                 </ListBox>
                                 <!--#endregion-->
 
                                 <!--#region 순위판-->
                                 <ListBox ItemsSource="{Binding DrawRankingList}"
                                          Background="{Binding RankingListBoxBackground}"
-                                         Visibility="{Binding RankingListBoxVisible}">
+                                         Visibility="{Binding RankingListBoxVisible}"
+                                         BorderThickness="0">
                                     <ListBox.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="7"/>
@@ -1270,96 +1285,98 @@
                                             <Setter Property="Margin" Value="0"/>
                                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                             <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                            <Setter Property="Opacity" Value="{Binding Value, ElementName=sliderRankingBoxtransparency}"/>
+                                            <Setter Property="Opacity" Value="{Binding DataContext.OpacityValue, ElementName=page}"/>
+
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <!--<Border BorderBrush="{Binding DataContext.RankingBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"
+                                                                BorderThickness="0"
+                                                                CornerRadius="3">-->
+                                                            <Button Width="{Binding DataContext.RankingBoxWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                                                    Height="{Binding DataContext.RankingBoxHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                                                    Command="{Binding DataContext.DrawOpenCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                                                    CommandParameter="{Binding}"
+                                                                    BorderThickness="0">
+                                                                <Button.Style>
+                                                                    <Style TargetType="Button">
+                                                                        <Setter Property="Background" Value="{Binding DataContext.RankingBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+                                                                        <Setter Property="Template">
+                                                                            <Setter.Value>
+                                                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                                                    <Border Background="{TemplateBinding Background}" CornerRadius="3">
+                                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                                    </Border>
+                                                                                </ControlTemplate>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                        <Style.Triggers>
+                                                                            <MultiDataTrigger>
+                                                                                <MultiDataTrigger.Conditions>
+                                                                                    <Condition Binding="{Binding IsOpen}" Value="True"/>
+                                                                                    <Condition Binding="{Binding IsWin}" Value="True"/>
+                                                                                </MultiDataTrigger.Conditions>
+                                                                                <Setter Property="Background" Value="{Binding DataContext.RankingWinBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+                                                                            </MultiDataTrigger>
+                                                                            <MultiDataTrigger>
+                                                                                <MultiDataTrigger.Conditions>
+                                                                                    <Condition Binding="{Binding IsOpen}" Value="True"/>
+                                                                                    <Condition Binding="{Binding IsWin}" Value="False"/>
+                                                                                </MultiDataTrigger.Conditions>
+                                                                                <Setter Property="Background" Value="{Binding DataContext.RankingLoseBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+                                                                            </MultiDataTrigger>
+                                                                            <!--<Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{Binding DataContext.RankingBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+                        </Trigger>-->
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Button.Style>
+
+                                                                <Grid>
+                                                                    <TextBlock Text="{Binding UnitNumber}"
+                                                                               FontSize="{Binding DataContext.RankingNumberTextSize, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                                                               FontFamily="{Binding DataContext.SelectedRankingFont, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                                                               Foreground="{Binding DataContext.RankingNumberColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}">
+                                                                        <TextBlock.Style>
+                                                                            <Style TargetType="TextBlock">
+                                                                                <Setter Property="Visibility" Value="Visible"/>
+
+                                                                                <Style.Triggers>
+                                                                                    <DataTrigger Binding="{Binding IsOpen}" Value="True">
+                                                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                                                    </DataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </TextBlock.Style>
+                                                                    </TextBlock>
+
+                                                                    <TextBlock FontSize="{Binding DataContext.RankingTextSize, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                                                               FontFamily="{Binding DataContext.SelectedRankingFont, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+                                                                        <TextBlock.Style>
+                                                                            <Style TargetType="TextBlock">
+                                                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                                                <Setter Property="Text" Value="{Binding DataContext.RankingLoseText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"/>
+                                                                                <Style.Triggers>
+                                                                                    <DataTrigger Binding="{Binding IsOpen}" Value="True">
+                                                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                                                        <Setter Property="Foreground" Value="{Binding DataContext.RankingLoseColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+                                                                                    </DataTrigger>
+                                                                                    <DataTrigger Binding="{Binding IsWin}" Value="True">
+                                                                                        <Setter Property="Text" Value="{Binding RankingText}"/>
+                                                                                        <Setter Property="Foreground" Value="{Binding DataContext.RankingWinColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
+                                                                                    </DataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </TextBlock.Style>
+                                                                    </TextBlock>
+                                                                </Grid>
+                                                            </Button>
+                                                        <!--</Border>-->
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
                                         </Style>
                                     </ListBox.ItemContainerStyle>
-
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Border BorderBrush="{Binding DataContext.RankingBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"
-                                                    BorderThickness="1"
-                                                    CornerRadius="3">
-                                                <Button Width="{Binding DataContext.RankingBoxWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
-                                                        Height="{Binding DataContext.RankingBoxHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
-                                                        Command="{Binding DataContext.DrawOpenCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
-                                                        CommandParameter="{Binding}"
-                                                        BorderThickness="0">
-                                                    <Button.Style>
-                                                        <Style TargetType="Button">
-                                                            <Setter Property="Background" Value="{Binding DataContext.RankingBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
-                                                            <Setter Property="Template">
-                                                                <Setter.Value>
-                                                                    <ControlTemplate TargetType="{x:Type Button}">
-                                                                        <Border Background="{TemplateBinding Background}">
-                                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                                        </Border>
-                                                                    </ControlTemplate>
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                            <Style.Triggers>
-                                                                <MultiDataTrigger>
-                                                                    <MultiDataTrigger.Conditions>
-                                                                        <Condition Binding="{Binding IsOpen}" Value="True"/>
-                                                                        <Condition Binding="{Binding IsWin}" Value="True"/>
-                                                                    </MultiDataTrigger.Conditions>
-                                                                    <Setter Property="Background" Value="{Binding DataContext.RankingWinBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
-                                                                </MultiDataTrigger>
-                                                                <MultiDataTrigger>
-                                                                    <MultiDataTrigger.Conditions>
-                                                                        <Condition Binding="{Binding IsOpen}" Value="True"/>
-                                                                        <Condition Binding="{Binding IsWin}" Value="False"/>
-                                                                    </MultiDataTrigger.Conditions>
-                                                                    <Setter Property="Background" Value="{Binding DataContext.RankingLoseBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
-                                                                </MultiDataTrigger>
-                                                                <!--<Trigger Property="IsMouseOver" Value="True">
-                                                                    <Setter Property="Background" Value="{Binding DataContext.RankingBackgroundColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
-                                                                </Trigger>-->
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Button.Style>
-
-                                                    <Grid>
-                                                        <TextBlock Text="{Binding UnitNumber}"
-                                                                   FontSize="{Binding DataContext.RankingNumberTextSize, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
-                                                                   FontFamily="{Binding DataContext.SelectedRankingFont, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
-                                                                   Foreground="{Binding DataContext.RankingNumberColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}">
-                                                            <TextBlock.Style>
-                                                                <Style TargetType="TextBlock">
-                                                                    <Setter Property="Visibility" Value="Visible"/>
-
-                                                                    <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding IsOpen}" Value="True">
-                                                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                                                        </DataTrigger>
-                                                                    </Style.Triggers>
-                                                                </Style>
-                                                            </TextBlock.Style>
-                                                        </TextBlock>
-
-                                                        <TextBlock FontSize="{Binding DataContext.RankingTextSize, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
-                                                                   FontFamily="{Binding DataContext.SelectedRankingFont, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
-                                                            <TextBlock.Style>
-                                                                <Style TargetType="TextBlock">
-                                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                                    <Setter Property="Text" Value="{Binding DataContext.RankingLoseText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"/>
-                                                                    <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding IsOpen}" Value="True">
-                                                                            <Setter Property="Visibility" Value="Visible"/>
-                                                                            <Setter Property="Foreground" Value="{Binding DataContext.RankingLoseColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
-                                                                        </DataTrigger>
-                                                                        <DataTrigger Binding="{Binding IsWin}" Value="True">
-                                                                            <Setter Property="Text" Value="{Binding RankingText}"/>
-                                                                            <Setter Property="Foreground" Value="{Binding DataContext.RankingWinColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Converter={StaticResource ColorToBrushConverter}}"/>
-                                                                        </DataTrigger>
-                                                                    </Style.Triggers>
-                                                                </Style>
-                                                            </TextBlock.Style>
-                                                        </TextBlock>
-                                                    </Grid>
-                                                </Button>
-                                            </Border>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
                                 </ListBox>
                                 <!--#endregion-->
 

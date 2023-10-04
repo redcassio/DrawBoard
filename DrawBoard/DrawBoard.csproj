@@ -23,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Images\background3.png" />
-    <None Remove="Images\background4.png" />
+    <None Remove="Images\background7.png" />
+    <None Remove="Images\background5.png" />
     <None Remove="SoundEffect\lose.mp3" />
     <None Remove="SoundEffect\LoseEffect.mp3" />
     <None Remove="SoundEffect\win.mp3" />
@@ -36,10 +36,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Images\background3.png">
+    <EmbeddedResource Include="Images\background7.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Images\background4.png">
+    <EmbeddedResource Include="Images\background5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="SoundEffect\Lose.mp3">

@@ -83,9 +83,9 @@ namespace DrawBoard.Models
         #region :: Color ::
 
         [ObservableProperty]
-        private Color? _winLoseBackgroundColor = (Color)ColorConverter.ConvertFromString("#FF4B0082");
+        private Color? _winLoseBackgroundColor = (Color)ColorConverter.ConvertFromString("#FFDD2476");
         [ObservableProperty]
-        private Color? _rankingBackgroundColor = (Color)ColorConverter.ConvertFromString("#FF4B0082");
+        private Color? _rankingBackgroundColor = (Color)ColorConverter.ConvertFromString("#FFDD2476");
 
         [ObservableProperty]
         private Color? _winLoseWinBackgroundColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
@@ -116,6 +116,11 @@ namespace DrawBoard.Models
         private Color? _winLosePanelColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
         [ObservableProperty]
         private Color? _rankingPanelColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
+
+        [ObservableProperty]
+        private Color? _backgroundColor1 = (Color)ColorConverter.ConvertFromString("#FF561139");
+        [ObservableProperty]
+        private Color? _backgroundColor2 = (Color)ColorConverter.ConvertFromString("#0A38A2D7");
 
         #endregion
 
@@ -202,7 +207,7 @@ namespace DrawBoard.Models
 
         #region :: Box ::
         [ObservableProperty]
-        private double _opacityValue = 0.7d;
+        private double _opacityValue = 0.8d;
 
         #endregion
 
@@ -286,6 +291,8 @@ namespace DrawBoard.Models
             model.RankingLoseColor = viewModel.RankingLoseColor;
             model.WinLosePanelColor = viewModel.WinLosePanelColor;
             model.RankingPanelColor = viewModel.RankingPanelColor;
+            model.BackgroundColor1 = viewModel.BackgroundColor1;
+            model.BackgroundColor2 = viewModel.BackgroundColor2;
 
             model.SelectedWinLoseFont = viewModel.SelectedWinLoseFont;
             model.SelectedRankingFont = viewModel.SelectedRankingFont;
@@ -321,6 +328,8 @@ namespace DrawBoard.Models
             model.IsRankingStretchFill = viewModel.IsRankingStretchFill;
             model.IsRankingStretchUniform = viewModel.IsRankingStretchUniform;
             model.IsRankingStretchNoneUniformToFill = viewModel.IsRankingStretchNoneUniformToFill;
+
+            model.OpacityValue = viewModel.OpacityValue;
 
             #region :: Visible ::
 
@@ -392,6 +401,8 @@ namespace DrawBoard.Models
             viewModel.RankingLoseColor = model.RankingLoseColor;
             viewModel.WinLosePanelColor = model.WinLosePanelColor;
             viewModel.RankingPanelColor = model.RankingPanelColor;
+            viewModel.BackgroundColor1 = model.BackgroundColor1;
+            viewModel.BackgroundColor2 = model.BackgroundColor2;
 
             viewModel.SelectedWinLoseFont = model.SelectedWinLoseFont;
             viewModel.SelectedRankingFont = model.SelectedRankingFont;
@@ -427,6 +438,8 @@ namespace DrawBoard.Models
             viewModel.IsRankingStretchFill = model.IsRankingStretchFill;
             viewModel.IsRankingStretchUniform = model.IsRankingStretchUniform;
             viewModel.IsRankingStretchNoneUniformToFill = model.IsRankingStretchNoneUniformToFill;
+
+            viewModel.OpacityValue = model.OpacityValue;
 
             #endregion
         }
@@ -480,11 +493,11 @@ namespace DrawBoard.Models
             model.RankingLoseColor = viewModel.RankingLoseColor;
             model.WinLosePanelColor = viewModel.WinLosePanelColor;
             model.RankingPanelColor = viewModel.RankingPanelColor;
+            model.BackgroundColor1 = viewModel.BackgroundColor1;
+            model.BackgroundColor2 = viewModel.BackgroundColor2;
 
             model.SelectedWinLoseFont = viewModel.SelectedWinLoseFont;
             model.SelectedRankingFont = viewModel.SelectedRankingFont;
-
-            model.OpacityValue = viewModel.OpacityValue;
 
             model.WinVolume = viewModel.WinVolume;
             model.LoseVolume = viewModel.LoseVolume;
@@ -517,6 +530,8 @@ namespace DrawBoard.Models
             model.IsRankingStretchFill = viewModel.IsRankingStretchFill;
             model.IsRankingStretchUniform = viewModel.IsRankingStretchUniform;
             model.IsRankingStretchNoneUniformToFill = viewModel.IsRankingStretchNoneUniformToFill;
+
+            model.OpacityValue = viewModel.OpacityValue;
 
             #region :: Visible ::
 
