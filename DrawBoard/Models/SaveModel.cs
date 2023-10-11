@@ -49,10 +49,10 @@ namespace DrawBoard.Models
         [ObservableProperty]
         private string _winText = "당첨";
         [ObservableProperty]
-        private string _loseText = "꽝";
+        private string _loseText = "";
 
         [ObservableProperty]
-        private string _rankingLoseText = "꽝";
+        private string _rankingLoseText = "";
         [ObservableProperty]
         private string _firstText = "1등";
         [ObservableProperty]
@@ -302,8 +302,8 @@ namespace DrawBoard.Models
             model.WinSoundPath = viewModel.WinSoundPath;
             model.LoseSoundPath = viewModel.LoseSoundPath;
 
-            //model.DrawWinLoseList = viewModel.DrawWinLoseList;
-            //model.DrawRankingList = viewModel.DrawRankingList;
+            model.DrawWinLoseList = viewModel.DrawWinLoseList;
+            model.DrawRankingList = viewModel.DrawRankingList;
 
             model.WinLoseBoxWidth = viewModel.WinLoseBoxWidth;
             model.WinLoseBoxHeight = viewModel.WinLoseBoxHeight;
@@ -412,8 +412,8 @@ namespace DrawBoard.Models
             viewModel.WinSoundPath = model.WinSoundPath;
             viewModel.LoseSoundPath = model.LoseSoundPath;
 
-            //viewModel.DrawWinLoseList = model.DrawWinLoseList;
-            //viewModel.DrawRankingList = model.DrawRankingList;
+            viewModel.DrawWinLoseList = model.DrawWinLoseList;
+            viewModel.DrawRankingList = model.DrawRankingList;
 
             viewModel.WinLoseBoxWidth = model.WinLoseBoxWidth;
             viewModel.WinLoseBoxHeight = model.WinLoseBoxHeight;

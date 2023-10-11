@@ -59,10 +59,10 @@ namespace DrawBoard
         [ObservableProperty]
         private string _winText = "당첨";
         [ObservableProperty]
-        private string _loseText = "꽝";
+        private string _loseText = "";
 
         [ObservableProperty]
-        private string _rankingLoseText = "꽝";
+        private string _rankingLoseText = "";
         [ObservableProperty]
         private string _firstText = "1등";
         [ObservableProperty]
@@ -446,7 +446,7 @@ namespace DrawBoard
         #endregion
 
         #region :: Save, Open Setting Button ::
-
+        
         [RelayCommand]
         private void SaveSetting()
         {
@@ -467,7 +467,7 @@ namespace DrawBoard
 
                     File.WriteAllText(saveFileDialog.FileName, encryptData);
 
-                    MessageBox.Show($"설정만 저장됩니다. {Environment.NewLine}당첨판, 순위판 데이터는 저장되지 않습니다.", "정보", MessageBoxButton.OK, MessageBoxImage.Information);
+                    //MessageBox.Show($"설정만 저장됩니다. {Environment.NewLine}당첨판, 순위판 데이터는 저장되지 않습니다.", "정보", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception)
                 {
@@ -492,7 +492,7 @@ namespace DrawBoard
 
                     SaveModel.OpenSetting(model, this);
 
-                    MessageBox.Show($"설정만 불러옵니다. {Environment.NewLine}당첨판, 순위판 데이터는 변하지 않습니다.", "정보", MessageBoxButton.OK, MessageBoxImage.Information);
+                   // MessageBox.Show($"설정만 불러옵니다. {Environment.NewLine}당첨판, 순위판 데이터는 변하지 않습니다.", "정보", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 }
                 catch (Exception)
