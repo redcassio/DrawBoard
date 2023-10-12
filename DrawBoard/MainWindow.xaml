@@ -905,7 +905,7 @@
                                             Visibility="{Binding ColorSettingVisible}">
                                     <StackPanel.Resources>
                                         <Style TargetType="colorpicker:ColorPicker">
-                                            <Setter Property="Width" Value="100"/>
+                                            <Setter Property="Width" Value="75"/>
                                         </Style>
                                         <Style TargetType="TextBlock" BasedOn="{StaticResource headerTextStyle}">
                                             <Setter Property="Width" Value="60"/>
