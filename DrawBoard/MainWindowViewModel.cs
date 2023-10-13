@@ -79,14 +79,14 @@ namespace DrawBoard
         private string _seventhText = "7등";
 
         [ObservableProperty]
-        private double _winLoseTextSize = 30d;
+        private double _winLoseTextSize = 25d;
         [ObservableProperty]
-        private double _winLoseNumberTextSize = 40d;
+        private double _winLoseNumberTextSize = 35d;
 
         [ObservableProperty]
-        private double _rankingTextSize = 30d;
+        private double _rankingTextSize = 25d;
         [ObservableProperty]
-        private double _rankingNumberTextSize = 40d;
+        private double _rankingNumberTextSize = 35d;
 
         #endregion
 
@@ -140,9 +140,9 @@ namespace DrawBoard
         private ObservableCollection<string> _fontList = new();
 
         [ObservableProperty]
-        private string? _selectedWinLoseFont = "GulimChe";
+        private string? _selectedWinLoseFont = "Arial";
         [ObservableProperty]
-        private string? _selectedRankingFont = "GulimChe";
+        private string? _selectedRankingFont = "Arial";
 
         #endregion
 
@@ -171,14 +171,14 @@ namespace DrawBoard
         private ObservableCollection<DrawModel> _drawRankingList = new();
 
         [ObservableProperty]
-        private double _winLoseBoxWidth = 100d;
+        private double _winLoseBoxWidth = 60d;
         [ObservableProperty]
-        private double _winLoseBoxHeight = 60d;
+        private double _winLoseBoxHeight = 45d;
 
         [ObservableProperty]
-        private double _rankingBoxWidth = 100d;
+        private double _rankingBoxWidth = 60d;
         [ObservableProperty]
-        private double _rankingBoxHeight = 60d;
+        private double _rankingBoxHeight = 45d;
 
         [ObservableProperty]
         private Brush? _winLoseListBoxBackground;
@@ -244,7 +244,7 @@ namespace DrawBoard
 
         #endregion
 
-        #region :: Box ::
+        #region :: Opacity ::
         [ObservableProperty]
         private double _opacityValue = 0.8d;       
 
