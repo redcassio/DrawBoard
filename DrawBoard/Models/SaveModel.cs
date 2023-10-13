@@ -21,12 +21,12 @@ namespace DrawBoard.Models
         #region :: Game Count ::
 
         [ObservableProperty]
-        private int _winLoseGameCount = 50;
+        private int _winLoseGameCount = 100;
         [ObservableProperty]
-        private int _winCount = 3;
+        private int _winCount = 5;
 
         [ObservableProperty]
-        private int _rankingGameCount = 50;
+        private int _rankingGameCount = 100;
         [ObservableProperty]
         private int _firstCount = 1;
         [ObservableProperty]
