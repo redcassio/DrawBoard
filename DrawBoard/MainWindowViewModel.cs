@@ -128,7 +128,7 @@ namespace DrawBoard
         private Color? _rankingPanelColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
 
         [ObservableProperty]
-        private Color? _backgroundColor1 = (Color)ColorConverter.ConvertFromString("#FF561139");
+        private Color? _backgroundColor1 = (Color)ColorConverter.ConvertFromString("#FF000000");
         [ObservableProperty]
         private Color? _backgroundColor2 = (Color)ColorConverter.ConvertFromString("#0A38A2D7");
 
