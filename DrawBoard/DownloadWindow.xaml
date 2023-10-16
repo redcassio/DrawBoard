@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DrawBoard"
         WindowStartupLocation="CenterScreen"
         WindowStyle="ToolWindow"
-        AllowsTransparency="False"
+        AllowsTransparency="True"
         mc:Ignorable="d"
         Title="NET6 Windowsdesktop-Runtime 다운로드"
         Width="500" Height="120"
