@@ -20,11 +20,11 @@ namespace DrawBoard
         #region :: Members ::
 
         #region :: Window ::
-
+        
         [ObservableProperty]
-        private double _windowWidth = 885d;
+        private double _windowWidth = 791d;
         [ObservableProperty]
-        private double _windowHeight = 635d;
+        private double _windowHeight = 602d;
 
         #endregion
 
@@ -79,23 +79,23 @@ namespace DrawBoard
         private string _seventhText = "7등";
 
         [ObservableProperty]
-        private double _winLoseTextSize = 25d;
+        private double _winLoseTextSize = 23d;
         [ObservableProperty]
-        private double _winLoseNumberTextSize = 35d;
+        private double _winLoseNumberTextSize = 23d;
 
         [ObservableProperty]
-        private double _rankingTextSize = 25d;
+        private double _rankingTextSize = 23d;
         [ObservableProperty]
-        private double _rankingNumberTextSize = 35d;
+        private double _rankingNumberTextSize = 23d;
 
         #endregion
 
         #region :: Color ::
 
         [ObservableProperty]
-        private Color? _winLoseBackgroundColor = (Color)ColorConverter.ConvertFromString("#FFDD2476");
+        private Color? _winLoseBackgroundColor = (Color)ColorConverter.ConvertFromString("#FFFFFFF0");
         [ObservableProperty]
-        private Color? _rankingBackgroundColor = (Color)ColorConverter.ConvertFromString("#FFDD2476");
+        private Color? _rankingBackgroundColor = (Color)ColorConverter.ConvertFromString("#FFFFFFF0");
 
         [ObservableProperty]
         private Color? _winLoseWinBackgroundColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
@@ -108,9 +108,9 @@ namespace DrawBoard
         private Color? _rankingLoseBackgroundColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
 
         [ObservableProperty]
-        private Color? _winLoseNumberColor = (Color)ColorConverter.ConvertFromString("#FFEBEB09");
+        private Color? _winLoseNumberColor = (Color)ColorConverter.ConvertFromString("#FF4169E1");
         [ObservableProperty]
-        private Color? _rankingNumberColor = (Color)ColorConverter.ConvertFromString("#FFEBEB09");
+        private Color? _rankingNumberColor = (Color)ColorConverter.ConvertFromString("#FF4169E1");
 
         [ObservableProperty]
         private Color? _winLoseWinColor = (Color)ColorConverter.ConvertFromString("#FF00BFFF");
