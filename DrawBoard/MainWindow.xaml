@@ -19,7 +19,7 @@
         Background="Transparent"
         Width="{Binding WindowWidth, Mode=TwoWay}"
         Height="{Binding WindowHeight, Mode=TwoWay}"
-        x:Name="page">
+        x:Name="this">
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
@@ -1163,7 +1163,7 @@
                                             <Setter Property="Margin" Value="0"/>
                                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                             <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                            <Setter Property="Opacity" Value="{Binding DataContext.OpacityValue, ElementName=page}"/>
+                                            <Setter Property="Opacity" Value="{Binding DataContext.OpacityValue, ElementName=this}"/>
                                             <Setter Property="ContentTemplate">
                                                 <Setter.Value>
                                                     <DataTemplate>
@@ -1285,7 +1285,7 @@
                                             <Setter Property="Margin" Value="0"/>
                                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                             <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                            <Setter Property="Opacity" Value="{Binding DataContext.OpacityValue, ElementName=page}"/>
+                                            <Setter Property="Opacity" Value="{Binding DataContext.OpacityValue, ElementName=this}"/>
 
                                             <Setter Property="ContentTemplate">
                                                 <Setter.Value>
