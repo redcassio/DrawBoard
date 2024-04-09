@@ -15,7 +15,7 @@
         WindowStyle="None"
         AllowsTransparency="True"
         MinWidth="200"  
-        MinHeight="200"
+        MinHeight="200" 
         Background="Transparent"
         Width="{Binding WindowWidth, Mode=TwoWay}"
         Height="{Binding WindowHeight, Mode=TwoWay}"
