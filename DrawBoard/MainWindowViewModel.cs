@@ -34,7 +34,7 @@ namespace DrawBoard
         private int _winLoseGameCount = 100;
         [ObservableProperty]
         private int _winCount = 5;
-
+        
         [ObservableProperty]
         private int _rankingGameCount = 100;
         [ObservableProperty]

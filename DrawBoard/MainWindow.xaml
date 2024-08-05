@@ -63,18 +63,17 @@
 
                     <!--#region 안보이는 컨트롤-->
                     <Grid Width="1" Height="1" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed">
-                        <MediaElement 
-                                  Source="{Binding WinMediaElementSource}"
-                                  LoadedBehavior="Manual"
-                                  Volume="{Binding WinVolume}">
+                        <MediaElement Source="{Binding WinMediaElementSource}"
+                                      LoadedBehavior="Manual"
+                                      Volume="{Binding WinVolume}">
                             <behaviors:Interaction.Behaviors>
                                 <drawBehavior:MediaElementBehavior IsMediaElementPlay="{Binding IsWinMediaElementPlay}"/>
                             </behaviors:Interaction.Behaviors>
                         </MediaElement>
 
                         <MediaElement Source="{Binding LoseMediaElementSource}"
-                                  LoadedBehavior="Manual"
-                                  Volume="{Binding LoseVolume}">
+                                      LoadedBehavior="Manual"
+                                      Volume="{Binding LoseVolume}">
                             <behaviors:Interaction.Behaviors>
                                 <drawBehavior:MediaElementBehavior IsMediaElementPlay="{Binding IsLoseMediaElementPlay}"/>
                             </behaviors:Interaction.Behaviors>
